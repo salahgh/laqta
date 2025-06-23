@@ -10,37 +10,30 @@ module.exports = {
     extend: {
       colors: {
         /*
-         * Brand palette – update anytime in one place.
-         * Generates e.g. text-primary, bg-secondary-700, border-neutral-200 ...
+         * Design System Colors from Figma
+         * Primary (prim) - Dark navy blues
+         * Secondary (sec) - Aqua, yellow, pink palette  
+         * Background (bg) - Dark background
          */
+
+        // todo 'A0A1B3' this color is not included in the design system, but it is used in the design hero section text color
+        // todo line hehight not included in the design system, but it is used in the design hero section text color
+        // todo letter spacing not included in the design system, but it is used in the design hero section text color
+        // todo work on font family, font size, and font weight
         primary: {
-          DEFAULT: '#1E40AF', // Indigo-900
-          50: '#EEF2FF',
-          100: '#E0E7FF',
-          200: '#C7D2FE',
-          300: '#A5B4FC',
-          400: '#818CF8',
-          500: '#6366F1',
-          600: '#4F46E5',
-          700: '#4338CA',
-          800: '#3730A3',
-          900: '#312E81',
+          DEFAULT: '#0D1137', // prim - main dark navy
+          light: '#1370AD',   // prim-2 - lighter blue
         },
         secondary: {
-          DEFAULT: '#D97706', // Amber-700
-          50: '#FFFBEB',
-          100: '#FEF3C7',
-          200: '#FDE68A',
-          300: '#FCD34D',
-          400: '#FBBF24',
-          500: '#F59E0B',
-          600: '#D97706',
-          700: '#B45309',
-          800: '#92400E',
-          900: '#78350F',
+          DEFAULT: '#94D7E0', // sec-1 - aqua
+          yellow: '#EFD27E',  // sec-2 - yellow
+          pink: '#E438D5',    // sec-3 - pink
+        },
+        background: {
+          DEFAULT: '#141733', // bg - dark background
         },
         neutral: {
-          DEFAULT: '#374151', // Gray-700
+          DEFAULT: '#374151', // Keep existing gray-700
           50: '#F9FAFB',
           100: '#F3F4F6',
           200: '#E5E7EB',
@@ -51,6 +44,15 @@ module.exports = {
           700: '#374151',
           800: '#1F2937',
           900: '#111827',
+        },
+        // Alternative naming convention (more semantic)
+        brand: {
+          navy: '#0D1137',      // prim
+          blue: '#1370AD',      // prim-2
+          aqua: '#94D7E0',      // sec-1
+          yellow: '#EFD27E',    // sec-2
+          pink: '#E438D5',      // sec-3
+          dark: '#141733',      // bg
         },
       },
       spacing: {
@@ -63,6 +65,21 @@ module.exports = {
         '3xl': '4rem', // 64px
       },
       fontSize: {
+        // Display Text Styles (for headings, heroes, etc.)
+        'display-xs': ['24px', { lineHeight: '32px', letterSpacing: '-2%' }],
+        'display-sm': ['30px', { lineHeight: '38px', letterSpacing: '-2%' }],
+        'display-md': ['36px', { lineHeight: '44px', letterSpacing: '-2%' }],
+        'display-lg': ['48px', { lineHeight: '60px', letterSpacing: '-2%' }],
+        'display-xl': ['60px', { lineHeight: '72px', letterSpacing: '-2%' }],
+        
+        // Body Text Styles (for content, paragraphs, etc.)
+        'body-xs': ['12px', { lineHeight: '20px', letterSpacing: '-2%' }],
+        'body-sm': ['14px', { lineHeight: '24px', letterSpacing: '-2%' }],
+        'body-md': ['16px', { lineHeight: '28px', letterSpacing: '-2%' }],
+        'body-lg': ['18px', { lineHeight: '32px', letterSpacing: '-2%' }],
+        'body-xl': ['20px', { lineHeight: '36px', letterSpacing: '-2%' }],
+        
+        // Legacy sizes (keep for backward compatibility)
         xs: ['0.75rem', { lineHeight: '1rem' }],      // 12px / 16px
         sm: ['0.875rem', { lineHeight: '1.25rem' }],  // 14px / 20px
         base: ['1rem', { lineHeight: '1.5rem' }],     // 16px / 24px
@@ -71,6 +88,10 @@ module.exports = {
         '2xl': ['1.5rem', { lineHeight: '2rem' }],    // 24px / 32px
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px / 36px
         '4xl': ['2.25rem', { lineHeight: '2.5rem' }],   // 36px / 40px
+      },
+      fontFamily: {
+        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+        'display': ['Poppins', 'system-ui', 'sans-serif'],
       },
     },
   },

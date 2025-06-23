@@ -1,30 +1,43 @@
-export const metadata = {
-  title: "Laqta | Digital Agency",
-};
+// components/ui/Button.jsx
+// components/ui/Logo.jsx
+// components/ui/LanguageSelector.jsx
+// components/ui/Navigation.jsx
+// components/ui/GradientText.jsx
+// components/ui/Avatar.jsx
+// components/sections/HeroSection.jsx
+// components/ui/WaveBackground.jsx
+// Main page component
 
-export default function Home() {
-  return (
-    <section className="space-y-3xl">
-      <header className="text-center max-w-3xl mx-auto">
-        <h1 className="text-5xl font-bold text-primary-600 mb-md">We craft delightful digital experiences</h1>
-        <p className="text-neutral-600">
-          Full-service product design & development agency helping startups and enterprises turn ideas into exceptional products.
-        </p>
-        <a href="/contact" className="inline-block mt-lg px-6 py-3 rounded bg-primary-600 text-white hover:bg-primary-700">
-          Start a project
-        </a>
-      </header>
-      <div className="grid gap-lg md:grid-cols-3">
-        {["Design", "Development", "Branding"].map((item) => (
-          <div key={item} className="border rounded-lg bg-white shadow p-lg text-center">
-            <div className="h-16 w-16 bg-neutral-200 mx-auto mb-md" />
-            <h3 className="font-semibold mb-sm">{item}</h3>
-            <p className="text-sm text-neutral-600">
-              Brief blurb about the service area.
-            </p>
-          </div>
-        ))}
+
+import {HeroSection} from "@/components/sections/HeroSection";
+import {Navigation} from "@/components/layout/Navigation";
+import AboutSection from "@/components/sections/aboutLaqta";
+import {CustomIllustration} from "@/components/ui/CustomIllustration";
+import {ServicesSection} from "@/components/sections/ServicesSection";
+import OurWorks from "@/components/sections/OurWorksSection";
+import YourPerfectPartner from "@/components/sections/YourPerfectPartner";
+import TestimonialsSection from "@/components/sections/SuccessStories";
+import LetsStartProjectSection from "@/components/sections/LetsStartProjectSection";
+import FAQSection from "@/components/sections/FAQSection";
+
+export const metadata = {
+    title: "Leqta | Where Creativity Meets Strategy",
+  };
+
+// todo adujust the size of the navigation bar all items should have the same height
+  
+  export default function Home() {
+    return (
+      <div className="min-h-screen bg-brand-navy relative"> 
+        <Navigation />
+        <HeroSection />
+          <AboutSection illustration={<CustomIllustration/>}/>
+          <ServicesSection/>
+          <OurWorks/>
+          <YourPerfectPartner/>
+          <TestimonialsSection/>
+          <LetsStartProjectSection/>
+          <FAQSection/>
       </div>
-    </section>
-  );
-}
+    );
+  }
