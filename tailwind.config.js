@@ -20,6 +20,12 @@ module.exports = {
         // todo line hehight not included in the design system, but it is used in the design hero section text color
         // todo letter spacing not included in the design system, but it is used in the design hero section text color
         // todo work on font family, font size, and font weight
+
+
+        // ABDEFF 0% prim blue gradient color
+        //62C1FF
+
+
         primary: {
           DEFAULT: '#0D1137', // prim - main dark navy
           light: '#1370AD',   // prim-2 - lighter blue
@@ -77,7 +83,7 @@ module.exports = {
         'body-sm': ['14px', { lineHeight: '24px', letterSpacing: '-2%' }],
         'body-md': ['16px', { lineHeight: '28px', letterSpacing: '-2%' }],
         'body-lg': ['18px', { lineHeight: '32px', letterSpacing: '-2%' }],
-        'body-xl': ['20px', { lineHeight: '36px', letterSpacing: '-2%' }],
+        'body-xl': ['20px', { lineHeight: '20px', letterSpacing: '-2%' }],
         
         // Legacy sizes (keep for backward compatibility)
         xs: ['0.75rem', { lineHeight: '1rem' }],      // 12px / 16px

@@ -22,22 +22,26 @@ import FAQSection from "@/components/sections/FAQSection";
 
 export const metadata = {
     title: "Leqta | Where Creativity Meets Strategy",
-  };
+};
 
 // todo adujust the size of the navigation bar all items should have the same height
-  
-  export default function Home() {
+
+export default function Home() {
     return (
-      <div className="min-h-screen bg-brand-navy relative"> 
-        <Navigation />
-        <HeroSection />
-          <AboutSection illustration={<CustomIllustration/>}/>
-          <ServicesSection/>
-          <OurWorks/>
-          <YourPerfectPartner/>
-          <TestimonialsSection/>
-          <LetsStartProjectSection/>
-          <FAQSection/>
-      </div>
+        <div className=" relative">
+            <div className={'bg-background flex flex-col justify-between'} style={{height: 920}}>
+                <Navigation/>
+                <HeroSection/>
+                <div className={'h-[105px]'}></div>
+            </div>
+
+            <AboutSection illustration={<CustomIllustration/>}/>
+            {/*<ServicesSection/>*/}
+            {/*<OurWorks/>*/}
+            {/*<YourPerfectPartner/>*/}
+            {/*<TestimonialsSection/>*/}
+            {/*<LetsStartProjectSection/>*/}
+            {/*<FAQSection/>*/}
+        </div>
     );
-  }
+}

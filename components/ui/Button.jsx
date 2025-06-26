@@ -18,14 +18,14 @@ export const Button = ({
     // Fixed variants object with conditional secondary variant
     const getVariants = (darkMode = false) => ({
         primary: `
-    bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 
-    text-white font-medium
-    hover:shadow-xl hover:shadow-blue-500/25
-    active:from-blue-700 active:via-blue-800 active:to-blue-900
-    focus:outline-none
-    transition-all duration-300 ease-in-out
-    transform hover:scale-105 active:scale-95
-  `,
+  bg-gradient-to-r from-[#1370AD] to-[#62C1FF] 
+  text-white font-medium
+  hover:shadow-xl hover:shadow-blue-500/25
+  active:from-[#1370AD] active:via-[#0F5A8A] active:to-[#0B4267]
+  focus:outline-none
+  transition-all duration-300 ease-in-out
+  transform hover:scale-105 active:scale-95
+`,
         secondary: `
     bg-transparent ${darkMode ? 'text-white' : 'text-gray-400'} border-2 border-gray-600
     hover:border-brand-aqua hover:text-brand-aqua hover:bg-brand-aqua hover:bg-opacity-10
@@ -45,11 +45,12 @@ export const Button = ({
 
     return (
         <button
-            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow`}
+
+            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow border-t border-t-blue-100 h-full text-body-xl px-[30px] font-medium`}
             {...props}
         >
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
-            <span className="leading-none">{children}</span>
+            <span className="leading-none ">{children}</span>
             {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
         </button>
     );

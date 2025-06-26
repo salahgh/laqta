@@ -14,13 +14,15 @@ const AboutSection = ({
                       }) => {
     // @ts-ignore
     return (
-        <div className={`bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 lg:p-12 shadow-2xl ${className}`}>
+        <div className={`bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 lg:p-12 shadow-2xl ${className}`}
+             style={{height: 671, paddingTop: 128, paddingBottom: 128, paddingLeft: 82, paddingRight: 82}}
+        >
             <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Content Section */}
                 <div className="space-y-6">
                     {/* Badge */}
                     <div className="inline-flex items-center">
-            <span className="text-blue-500 text-sm font-medium bg-blue-50 px-3 py-1 rounded-full">
+            <span className="text-blue-500 text-sm font-medium  rounded-full w-[165px] h-[40px] flex items-center justify-center">
               {badge}
             </span>
                     </div>
@@ -41,7 +43,8 @@ const AboutSection = ({
 
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Button variant="primary" className="flex items-center justify-center" rightIcon={<Rocket className="w-4 h-4 ml-2"/>}>
+                        <Button variant="primary" className="flex items-center justify-center"
+                                rightIcon={<Rocket className="w-4 h-4 ml-2"/>}>
                             {primaryButtonText}
                         </Button>
                         <Button variant="secondary">

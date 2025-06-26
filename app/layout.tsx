@@ -15,12 +15,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col font-sans antialiased bg-neutral-50">
-        <Navbar />
-        <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-lg">
-          {children}
-        </main>
-      </body>
+
+    <body className="min-h-screen flex flex-col items-center font-sans antialiased bg-gray-400">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
+    {/*<Navbar />*/}
+    <main className="flex-1 w-full " style={{maxWidth: 1514}}>
+      {children}
+    </main>
+    </body>
     </html>
   );
 }
