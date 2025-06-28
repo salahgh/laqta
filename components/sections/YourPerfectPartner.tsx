@@ -1,43 +1,54 @@
-import React from 'react';
-import {ProfileAvatar} from "@/components/ui/ProfileAvatar";
-import {StepCard} from "@/components/ui/StepCard";
-
-
-
+import React from "react";
+import { ProfileAvatar } from "@/components/ui/ProfileAvatar";
+import { StepCard } from "@/components/ui/StepCard";
 
 export const YourPerfectPartner = () => {
+    // todo complte the illustration
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
-            {/* Background decorative elements */}
-            <div className="absolute inset-0">
-                {/* Diagonal gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/20 to-purple-900/30"></div>
-
-                {/* Abstract shapes */}
-                <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-full blur-xl"></div>
-                <div className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-teal-500/20 to-blue-500/20 rounded-full blur-lg"></div>
-            </div>
-
-            {/* Profile avatars */}
-            <ProfileAvatar position="top-8 right-8" />
-            <ProfileAvatar position="bottom-8 left-8" />
-
+        <div
+            className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden"
+            style={{
+                height: 1205,
+                paddingTop: 188,
+                paddingBottom: 188,
+                paddingLeft: 134,
+                paddingRight: 134,
+            }}
+        >
             <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
                 {/* Header section */}
                 <div className="mb-20">
-                    <div className="mb-6">
-            <span className="inline-block px-4 py-2 border border-blue-400 text-blue-400 text-sm font-medium rounded-full">
-              Your perfect partner
-            </span>
+                    <div className="mb-8">
+                        <span
+                            className="inline-block border px-6 py-4 rounded-full"
+                            style={{
+                                color: "#54B3F1",
+                                borderColor: "#54B3F1",
+                                fontSize: 20,
+                            }}
+                        >
+                            Your perfect partner
+                        </span>
                     </div>
 
-                    <h1 className="text-5xl font-bold text-white mb-6 leading-tight max-w-2xl">
+                    <h1
+                        className="font-medium text-white leading-tight"
+                        style={{
+                            fontSize: 56,
+                            maxWidth: 800,
+                            marginBottom: 16,
+                        }}
+                    >
                         Consistent Growth in Just a Simple 3-Steps
                     </h1>
 
-                    <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                        We follow a structured, data-driven process to ensure your marketing strategy delivers consistent
-                        growth and measurable results.
+                    <p
+                        className="text-display-xs font"
+                        style={{ color: "#C6BBBB" }}
+                    >
+                        We follow a structured, data-driven process to ensure
+                        your marketing strategy delivers consistent growth and
+                        measurable results.
                     </p>
                 </div>
 

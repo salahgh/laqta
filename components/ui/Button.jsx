@@ -1,13 +1,15 @@
+import React from "react";
+
 export const Button = ({
-                           variant = 'primary',
-                           size = 'md',
-                           children,
-                           className = '',
-                           leftIcon = null,
-                           rightIcon = null,
-                           darkMode = false,
-                           ...props
-                       }) => {
+    variant = "primary",
+    size = "md",
+    children,
+    className = "",
+    leftIcon = <></>,
+    rightIcon = <></>,
+    darkMode = false,
+    ...props
+}) => {
     const baseClasses = `
     font-semibold transition-all duration-200 ease-in-out
     flex items-center justify-center gap-2
@@ -27,8 +29,7 @@ export const Button = ({
   transform hover:scale-105 active:scale-95
 `,
         secondary: `
-    bg-transparent ${darkMode ? 'text-white' : 'text-gray-400'} border-2 border-gray-600
-    hover:border-brand-aqua hover:text-brand-aqua hover:bg-brand-aqua hover:bg-opacity-10
+    bg-transparent ${darkMode ? "text-white" : "text-gray-400"}  
     focus:ring-brand-aqua
     transition-all duration-300 ease-in-out
     transform hover:scale-105 active:scale-95
@@ -36,18 +37,27 @@ export const Button = ({
     });
 
     const sizes = {
-        sm: 'px-4 py-2 text-[14px] h-[36px]',
-        md: 'px-6 py-3 text-[16px] h-[44px]',
-        lg: 'px-8 py-4 text-[18px] h-[52px]',
+        sm: "px-4 py-2 text-[14px] h-[36px]",
+        md: "px-6 py-3 text-[16px] h-[44px]",
+        lg: "px-8 py-4 text-[18px] h-[52px]",
     };
 
     const variants = getVariants(darkMode);
 
     return (
         <button
-
-            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow border-t border-t-blue-100 h-full text-body-xl px-[30px] font-medium`}
+            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow h-full w-full text-body-xl px-[30px] font-medium`}
             {...props}
+            style={{
+                borderColor: variant === "secondary" ? "#54B3F1" : "unset",
+                borderWidth:
+                    variant === "secondary"
+                        ? variant === "primary"
+                            ? "0px"
+                            : "1px"
+                        : "0px",
+                borderTopWidth: variant === "primary" ? "1px" : "1px",
+            }}
         >
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
             <span className="leading-none ">{children}</span>
