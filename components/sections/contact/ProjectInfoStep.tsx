@@ -94,10 +94,11 @@ const ProjectInfoStep = ({
             {/* Project Type */}
             <div className="grid grid-cols-1 gap-6 w-full">
                 <FormInput
+                    placeholder={undefined}
                     label="Project Type"
                     {...useFormInput("projectType", formik)}
                     as="select"
-                    options={projectTypeOptions}
+                    // options={projectTypeOptions}
                     style={{
                         backgroundColor: "#141733",
                         color: "#D2D2D3",
@@ -106,10 +107,11 @@ const ProjectInfoStep = ({
 
                 {/* Budget */}
                 <FormInput
+                    placeholder={undefined}
                     label="Budget"
                     {...useFormInput("budget", formik)}
                     as="select"
-                    options={budgetOptions}
+                    // options={budgetOptions}
                     style={{
                         backgroundColor: "#141733",
                         color: "#D2D2D3",
@@ -118,10 +120,11 @@ const ProjectInfoStep = ({
 
                 {/* Timeline */}
                 <FormInput
+                    placeholder={undefined}
                     label="Timeline"
                     {...useFormInput("timeline", formik)}
                     as="select"
-                    options={timelineOptions}
+                    // options={timelineOptions}
                     style={{
                         backgroundColor: "#141733",
                         color: "#D2D2D3",
@@ -130,6 +133,7 @@ const ProjectInfoStep = ({
 
                 {/* Project Description */}
                 <FormInput
+                    placeholder={undefined}
                     label="Project Description"
                     {...useFormInput("projectDescription", formik)}
                     as="textarea"
@@ -143,6 +147,7 @@ const ProjectInfoStep = ({
 
                 {/* Project Goals */}
                 <FormInput
+                    placeholder={undefined}
                     label="Project Goals & Success Metrics"
                     {...useFormInput("goals", formik)}
                     as="textarea"
