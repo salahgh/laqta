@@ -98,6 +98,7 @@ module.exports = {
       fontFamily: {
         'sans': ['Poppins', 'system-ui', 'sans-serif'],
         'display': ['Poppins', 'system-ui', 'sans-serif'],
+        'gotham': ['Gotham', 'Poppins', 'system-ui', 'sans-serif'],
       },
     },
   },

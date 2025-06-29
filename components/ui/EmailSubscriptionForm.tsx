@@ -44,7 +44,7 @@ export default function EmailSubscriptionForm() {
                             placeholder="Enter your email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-transparent w-full h-12 outline-none text-gray-700 placeholder-gray-500"
+                            className="bg-transparent w-full h-12 outline-none placeholder-gray-500"
                             required
                         />
                     </div>

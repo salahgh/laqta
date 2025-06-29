@@ -8,6 +8,7 @@ export const Button = ({
     leftIcon = <></>,
     rightIcon = <></>,
     darkMode = false,
+    style = {},
     ...props
 }) => {
     const baseClasses = `
@@ -57,6 +58,7 @@ export const Button = ({
                             : "1px"
                         : "0px",
                 borderTopWidth: variant === "primary" ? "1px" : "1px",
+                ...style,
             }}
         >
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
