@@ -34,28 +34,27 @@ const OurWorks = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 py-16">
-            <div className=" px-8" style={{ marginLeft: 82, marginRight: 82 }}>
+            <div className=" px-3 md:px-20">
                 {/* Header Section */}
                 <div className="text-center mb-16 flex flex-col items-center space-y-4">
                     <h1
-                        className="px-4 py-2 bg-blue-50 text-blue-600 text-body-xl font-medium rounded-full border border-blue-100 flex items-center justify-center mb-4"
+                        className="px-4 py-2 bg-blue-50 text-blue-600 text-body-md md:text-display-sm
+                        rounded-full border border-blue-100 flex items-center justify-center mb-4
+                        md:h-[56px] h-[42px]
+                        "
                         style={{
                             color: "#54B3F1",
                             borderColor: "#54B3F1",
-                            height: 56,
                         }}
                     >
                         Our Works
                     </h1>
 
-                    <h1
-                        className="px-4 py-2 text-display-xl flex items-center justify-center mb-4"
-                        style={{}}
-                    >
+                    <h1 className="px-4 py-2 md:text-display-xl text-display-md flex items-center justify-center mb-4">
                         Our Works
                     </h1>
 
-                    <p className="text-[#A0A1B3] text-display-xs leading-relaxed mx-auto">
+                    <p className="text-secondary-gray md:text-display-xs text-body-md leading-relaxed mx-auto md:px-32">
                         From powerful brand firms to bold social campaigns,
                         creativity with strategy to connect, perform, and
                         inspire. Here's a look at what we've created with our
@@ -64,7 +63,7 @@ const OurWorks = () => {
                 </div>
 
                 {/* Projects Section */}
-                <div className="space-y-12">
+                <div className="space-y-12 flex flex-col">
                     {projects.map((project, index) => (
                         <ProjectCard
                             key={index}

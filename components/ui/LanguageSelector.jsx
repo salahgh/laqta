@@ -46,7 +46,7 @@ export const LanguageSelector = ({ className = "" }) => {
             {/* Selected Language Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-1 border border-gray-50 rounded-full transition-colors"
+                className="flex items-center gap-1 md:gap-2 px-1  md:px-3 py-1 border border-gray-50 rounded-full transition-colors"
                 dir={selectedLang.dir}
                 style={{ borderColor: "rgba(255, 255, 255, 0.2)" }}
             >

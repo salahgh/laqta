@@ -44,43 +44,32 @@ export const ServicesSection = ({
 
     return (
         <section>
-            <div
-                className="bg-primary flex flex-col gap-10"
-                style={{
-                    height: 1226,
-                    paddingTop: 188,
-                    paddingBottom: 188,
-                    paddingLeft: 140,
-                    paddingRight: 140,
-                }}
-            >
+            <div className="bg-primary flex flex-col p-4 md:pt-32">
                 {/* Header - Centered */}
-                <div className="text-center flex items-center flex-col mb-20">
+                <div className="text-center flex flex-col items-center mb-20 mt-8 ">
                     <div
-                        className="mb-8 border rounded-full px-6 py-2 font-semibold text-body-xl flex items-center justify-center"
+                        className="mb-8 border rounded-full md:px-6 md:py-4 px-4 py-2 font-semibold flex items-center justify-center
+                        md:text-[20px] text-body-md
+                        "
                         style={{
                             color: "#54B3F1",
                             borderColor: "#54B3F1",
-                            height: 56,
                         }}
                     >
                         {badge}
                     </div>
 
-                    <p className={"text-white"} style={{ fontSize: 56 }}>
+                    <p className={"text-white md:text-[56px] text-display-md "}>
                         Our Services
                     </p>
 
-                    <p className="" style={{ color: "#C6BBBB", fontSize: 24 }}>
+                    <p className="text-body-sm md:text-display-xs text-secondary-gray mt-8 md:max-w-4xl">
                         {description}
                     </p>
                 </div>
 
                 {/*/!* Services Grid - Exact spacing *!/*/}
-                <div
-                    className="grid lg:grid-cols-3 gap-14 mb-20 justify-center items-center"
-                    style={{ width: 1296, height: 447 }}
-                >
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-center items-center  md:px-20">
                     {servicesToRender.map((service, index) => (
                         <ServiceCard
                             key={index}
@@ -95,8 +84,8 @@ export const ServicesSection = ({
                 </div>
 
                 {/*/!* CTA Button - Centered *!/*/}
-                <div className="text-center flex items-center justify-center">
-                    <div className={"h-16"}>
+                <div className="text-center flex items-center justify-center md:mt-20 mt-8 pb-16 md:pb-32">
+                    <div className={"md:h-16 h-12"}>
                         <Button
                             variant="primary"
                             size="lg"

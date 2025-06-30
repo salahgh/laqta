@@ -1,89 +1,47 @@
 import React from "react";
-import { ProfileAvatar } from "@/components/ui/ProfileAvatar";
-import { StepCard } from "@/components/ui/StepCard";
 
 export const YourPerfectPartner = () => {
-    // todo complte the illustration
     return (
-        <div
-            className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden"
-            style={{
-                height: 1205,
-                paddingTop: 188,
-                paddingBottom: 188,
-                paddingLeft: 134,
-                paddingRight: 134,
-            }}
-        >
-            <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-                {/* Header section */}
-                <div className="mb-20">
-                    <div className="mb-8">
-                        <span
-                            className="inline-block border px-6 py-4 rounded-full"
-                            style={{
-                                color: "#54B3F1",
-                                borderColor: "#54B3F1",
-                                fontSize: 20,
-                            }}
-                        >
-                            Your perfect partner
-                        </span>
-                    </div>
+        <div className="min-h-screen relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden md:px-24 pb-24">
+            {/* Background Image */}
+            <div
+                className="absolute inset-0 z-0 invisible md:visible"
+                style={{
+                    backgroundImage: "url('/images/steps.svg')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center top",
+                    backgroundSize: "contain",
+                    opacity: 1, // Adjust opacity as needed
+                }}
+            />
 
-                    <h1
-                        className="font-medium text-white leading-tight"
+            <div className="relative z-10 max-w-7xl mx-auto px-3 md:py-32 py-16">
+                {/* Header section */}
+
+                <div className="md:mb-8">
+                    <span
+                        className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full text-body-md md:text-display-xs"
                         style={{
-                            fontSize: 56,
-                            maxWidth: 800,
-                            marginBottom: 16,
+                            color: "#54B3F1",
+                            borderColor: "#54B3F1",
                         }}
                     >
-                        Consistent Growth in Just a Simple 3-Steps
-                    </h1>
-
-                    <p
-                        className="text-display-xs font"
-                        style={{ color: "#C6BBBB" }}
-                    >
-                        We follow a structured, data-driven process to ensure
-                        your marketing strategy delivers consistent growth and
-                        measurable results.
-                    </p>
+                        Your perfect partner
+                    </span>
                 </div>
 
-                {/* Steps visualization */}
-                <div className="relative h-96 mt-32">
-                    {/* Connecting line */}
-                    <div className="absolute top-8 left-16 w-full h-0.5 bg-gradient-to-r from-teal-400 via-yellow-400 to-pink-500 opacity-30 transform rotate-12"></div>
+                <h1 className="font-medium text-white leading-tight text-display-md md:text-display-lg md:max-w-[700px] mt-8">
+                    Consistent Growth in Just a Simple 3-Steps
+                </h1>
 
-                    {/* Step 1 */}
-                    <StepCard
-                        number="1"
-                        title="Onboarding Strategy"
-                        description="We start with an in-depth consultation to understand your goals, target audience."
-                        color="teal"
-                        position="top-0 left-0"
-                    />
-
-                    {/* Step 2 */}
-                    <StepCard
-                        number="2"
-                        title="Optimization Tracking"
-                        description="In-depth consultation to understand your goals, target audience, business needs."
-                        color="yellow"
-                        position="top-24 left-1/2 transform -translate-x-1/2"
-                    />
-
-                    {/* Step 3 */}
-                    <StepCard
-                        number="3"
-                        title="Strategy Adjustments"
-                        description="Consultation to understand your goals, target audience, and business needs."
-                        color="pink"
-                        position="top-0 right-0"
-                    />
-                </div>
+                <p className=" font text-secondary-gray text-body-md md:text-display-sm mt-4">
+                    We follow a structured, data-driven process to ensure your
+                    marketing strategy delivers consistent growth and measurable
+                    results.
+                </p>
+            </div>
+            <div className="flex-shrink-0 md:invisible">
+                <img src="/images/steps_vertical.svg" alt="Logo" />
             </div>
         </div>
     );

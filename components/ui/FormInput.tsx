@@ -9,11 +9,11 @@ export const FormInput = ({
     value,
     onChange,
     error,
-    className = "",
+    className = "text-body-sm md:text-body-xl",
     style = {},
 }) => (
     <div className="mb-6">
-        <label className="block text-white text-body-xl mb-3 font-medium">
+        <label className="block text-white text-body-md mb-2 md:text-display-xs md:mb-4 font-medium">
             {label}
         </label>
         {as === "textarea" ? (
@@ -26,7 +26,7 @@ export const FormInput = ({
                 className={`w - full text-body-xl bg-transparent border border-gray-600 rounded-lg px-4 
                  py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 
                  focus:ring-blue-500  focus:border-transparent transition-all 
-                 duration-200 resize-none ${className}`}
+                 duration-200 w-full ${className}`}
                 style={style}
             />
         ) : (
@@ -36,10 +36,10 @@ export const FormInput = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className={`${className} w-full px-10 text-body-xl rounded-full bg-transparent border border-gray-600 
+                className={`w-full px-10 text-body-xl rounded-full bg-transparent border border-gray-600 
                 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                focus:border-transparent transition-all duration-200`}
-                style={{ height: 80, color: "#D2D2D3", ...style }}
+                focus:border-transparent transition-all duration-200 ${className} `}
+                style={{ color: "#D2D2D3", ...style }}
             />
         )}
         {error && <div className="text-red-400 text-sm mt-1">{error}</div>}

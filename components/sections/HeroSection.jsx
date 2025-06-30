@@ -2,10 +2,11 @@ import { GradientText } from "@/components/ui/GradientText";
 import { Button } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rocket } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 const ArrowIcon = () => (
     <svg
-        className="w-4 h-4"
+        className="h-4 w-4"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -21,44 +22,32 @@ const ArrowIcon = () => (
 
 export const HeroSection = () => {
     return (
-        <div className="text-center relative flex flex-col items-center justify-center ">
-            <div className="flex flex-col" style={{ height: 420, width: 1011 }}>
-                {/*<h1 className="text-display-xl text-white mb-8 leading-tight">*/}
-                {/*    Where{' '}*/}
-                {/*    <GradientText>Creativity</GradientText>*/}
-                {/*    <br />*/}
-                {/*    Meets Strategy*/}
-                {/*</h1>*/}
+        <div className="relative flex flex-col items-center justify-center bg-primary pb-24 text-center md:p-24 p-4">
+            <div className={"pt-8 md:pt-0"}>
+                <Logo className={"md:invisible"} />
+            </div>
+            <img
+                src="/images/wherecreativitymeetsstrategy.svg"
+                alt="Logo"
+                className={"mt-6"}
+            />
 
-                <img
-                    src="/images/wherecreativitymeetsstrategy.svg"
-                    alt="Logo"
-                    style={{ marginTop: "-20px" }}
-                />
+            <p className="text-body-sm font-medium text-gray-500 md:text-display-xs p-2 md:px-36">
+                Leqta is a full-service content marketing & production company
+                based in Algiers. We combine storytelling, strategy, and visual
+                excellence to empower your brand with impactful video content.
+            </p>
 
-                <p
-                    className="text-display-xs text-gray-500 font-medium"
-                    style={{ marginTop: -55 }}
-                >
-                    Leqta is a full-service content marketing & production
-                    company based in Algiers. We combine storytelling, strategy,
-                    and visual excellence to empower your brand with impactful
-                    video content.
-                </p>
+            <div className={"h-8 md:h-[56px]"}></div>
 
-                <div className={"flex-1"}></div>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <div className={"h-16"}>
-                        <Button
-                            rightIcon={<Rocket className="w-4 h-10 ml-2" />}
-                        >
-                            Get Started
-                        </Button>
-                    </div>
-                    <div className={"h-16"}>
-                        <Button variant="secondary">Contact Us</Button>
-                    </div>
+            <div className="flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
+                <div className={"h-12 w-full md:h-16 md:w-auto"}>
+                    <Button rightIcon={<Rocket className="ml-2 h-10 w-4" />}>
+                        Get Started
+                    </Button>
+                </div>
+                <div className={"h-12 w-full md:h-16 md:w-auto"}>
+                    <Button variant="secondary">Contact Us</Button>
                 </div>
             </div>
         </div>

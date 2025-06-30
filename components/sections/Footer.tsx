@@ -11,9 +11,9 @@ const Footer = () => {
             {/* Footer */}
             <footer className="bg-slate-900 text-white px-6 py-16">
                 <div>
-                    <div className="flex justify-between p-16">
+                    <div className="flex  md:flex-row flex-col justify-between p-16">
                         {/* Left - Logo and Newsletter */}
-                        <div className="lg:col-span-1">
+                        <div className="lg:col-span-1 invisible md:visible">
                             {/* Logo */}
                             <Logo />
 
@@ -34,7 +34,7 @@ const Footer = () => {
                         </div>
 
                         {/* Middle - Company Links */}
-                        <div className={"flex gap-16"}>
+                        <div className={"flex md:flex-col flex-row gap-16"}>
                             <div className="lg:col-span-1">
                                 <h3 className="text-lg font-semibold mb-6">
                                     Company

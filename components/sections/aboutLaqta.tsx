@@ -16,98 +16,75 @@ const AboutSection = ({
     // @ts-ignore
     return (
         <div
-            className={`bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 lg:p-12 shadow-2xl ${className}`}
-            style={{
-                height: 671,
-                paddingTop: 128,
-                paddingBottom: 128,
-                paddingLeft: 82,
-                paddingRight: 82,
-            }}
+            className={`bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl shadow-2xl ${className} p-4 pt-8
+            md:p-24 md:flex 
+            `}
         >
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Content Section */}
-                <div className="space-y-6">
-                    {/* Badge */}
-                    <div
-                        className="items-center justify-center"
-                        style={{ width: 165, height: 40 }}
+            {/* Content Section */}
+            <div className="space-y-6">
+                {/* Badge */}
+                <div className="items-center justify-center md:text-display-xl">
+                    <span
+                        className="p-4 py-2 rounded-full bg-gray-800 text-body-xl"
+                        style={{
+                            color: "#54B3F1",
+                            backgroundColor: "#e9f0fc",
+                        }}
                     >
+                        {badge}
+                    </span>
+                </div>
+                <h2 className="text-black md:text-[56px] text-[40 px] leading-tight">
+                    {title.split(" ").map((word, index) => (
                         <span
-                            className="p-4 py-2 rounded-full bg-gray-800 text-body-xl"
+                            key={index}
                             style={{
-                                color: "#54B3F1",
-                                backgroundColor: "#e9f0fc",
+                                fontWeight: word === "LEQTA" ? "700" : "500",
                             }}
+                            className={
+                                word === "LEQTA"
+                                    ? "bg-gradient-to-b from-[#1370AD] to-[#ABDEFF] bg-clip-text text-transparent"
+                                    : ""
+                            }
                         >
-                            {badge}
+                            {word}{" "}
                         </span>
+                    ))}
+                </h2>
+                {/* Description */}
+                <p className="md:text-display-xs text-secondary-gray leading-relaxed">
+                    {description}
+                </p>
+                {/*Buttons*/}
+                <div className="flex gap-4" style={{ height: 61 }}>
+                    <div className={"h-12 md:h-16"}>
+                        <Button
+                            variant="primary"
+                            className=""
+                            rightIcon={<Rocket className="w-4 h-4 ml-2" />}
+                        >
+                            {primaryButtonText}
+                        </Button>
                     </div>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                        {title.split(" ").map((word, index) => (
-                            <span
-                                key={index}
-                                style={{
-                                    fontSize: 56,
-                                    fontWeight:
-                                        word === "LEQTA" ? "700" : "500",
-                                }}
-                                className={
-                                    word === "LEQTA"
-                                        ? "bg-gradient-to-b from-[#1370AD] to-[#ABDEFF] bg-clip-text text-transparent"
-                                        : ""
-                                }
-                            >
-                                {word}{" "}
-                            </span>
-                        ))}
-                    </h2>
-                    {/* Description */}
-                    <p
-                        className="text-display-xs text-lg leading-relaxed"
-                        style={{ fontSize: 28, color: "#A0A1B3" }}
-                    >
-                        {description}
-                    </p>
-                    {/*Buttons*/}
-                    <div className="flex gap-4" style={{ height: 61 }}>
-                        <div className={"h-16"}>
-                            <Button
-                                variant="primary"
-                                className=""
-                                rightIcon={<Rocket className="w-4 h-4 ml-2" />}
-                            >
-                                {primaryButtonText}
-                            </Button>
-                        </div>
-                        <div className={"h-16"}>
-                            <Button variant="secondary" className="">
-                                {secondaryButtonText}
-                            </Button>
-                        </div>
+                    <div className={"h-12 md:h-16"}>
+                        <Button variant="secondary" className="">
+                            {secondaryButtonText}
+                        </Button>
                     </div>
                 </div>
-                {/* Illustration Section */}
-                <div className="flex justify-center lg:justify-end">
-                    <div className="relative">
-                        {/* Decorative background elements */}
-                        {/*<div className="absolute -top-4 -right-4 w-20 h-20 bg-blue-100 rounded-full opacity-50"></div>*/}
-                        {/*<div*/}
-                        {/*    className="absolute -bottom-6 -left-6 w-16 h-16 bg-green-100 rounded-full opacity-40"></div>*/}
-                        {/*<div*/}
-                        {/*    className="absolute top-1/2 -right-8 w-12 h-12 bg-yellow-100 rounded-full opacity-30"></div>*/}
-                        {/* Main illustration container */}
-                        <div className="relative z-10 max-w-md w-full">
-                            {illustration || (
-                                // Fallback illustration if none provided
-                                <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-8 aspect-square flex items-center justify-center">
-                                    <div className="text-6xl text-blue-500">
-                                        🎬
-                                    </div>
-                                </div>
-                            )}
+            </div>
+            {/* Illustration Section */}
+            <div className="">
+                <div
+                    className="flex justify-center items-center lg:justify-endrelative z-10 md:w-[474px]
+                ml-4 md:ml-32 mt-[-15px] md:mt-0"
+                >
+                    {illustration || (
+                        // Fallback illustration if none provided
+                        <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-8 aspect-square flex items-center justify-center">
+                            <div className="text-6xl text-blue-500">🎬</div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

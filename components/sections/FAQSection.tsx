@@ -1,42 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
-const FAQItem = ({ question, answer, isOpen, onToggle, isLast }) => {
-    return (
-        <div className="rounded-2xl mb-4 overflow-hidden">
-            <button
-                onClick={onToggle}
-                className="w-full px-8 py-6 text-left flex items-center justify-between transition-colors"
-            >
-                <span className="text-display-xs font-semibold text-black pr-4">
-                    {question}
-                </span>
-                <div className="flex-shrink-0">
-                    <img
-                        src="/icons/arrowUp.svg"
-                        alt="Logo"
-                        className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                    />
-                </div>
-            </button>
-
-            {isOpen && (
-                <div className="px-8 pb-6">
-                    <div
-                        className=" leading-relaxed text-body-xl"
-                        style={{ color: "#38383A" }}
-                    >
-                        {answer}
-                    </div>
-                </div>
-            )}
-            {!isLast && (
-                <div className={"border-2 border-gray-200 px-16"}></div>
-            )}
-        </div>
-    );
-};
+import { FAQItem } from "@/components/sections/FAQItem";
 
 const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState(0);
@@ -92,60 +57,46 @@ const FAQSection = () => {
     };
 
     return (
-        <div
-            className="w-full bg-gray-100"
-            style={{
-                paddingTop: 128,
-                paddingLeft: 150,
-                paddingRight: 150,
-                paddingBottom: 128,
-            }}
-        >
-            <div className="">
-                {/* Header Section */}
-                <div className="text-center mb-16 flex justify-center flex-col items-center">
-                    <div className="mb-8">
-                        <span
-                            className="inline-block border px-6 py-4 rounded-full shadow-lg"
-                            style={{
-                                color: "#54B3F1",
-                                borderColor: "#54B3F1",
-                                fontSize: 20,
-                            }}
-                        >
-                            Questions?
-                        </span>
-                    </div>
-
-                    <h1
-                        className="text-4xl font-bold text-gray-900 mb-6 leading-tight"
-                        style={{ fontSize: 56, fontWeight: "500" }}
+        <div className="w-full bg-gray-100 md:p-32 p-2 pt-12">
+            {/* Header Section */}
+            <div className="text-center mb-16 flex justify-center flex-col items-center">
+                <div className="mb-8">
+                    <span
+                        className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full shadow-lg"
+                        style={{
+                            color: "#54B3F1",
+                            borderColor: "#54B3F1",
+                        }}
                     >
-                        Answers to Your Top Questions
-                    </h1>
-
-                    <p
-                        className="text-display-xs leading-relaxed"
-                        style={{ color: "#A0A1B3", maxWidth: 982 }}
-                    >
-                        Check out our frequently asked questions to learn more
-                        about our process, services and what to expect
-                    </p>
+                        Questions?
+                    </span>
                 </div>
 
-                {/* FAQ Items */}
-                <div className="space-y-0 border-4 p-8 border-gray-200 rounded-3xl shadow-sm">
-                    {faqs.map((faq, index) => (
-                        <FAQItem
-                            key={index}
-                            question={faq.question}
-                            answer={faq.answer}
-                            isOpen={openIndex === index}
-                            onToggle={() => handleToggle(index)}
-                            isLast={index === faqs.length - 1}
-                        />
-                    ))}
-                </div>
+                <h1 className="md:text-[56px] text-[40px] font-semibold text-gray-900 mb-6 leading-tight ">
+                    Answers to Your Top Questions
+                </h1>
+
+                <p
+                    className="md:text-display-xs text-body-md leading-relaxed"
+                    style={{ color: "#A0A1B3", maxWidth: 982 }}
+                >
+                    Check out our frequently asked questions to learn more about
+                    our process, services and what to expect
+                </p>
+            </div>
+
+            {/* FAQ Items */}
+            <div className="space-y-0 border-4 md:p-8 p-0 border-gray-200 md:rounded-3xl rounded-2xl shadow-sm">
+                {faqs.map((faq, index) => (
+                    <FAQItem
+                        key={index}
+                        question={faq.question}
+                        answer={faq.answer}
+                        isOpen={openIndex === index}
+                        onToggle={() => handleToggle(index)}
+                        isLast={index === faqs.length - 1}
+                    />
+                ))}
             </div>
         </div>
     );

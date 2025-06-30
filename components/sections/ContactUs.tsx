@@ -62,103 +62,95 @@ const ContactForm = () => {
     });
 
     return (
-        <div
-            className="bg-primary flex items-center justify-center px-4"
-            style={{ paddingTop: 188, paddingBottom: 188 }}
-        >
-            <div className="w-full overflow-hidden">
-                <div className="flex flex-col lg:flex-row min-h-[600px]">
-                    {/* Left side - Contact Info */}
-                    <ContactInfo />
+        <div className="bg-primary flex flex-col md:flex-row items-center justify-center py-8">
+            {/* Left side - Contact Info */}
+            <ContactInfo />
 
-                    {/* Right side - Form */}
+            {/* Right side - Form */}
 
+            <div className={"w-full md:p-12 p-1 mt-4 md:max-w-[50%]"}>
+                <div
+                    style={{
+                        background:
+                            "linear-gradient(358deg, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%)",
+                        padding: 2,
+                        borderRadius: 16,
+                        zIndex: 20,
+                    }}
+                    className={"shadow-2xl pt-8"}
+                >
+                    {/* Inner content */}
                     <div
                         style={{
                             background:
-                                "linear-gradient(358deg, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%)",
-                            padding: 3,
-                            borderRadius: 16,
-                            zIndex: 20,
+                                "linear-gradient(180deg, rgba(29, 34, 53, 1) 0%, rgba(18, 19, 24, 1) 100%)",
+                            borderRadius: 15, // 62 - 16 (border width)
+                            zIndex: 19,
                         }}
-                        className={"shadow-2xl"}
+                        className={"shadow-2xl w-full md:p-4 p-1"}
                     >
-                        {/* Inner content */}
-                        <div
-                            style={{
-                                width: 689,
-                                padding: 48,
-                                background:
-                                    "linear-gradient(180deg, rgba(29, 34, 53, 1) 0%, rgba(18, 19, 24, 1) 100%)",
-                                borderRadius: 15, // 62 - 16 (border width)
-                                zIndex: 19,
-                            }}
-                            className={"shadow-2xl"}
+                        <form
+                            onSubmit={formik.handleSubmit}
+                            className="h-full flex flex-col"
                         >
-                            <form
-                                onSubmit={formik.handleSubmit}
-                                className="h-full flex flex-col"
-                                style={{ borderRadius: 62 }}
-                            >
-                                <div className="flex-1 space-y-8">
-                                    <FormInput
-                                        label="Fullname"
-                                        name="fullname"
-                                        placeholder="Benyamina Sarah"
-                                        value={formik.values.fullname}
-                                        onChange={formik.handleChange}
-                                        error={
-                                            formik.touched.fullname &&
-                                            (formik.errors.fullname as string)
-                                        }
-                                    />
+                            <div className="md:gap-8 gap-1 p-3">
+                                <FormInput
+                                    label="Fullname"
+                                    name="fullname"
+                                    placeholder="Benyamina Sarah"
+                                    value={formik.values.fullname}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.fullname &&
+                                        (formik.errors.fullname as string)
+                                    }
+                                />
 
-                                    <FormInput
-                                        label="Email Address"
-                                        name="email"
-                                        type="email"
-                                        placeholder="sarah.benyamina@email.com"
-                                        value={formik.values.email}
-                                        onChange={formik.handleChange}
-                                        error={
-                                            formik.touched.email &&
-                                            (formik.errors.email as string)
-                                        }
-                                    />
+                                <FormInput
+                                    label="Email Address"
+                                    name="email"
+                                    type="email"
+                                    placeholder="sarah.benyamina@email.com"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.email &&
+                                        (formik.errors.email as string)
+                                    }
+                                />
 
-                                    <FormInput
-                                        label="Phone number"
-                                        name="phone"
-                                        placeholder="05 0000 00 00"
-                                        value={formik.values.phone}
-                                        onChange={formik.handleChange}
-                                        error={
-                                            formik.touched.phone &&
-                                            (formik.errors.phone as string)
-                                        }
-                                    />
+                                <FormInput
+                                    label="Phone number"
+                                    name="phone"
+                                    placeholder="05 0000 00 00"
+                                    value={formik.values.phone}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.phone &&
+                                        (formik.errors.phone as string)
+                                    }
+                                />
 
-                                    <FormInput
-                                        label="Message"
-                                        name="message"
-                                        as="textarea"
-                                        placeholder="Tell us more about what you're looking for..."
-                                        value={formik.values.message}
-                                        onChange={formik.handleChange}
-                                        error={
-                                            formik.touched.message &&
-                                            (formik.errors.message as string)
-                                        }
-                                    />
-                                </div>
+                                <FormInput
+                                    label="Message"
+                                    name="message"
+                                    as="textarea"
+                                    placeholder="Tell us more about what you're looking for..."
+                                    value={formik.values.message}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.message &&
+                                        (formik.errors.message as string)
+                                    }
+                                />
+                            </div>
 
-                                <div className="mt-8">
-                                    <SubmitButton
-                                        isSubmitting={formik.isSubmitting}
-                                    />
-                                </div>
-                            </form>
-                        </div>
+                            <div className="md:mt-8 mt-1">
+                                <SubmitButton
+                                    isSubmitting={formik.isSubmitting}
+                                />
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
