@@ -27,12 +27,12 @@ export const Navigation = () => {
     // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setIsDropdownOpen(false);
-            }
+            // if (
+            //     dropdownRef.current &&
+            //     !dropdownRef.current?.contains(event.target)
+            // ) {
+            //     setIsDropdownOpen(false);
+            // }
         };
 
         document.addEventListener("mousedown", handleClickOutside);
