@@ -47,7 +47,8 @@ export const Button = ({
 
     return (
         <button
-            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow h-full w-full md:text-body-xl text-body-md px-[30px] font-medium`}
+            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} shadow h-full w-full md:text-body-xl 
+            text-body-md md:px-[30px] px-[5px] font-medium`}
             {...props}
             style={{
                 borderColor: variant === "secondary" ? "#54B3F1" : "unset",
@@ -62,11 +63,13 @@ export const Button = ({
             }}
         >
             {leftIcon && (
-                <span className="flex-shrink-0 hidden md:flex">{leftIcon}</span>
+                <span className="flex-shrink-0 invisible md:visible">
+                    {leftIcon}
+                </span>
             )}
             <span className="leading-none ">{children}</span>
             {rightIcon && (
-                <span className="flex-shrink-0 hidden md:flex">
+                <span className="flex-shrink-0 invisible md:visible">
                     {rightIcon}
                 </span>
             )}

@@ -42,7 +42,7 @@ export const LanguageSelector = ({ className = "" }) => {
     };
 
     return (
-        <div className={`relative inline-block text-left ${className}`}>
+        <div className={`relative inline-block text-left h-full ${className}`}>
             {/* Selected Language Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}

@@ -2,6 +2,8 @@ import { Navigation } from "@/app/services/navigation";
 import React from "react";
 import { Header } from "@/app/services/header";
 import { PlanCard } from "@/app/services/planCard";
+import { Navigation as Navigation_ } from "@/components/layout/Navigation";
+import Footer from "@/components/sections/Footer";
 
 export const metadata = {
     title: "Services | Laqta",
@@ -33,10 +35,11 @@ const BasicProductionPage = () => {
     return (
         <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex justify-center items-center">
             <div className="">
+                <Navigation_></Navigation_>
                 <Navigation />
                 <Header />
 
-                <div className="grid md:grid-cols-2 gap-8 mb-8 pl-32 pr-32">
+                <div className="grid md:grid-cols-2 gap-8 mb-8 md:pl-32 md:pr-32 px-6">
                     {/* Basic Plan */}
                     <PlanCard
                         frameId="Frame 170480111"
@@ -63,6 +66,7 @@ const BasicProductionPage = () => {
                         frameId={undefined}
                     />
                 </div>
+                <Footer />
             </div>
         </div>
     );
