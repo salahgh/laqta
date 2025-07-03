@@ -1,6 +1,7 @@
 import { ArrowRight, ChartColumnBig, Film, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
+import { Badge } from "@/components/ui/Badge";
 
 // Main Services Section Component - Exact replica
 export const ServicesSection = ({
@@ -47,17 +48,7 @@ export const ServicesSection = ({
             <div className="bg-primary flex flex-col p-4 md:pt-32">
                 {/* Header - Centered */}
                 <div className="text-center flex flex-col items-center mb-20 mt-8 ">
-                    <div
-                        className="mb-8 border rounded-full md:px-6 md:py-4 px-4 py-2 font-semibold flex items-center justify-center
-                        md:text-[20px] text-body-md
-                        "
-                        style={{
-                            color: "#54B3F1",
-                            borderColor: "#54B3F1",
-                        }}
-                    >
-                        {badge}
-                    </div>
+                    <Badge variant="default">{badge}</Badge>
 
                     <p className={"text-white md:text-[56px] text-display-md "}>
                         Our Services

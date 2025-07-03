@@ -1,5 +1,6 @@
 import React from "react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Badge } from "@/components/ui/Badge";
 
 const OurWorks = () => {
     const projects = [
@@ -37,18 +38,7 @@ const OurWorks = () => {
             <div className=" px-3 md:px-20">
                 {/* Header Section */}
                 <div className="text-center mb-16 flex flex-col items-center space-y-4">
-                    <h1
-                        className="px-4 py-2 bg-blue-50 text-blue-600 text-body-md md:text-display-sm
-                        rounded-full border border-blue-100 flex items-center justify-center mb-4
-                        md:h-[56px] h-[42px]
-                        "
-                        style={{
-                            color: "#54B3F1",
-                            borderColor: "#54B3F1",
-                        }}
-                    >
-                        Our Works
-                    </h1>
+                    <Badge variant="default">Our Works</Badge>
 
                     <h1 className="px-4 py-2 md:text-display-xl text-display-md flex items-center justify-center mb-4">
                         Our Works

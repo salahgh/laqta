@@ -51,7 +51,7 @@ export function PaymentInfoForm({
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Payment Details */}
             <FormInput
                 label="Card Number"

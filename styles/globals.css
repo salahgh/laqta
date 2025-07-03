@@ -1,5 +1,107 @@
+/* Responsive Typography Utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global rules placeholder */
+@layer base {
+    html {
+        font-family: 'Poppins', system-ui, sans-serif;
+    }
+
+    body {
+        @apply text-body-md text-white bg-primary;
+    }
+
+    h1 {
+        @apply text-responsive-display font-bold;
+    }
+
+    h2 {
+        @apply text-display-md md:text-display-lg font-semibold;
+    }
+
+    h3 {
+        @apply text-display-sm md:text-display-md font-semibold;
+    }
+
+    p {
+        @apply text-responsive-md;
+    }
+}
+
+@layer components {
+    .text-responsive-xs {
+        @apply text-[10px] md:text-body-xs lg:text-body-sm;
+    }
+
+    .text-responsive-sm {
+        @apply text-body-xs md:text-body-sm lg:text-body-md;
+    }
+
+    .text-responsive-md {
+        @apply text-body-sm md:text-body-md lg:text-body-lg;
+    }
+
+    .text-responsive-lg {
+        @apply text-body-md md:text-body-lg lg:text-body-xl;
+    }
+
+    .text-responsive-display {
+        @apply text-display-sm md:text-display-md lg:text-display-lg;
+    }
+
+    /* Responsive Spacing Utilities */
+    .spacing-form-tight {
+        @apply mb-0.5 md:mb-1 lg:mb-2;
+    }
+
+    .spacing-form-normal {
+        @apply mb-1 md:mb-3 lg:mb-4;
+    }
+
+    .padding-responsive-sm {
+        @apply px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-3;
+    }
+
+    .padding-responsive-md {
+        @apply px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3;
+    }
+
+    /* Button Size Utilities */
+    .btn-size-sm {
+        @apply px-1.5 py-0.5 md:px-2 md:py-1 lg:px-3 lg:py-1.5 h-[24px] md:h-[28px] lg:h-[32px];
+    }
+
+    .btn-size-md {
+        @apply px-2 py-1 md:px-3 md:py-1.5 lg:px-4 lg:py-2 h-[28px] md:h-[32px] lg:h-[38px];
+    }
+
+    .btn-size-lg {
+        @apply px-3 py-1.5 md:px-4 md:py-2 lg:px-6 lg:py-3 h-[32px] md:h-[38px] lg:h-[44px];
+    }
+
+    /* Form Input Utilities */
+    .form-input-base {
+        @apply w-full bg-transparent border border-gray-600 text-white placeholder-gray-400;
+        @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+        @apply transition-all duration-200;
+    }
+
+    .form-label-base {
+        @apply block text-white font-medium;
+    }
+
+    /* Navigation Utilities */
+    .nav-link-base {
+        @apply relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out;
+        @apply text-white/90 hover:text-white font-medium;
+    }
+
+    .nav-link-active {
+        @apply text-white;
+    }
+
+    .nav-link-inactive {
+        @apply hover:bg-white/10;
+    }
+}

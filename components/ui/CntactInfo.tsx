@@ -1,18 +1,13 @@
 import React from "react";
 import { Mail, MapPin, Phone, PhoneCall } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
 
 export const ContactInfo = () => (
     <div className="flex-1 flex flex-col justify-center px-3 lg:px-12 md:max-w-[50%]">
         <div className="mb-8 flex justify-center md:justify-start">
-            <span
-                className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full shadow-lg"
-                style={{
-                    color: "#54B3F1",
-                    borderColor: "#54B3F1",
-                }}
-            >
+            <Badge variant="default" shadow>
                 Let's Connect
-            </span>
+            </Badge>
         </div>
 
         <div

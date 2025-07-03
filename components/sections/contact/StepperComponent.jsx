@@ -50,7 +50,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                             }`}
                         >
                             <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                                     isActive
                                         ? "bg-blue-500 shadow-lg shadow-blue-500/25"
                                         : isCompleted
@@ -59,7 +59,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                 }`}
                             >
                                 <IconComponent
-                                    className={`w-5 h-5 transition-colors duration-300 ${
+                                    className={`w-4 h-4 transition-colors duration-300 ${
                                         isActive || isCompleted
                                             ? "text-white"
                                             : "text-slate-300"
@@ -77,8 +77,8 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                     }`}
                                     style={
                                         isActive
-                                            ? { fontSize: 23, color: "#dae8f7" }
-                                            : { fontSize: 18 }
+                                            ? { fontSize: 16, color: "#dae8f7" }
+                                            : { fontSize: 14 }
                                     }
                                 >
                                     {step.title}
@@ -118,7 +118,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                             <React.Fragment key={step.id}>
                                 {/* Step Circle */}
                                 <div
-                                    className={`relative w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 transform ${
+                                    className={`relative w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 transform ${
                                         isActive
                                             ? "bg-blue-500 shadow-lg shadow-blue-500/40 scale-110"
                                             : isCompleted
@@ -127,7 +127,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                     } ${isInactive ? "opacity-50" : ""}`}
                                 >
                                     <IconComponent
-                                        className={`w-6 h-6 transition-all duration-300 ${
+                                        className={`w-4 h-4 transition-all duration-300 ${
                                             isActive || isCompleted
                                                 ? "text-white"
                                                 : "text-slate-300"
@@ -141,7 +141,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
                                     {/* Step Number Badge */}
                                     <div
-                                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                                        className={`absolute -top-2 -right-2 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                                             isActive
                                                 ? "bg-white text-blue-500 shadow-md"
                                                 : isCompleted
@@ -184,10 +184,10 @@ const StepperComponent = ({ currentStep = 1 }) => {
                 {/* Active Step Info - Centered */}
                 {activeStep && (
                     <div className="text-center px-4 animate-fade-in">
-                        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+                        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-3 border border-slate-700/50 shadow-xl">
                             <h3
                                 className="font-semibold text-white mb-2 transition-all duration-300"
-                                style={{ fontSize: 23, color: "#dae8f7" }}
+                                style={{ fontSize: 16, color: "#dae8f7" }}
                             >
                                 {activeStep.title}
                             </h3>

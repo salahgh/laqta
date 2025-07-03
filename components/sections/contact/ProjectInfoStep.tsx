@@ -90,9 +90,9 @@ const ProjectInfoStep = ({
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Project Type */}
-            <div className="grid grid-cols-1 gap-6 w-full">
+            <div className="grid grid-cols-1 gap-3 w-full">
                 <FormInput
                     placeholder={undefined}
                     label="Project Type"

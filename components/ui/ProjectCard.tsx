@@ -1,6 +1,7 @@
 import React from "react";
 import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 export const ProjectCard = ({
     imagePosition = "left",
@@ -18,22 +19,12 @@ export const ProjectCard = ({
                 className={`flex items-center gap-8 ${isLeftImage ? "md:flex-row" : "md:flex-row-reverse"} flex-col`}
             >
                 {/* Project Image */}
-
                 <img src="/images/workImage.jpg" alt="Logo" />
 
                 {/* Project Content */}
                 <div className="flex-1">
                     <div className="mb-3">
-                        <span
-                            className="inline-block border px-6 py-1 rounded-full text-body-md md:text-display-xs"
-                            style={{
-                                color: "#54B3F1",
-                                borderColor: "#54B3F1",
-                                fontSize: 20,
-                            }}
-                        >
-                            {category}
-                        </span>
+                        <Badge variant="compact">{category}</Badge>
                     </div>
 
                     <h3 className="font-semibold mb-3 text-display-sm md:text-display-md">

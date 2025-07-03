@@ -1,6 +1,7 @@
 // Competitive Edge Component
 import { Clock, Edit, Eye, RefreshCw } from "lucide-react";
 import React from "react";
+import { Badge } from "@/components/ui/Badge";
 
 export const CompetitiveEdge = () => {
     const advantages = [
@@ -26,17 +27,7 @@ export const CompetitiveEdge = () => {
         <section className="py-16  max-w-4xl mx-auto bg-gray-300">
             <div className="bg-gradient-to-br from-gray-100/10 to-blue-100/10 backdrop-blur-sm rounded-3xl p-12 border border-gray-200/20">
                 <div className="text-center mb-12">
-                    <div className="mb-8">
-                        <span
-                            className="inline-block border md:px-6 md:py-4 px-4 py-2 md:text-body-xl text-body-md rounded-full shadow-lg"
-                            style={{
-                                color: "#54B3F1",
-                                borderColor: "#54B3F1",
-                            }}
-                        >
-                            The Leqta Difference
-                        </span>
-                    </div>
+                    <Badge>The Leqta Difference</Badge>
 
                     <h2 className="text-white mb-4" style={{ fontSize: 48 }}>
                         Our Competitive Edge

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FAQItem } from "@/components/sections/FAQItem";
+import { Badge } from "@/components/ui/Badge";
 
 const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState(0);
@@ -61,15 +62,9 @@ const FAQSection = () => {
             {/* Header Section */}
             <div className="text-center mb-16 flex justify-center flex-col items-center">
                 <div className="mb-8">
-                    <span
-                        className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full shadow-lg"
-                        style={{
-                            color: "#54B3F1",
-                            borderColor: "#54B3F1",
-                        }}
-                    >
+                    <Badge variant="default" shadow>
                         Questions?
-                    </span>
+                    </Badge>
                 </div>
 
                 <h1 className="md:text-[56px] text-[40px] font-semibold text-gray-900 mb-6 leading-tight ">

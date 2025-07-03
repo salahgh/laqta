@@ -2,24 +2,14 @@
 import { ArrowRight, Rocket } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 const title = "We are LEQTA";
 
 export const HeroSection = () => (
     <section className="flex md:flex-row flex-col items-center md:px-16 px-8 py-16">
         <div className="flex-1 ">
-            <div className="mb-8">
-                <span
-                    className="inline-block border md:px-6 md:py-4 px-4 py-2
-                    rounded-full shadow-lg text-body-md md:text-body-xl"
-                    style={{
-                        color: "#54B3F1",
-                        borderColor: "#54B3F1",
-                    }}
-                >
-                    About Leqta
-                </span>
-            </div>
+            <Badge>About Leqta</Badge>
 
             <h2 className="text-gray-200 md:text-[56px] text-[40px] leading-tight">
                 {title.split(" ").map((word, index) => (

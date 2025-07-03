@@ -4,6 +4,7 @@ import LetsStartProjectSection from "@/components/sections/LetsStartProjectSecti
 import { TestimonialCard } from "@/components/sections/successStories/TestimonialCard";
 import { PaginationDots } from "@/components/sections/successStories/PaginationDots";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
 
 const TestimonialsSection = () => {
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -111,17 +112,7 @@ const TestimonialsSection = () => {
         <div className="bg-gray-100 md:pt-20 pt-8">
             {/* Header section */}
             <div className="text-center mb-16 px-3">
-                <div className="mb-8">
-                    <span
-                        className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full shadow-lg"
-                        style={{
-                            color: "#54B3F1",
-                            borderColor: "#54B3F1",
-                        }}
-                    >
-                        Testimonials
-                    </span>
-                </div>
+                <Badge>Testimonials</Badge>
 
                 <h1 className="mb-8 leading-tight text-display-md md:text-display-xl">
                     Success Stories From Our

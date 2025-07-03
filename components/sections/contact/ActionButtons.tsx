@@ -10,7 +10,7 @@ export const ActionButtons = ({
     isSubmitting,
 }) => {
     return (
-        <div className={"flex"}>
+        <div className={"pt-4 flex"}>
             <div className="flex-1"></div>
             <div className="flex justify-end items-center h-full gap-6">
                 <Button

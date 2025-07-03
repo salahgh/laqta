@@ -7,6 +7,21 @@ import { Button } from "@/components/ui/Button";
 import { Rocket, Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+
+// Navigation constants
+const NAV_ITEMS = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+const GET_STARTED_BUTTON_PROPS = {
+  rightIcon: <Rocket className="ml-2 h-4 w-4" />,
+  className: "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+};
 
 export const Navigation = ({ className = "" }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
