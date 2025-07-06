@@ -36,10 +36,12 @@ const BasicProductionPage = () => {
         <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex justify-center items-center">
             <div className="">
                 <Navigation_></Navigation_>
-                <Navigation />
-                <Header />
+                <div className={"space-y-8"}>
+                    <Navigation />
+                    <Header />
+                </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-8 md:pl-32 md:pr-32 px-6">
+                <div className="grid lg:grid-cols-2 gap-8 mb-8 md:px-16 px-4">
                     {/* Basic Plan */}
                     <PlanCard
                         frameId="Frame 170480111"

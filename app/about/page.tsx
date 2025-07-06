@@ -7,7 +7,7 @@ import { CompetitiveEdge } from "@/app/about/competitiveEdge";
 
 // Main Homepage Component
 const LeqtaHomepage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-purple-900">
+    <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-purple-900">
         <Navigation />
         <HeroSection />
         <MissionVisionCards />

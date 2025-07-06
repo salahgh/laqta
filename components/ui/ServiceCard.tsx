@@ -1,26 +1,28 @@
 // Service Card Component - Exact replica
 import { ChartColumnBig } from "lucide-react";
 
-export const ServiceCard = ({
-    title,
-    description,
-    tags = ["Strategy", "Publishing", "Production", "Reporting"],
-    gradientFrom = "#B8860B",
-    gradientTo = "#DAA520",
-    iconBg = "rgba(255,255,255,0.2)",
-    className = "",
-    icon = <ChartColumnBig />,
-}) => {
+export const ServiceCard = (props) => {
+    const {
+        title,
+        description,
+        tags = ["Strategy", "Publishing", "Production", "Reporting"],
+        gradientFrom = null,
+        gradientTo = null,
+        iconBg = "rgba(255,255,255,0.2)",
+        className = "",
+        icon = <ChartColumnBig />,
+    } = props;
+
     // todo display good illustrations
     return (
         <div
             className={`relative rounded-lg p-3 h-full overflow-hidden hover:scale-[1.02] transition-all duration-300 ${className}`}
             style={{
-                backgroundColor: "#333139",
+                backgroundColor: "#605e68",
             }}
         >
             <div
-                className={"relative rounded-lg h-full w-full p-4"}
+                className={"relative rounded-lg h-full w-full p-2"}
                 style={{
                     background: `linear-gradient(0deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
                 }}

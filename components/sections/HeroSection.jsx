@@ -22,17 +22,21 @@ const ArrowIcon = () => (
 
 export const HeroSection = () => {
     return (
-        <div className="relative flex flex-col items-center justify-center bg-primary pb-24 text-center md:p-24 p-4">
+        <div className="relative flex flex-col items-center justify-center bg-primary text-center p-4 sm:p-12 md:pb-24 lg:pb-36">
             <div className={"pt-8 md:pt-0"}>
-                <Logo className={"md:invisible"} />
+                <Logo className={"md:hidden"} />
             </div>
+
             <img
                 src="/images/wherecreativitymeetsstrategy.svg"
                 alt="Logo"
-                className={"mt-6"}
+                className={"padding-responsive-lg "}
             />
-
-            <p className="text-body-sm font-medium text-gray-500 md:text-display-xs p-2 md:px-36">
+            <p
+                className="text-responsive-lg font-medium text-secondary-gray padding-responsive-lg
+            text-justify
+             sm:text-center md:px-12 md:text-justify lg:text-center xl:px-40"
+            >
                 Leqta is a full-service content marketing & production company
                 based in Algiers. We combine storytelling, strategy, and visual
                 excellence to empower your brand with impactful video content.

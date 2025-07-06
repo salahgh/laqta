@@ -3,52 +3,87 @@ import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 
-export const ProjectCard = ({
-    imagePosition = "left",
-    title,
-    category,
-    description,
-    metrics,
-    ctaText,
-}) => {
+interface ProjectCardProps {
+    imagePosition?: "left" | "right";
+    title: string;
+    category: string;
+    description: string;
+    metrics?: string;
+    ctaText?: string;
+    imageUrl?: string;
+    imageAlt?: string;
+    className?: string;
+}
+
+export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
+    const {
+        imagePosition = "left",
+        title,
+        category,
+        description,
+        metrics,
+        ctaText = "Learn more",
+        imageUrl = "/images/workImage.jpg",
+        imageAlt = "Project image",
+        className = "",
+    } = props;
+
     const isLeftImage = imagePosition === "left";
 
     return (
-        <div className="bg-white rounded-2xl p-2 shadow-lg border border-gray-200 ">
+        <div
+            className={`bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 shadow-lg border border-gray-200 ${className}`}
+        >
             <div
-                className={`flex items-center gap-8 ${isLeftImage ? "md:flex-row" : "md:flex-row-reverse"} flex-col`}
+                className={`flex gap-3 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 ${
+                    isLeftImage ? "lg:flex-row" : "lg:flex-row-reverse"
+                } flex-col`}
             >
                 {/* Project Image */}
-                <img src="/images/workImage.jpg" alt="Logo" />
+                <div className="flex w-full lg:w-auto justify-center items-center">
+                    <img
+                        src={imageUrl}
+                        alt={imageAlt}
+                        className="w-full rounded-lg sm:rounded-xl object-cover md:w-2/3 lg:w-full aspect-square"
+                    />
+                </div>
 
                 {/* Project Content */}
-                <div className="flex-1">
-                    <div className="mb-3">
-                        <Badge variant="compact">{category}</Badge>
-                    </div>
+                <div className="flex-1 lg:w-3/5 xl:w-1/2 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+                    <Badge variant="compact" className="">
+                        {category}
+                    </Badge>
 
-                    <h3 className="font-semibold mb-3 text-display-sm md:text-display-md">
+                    <h1 className="font-semibold text-body-lg md:text-display-md text-gray-900 leading-tight">
                         {title}
-                    </h3>
+                    </h1>
 
-                    <p className="text-gray-600 text-base leading-relaxed mb-4 text-body-md md:text-display-xs">
+                    <p
+                        className="text-responsive-lg text-secondary-gray
+                    leading-relaxed"
+                    >
                         {description}
                     </p>
 
-                    <p className="mb-6 text-body-md md:text-display-xs text-secondary-gray">
-                        {metrics}
-                    </p>
+                    {metrics && (
+                        <p
+                            className="text-body-sm sm:text-body-md md:text-display-xs lg:text-display-sm
+                        xl:text-display-md text-gray-600 font-medium"
+                        >
+                            {metrics}
+                        </p>
+                    )}
 
-                    <div className={"flex"} style={{ height: 50 }}>
-                        <div className={"md:h-16 h-12"}>
-                            <Button
-                                size="md"
-                                rightIcon={<Rocket className="w-4 h-4 ml-2" />}
-                                // className="min-w-[140px]"
-                            >
-                                Get a free audit
-                            </Button>
-                        </div>
+                    <div className="flex max-w-max pt-2 sm:pt-3 md:pt-4 h-14 md:h-20 self-start">
+                        <Button
+                            size="lg"
+                            className=""
+                            rightIcon={
+                                <Rocket className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-2" />
+                            }
+                        >
+                            {ctaText}
+                        </Button>
                     </div>
                 </div>
             </div>

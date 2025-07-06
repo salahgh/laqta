@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-import { Logo } from "@/components/ui/Logo";
 import StepperComponent from "./StepperComponent";
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProjectInfoStep from "@/components/sections/contact/ProjectInfoStep";
@@ -47,16 +46,18 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white">
+        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white space-y-2">
             {/* Header */}
-            <Navigation></Navigation>
+            <div className={""}>
+                <Navigation></Navigation>
+            </div>
 
             {/* Go Back Button */}
-            <div className="px-6 mb-8">
+            <div className="px-6">
                 <button
                     onClick={handleGoToMainPage}
                     className="flex items-center space-x-2 px-4 py-2 border border-slate-600 rounded-full hover:bg-slate-700/30
-                transition-colors text-body-md text-secondary-gray"
+                transition-colors text-responsive-lg text-secondary-gray"
                     style={{}}
                 >
                     <ArrowLeft className="w-4 h-4" />
@@ -65,33 +66,26 @@ const ContactUs = () => {
             </div>
 
             {/* Main Content */}
-            <div
-                className="flex md:flex-row flex-col gap-8 md:px-32 px-4"
-                style={{ paddingTop: 50 }}
-            >
+            <div className="flex lg:flex-row flex-col gap-4 md:px-12 px-4">
                 {/* Left Sidebar - Stepper */}
-                <StepperComponent currentStep={currentStep} />
+                <div className={"pt-4 w-1/2"}>
+                    <StepperComponent currentStep={currentStep} />
+                </div>
 
                 {/* Right Content - Dynamic Form */}
 
-                <div
-                    className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50  w-full"
-                    style={{ minHeight: "calc(100vh - 240px)" }}
-                >
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-4 border border-slate-700/50  w-full">
                     {renderCurrentStepForm()}
-                    <div className={"pt-16"}>
-                        <ActionButtons
-                            currentStep={currentStep}
-                            totalSteps={4}
-                            handleGoBack={handleGoBack}
-                            handeGoNext={handeGoNext}
-                            isSubmitting={false}
-                        />
-                    </div>
+
+                    <ActionButtons
+                        currentStep={currentStep}
+                        totalSteps={4}
+                        handleGoBack={handleGoBack}
+                        handeGoNext={handeGoNext}
+                        isSubmitting={false}
+                    />
                 </div>
             </div>
-
-            <div style={{ height: 240 }}></div>
 
             {/* Footer */}
             <Footer />

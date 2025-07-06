@@ -35,7 +35,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
     return (
         <>
             {/* Desktop Version - Vertical Layout */}
-            <div className="hidden lg:block lg:w-1/3 space-y-6">
+            <div className="hidden lg:block space-y-6">
                 {steps.map((step) => {
                     const IconComponent = step.icon;
                     const isActive = step.active;
@@ -45,7 +45,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                     return (
                         <div
                             key={step.id}
-                            className={`flex items-start space-x-4 transition-all duration-300 ${
+                            className={`flex items-start transition-all duration-300 ${
                                 isInactive ? "opacity-60" : ""
                             }`}
                         >
@@ -105,9 +105,9 @@ const StepperComponent = ({ currentStep = 1 }) => {
             </div>
 
             {/* Mobile Version - Horizontal Layout */}
-            <div className="lg:hidden w-full">
+            <div className="lg:hidden w-full space-y-4">
                 {/* Horizontal Steps */}
-                <div className="flex items-center justify-center space-x-4 mb-6">
+                <div className="flex items-center justify-center space-x-4">
                     {steps.map((step, index) => {
                         const IconComponent = step.icon;
                         const isActive = step.active;
@@ -118,7 +118,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                             <React.Fragment key={step.id}>
                                 {/* Step Circle */}
                                 <div
-                                    className={`relative w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 transform ${
+                                    className={`relative w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 transform ${
                                         isActive
                                             ? "bg-blue-500 shadow-lg shadow-blue-500/40 scale-110"
                                             : isCompleted
@@ -127,7 +127,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                     } ${isInactive ? "opacity-50" : ""}`}
                                 >
                                     <IconComponent
-                                        className={`w-4 h-4 transition-all duration-300 ${
+                                        className={`w-6 h-6 transition-all duration-300 ${
                                             isActive || isCompleted
                                                 ? "text-white"
                                                 : "text-slate-300"
@@ -141,7 +141,8 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
                                     {/* Step Number Badge */}
                                     <div
-                                        className={`absolute -top-2 -right-2 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-md 
+                                        font-bold transition-all duration-300 ${
                                             isActive
                                                 ? "bg-white text-blue-500 shadow-md"
                                                 : isCompleted
@@ -150,7 +151,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                         }`}
                                     >
                                         {isCompleted ? (
-                                            <CheckCircle className="w-3 h-3" />
+                                            <CheckCircle className="w-5 h-5" />
                                         ) : (
                                             step.id
                                         )}
@@ -183,40 +184,35 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
                 {/* Active Step Info - Centered */}
                 {activeStep && (
-                    <div className="text-center px-4 animate-fade-in">
-                        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-3 border border-slate-700/50 shadow-xl">
-                            <h3
-                                className="font-semibold text-white mb-2 transition-all duration-300"
-                                style={{ fontSize: 16, color: "#dae8f7" }}
-                            >
-                                {activeStep.title}
-                            </h3>
-                            <p
-                                className="text-sm transition-colors duration-300"
-                                style={{ color: "#93d5de" }}
-                            >
-                                {activeStep.description}
-                            </p>
+                    <div className="text-center px-2 animate-fade-in bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-xl space-y-2 py-2">
+                        <h3 className="font-semibold text-white transition-all duration-300">
+                            {activeStep.title}
+                        </h3>
+                        <p
+                            className="text-sm transition-colors duration-300"
+                            style={{ color: "#93d5de" }}
+                        >
+                            {activeStep.description}
+                        </p>
 
-                            {/* Progress Indicator */}
-                            <div className="mt-4 flex items-center justify-center space-x-2">
-                                <span className="text-xs text-slate-400">
-                                    Step {currentStep} of {steps.length}
-                                </span>
-                                <div className="flex space-x-1">
-                                    {steps.map((_, index) => (
-                                        <div
-                                            key={index}
-                                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                                index + 1 === currentStep
-                                                    ? "bg-blue-400 scale-125"
-                                                    : index + 1 < currentStep
-                                                      ? "bg-green-400"
-                                                      : "bg-slate-600"
-                                            }`}
-                                        />
-                                    ))}
-                                </div>
+                        {/* Progress Indicator */}
+                        <div className="flex items-center justify-center space-x-2">
+                            <span className="text-xs text-slate-400">
+                                Step {currentStep} of {steps.length}
+                            </span>
+                            <div className="flex space-x-1">
+                                {steps.map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                            index + 1 === currentStep
+                                                ? "bg-blue-400 scale-125"
+                                                : index + 1 < currentStep
+                                                  ? "bg-green-400"
+                                                  : "bg-slate-600"
+                                        }`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@ const buttonSizes = {
 
 export const Button = ({
     variant = "primary",
-    size = "md",
+    size = "lg",
     children,
     className = "",
     leftIcon,

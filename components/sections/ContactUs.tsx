@@ -63,12 +63,9 @@ const ContactForm = () => {
 
     return (
         <div className="bg-primary flex flex-col md:flex-row items-center justify-center py-8">
-            {/* Left side - Contact Info */}
             <ContactInfo />
 
-            {/* Right side - Form */}
-
-            <div className={"w-full md:p-12 p-2 mt-2 md:mt-4 md:max-w-[50%]"}>
+            <div className={"w-full md:w-auto md:p-12 p-2 mt-2 md:mt-4 "}>
                 <div
                     style={{
                         background:
@@ -89,67 +86,62 @@ const ContactForm = () => {
                         }}
                         className={"shadow-2xl w-full md:p-4 p-2"}
                     >
-                        <form
-                            onSubmit={formik.handleSubmit}
-                            className="h-full flex flex-col"
-                        >
-                            // In the form section, update FormInput usage:
-                            <div className="md:gap-4 gap-0 p-1 md:p-2 lg:p-3">
-                            <FormInput
-                            label="Fullname"
-                            name="fullname"
-                            placeholder="Benyamina Sarah"
-                            value={formik.values.fullname}
-                            onChange={formik.handleChange}
-                            error={
-                            formik.touched.fullname &&
-                            (formik.errors.fullname as string)
-                            }
-                            variant="compact"
-                            />
-                            
-                            <FormInput
-                            label="Email Address"
-                            name="email"
-                            type="email"
-                            placeholder="sarah.benyamina@email.com"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            error={
-                            formik.touched.email &&
-                            (formik.errors.email as string)
-                            }
-                            variant="compact"
-                            />
-                            
-                            <FormInput
-                            label="Phone number"
-                            name="phone"
-                            placeholder="05 0000 00 00"
-                            value={formik.values.phone}
-                            onChange={formik.handleChange}
-                            error={
-                            formik.touched.phone &&
-                            (formik.errors.phone as string)
-                            }
-                            variant="compact"
-                            />
-                            
-                            <FormInput
-                            label="Message"
-                            name="message"
-                            as="textarea"
-                            placeholder="Tell us more about what you're looking for..."
-                            value={formik.values.message}
-                            onChange={formik.handleChange}
-                            error={
-                            formik.touched.message &&
-                            (formik.errors.message as string)
-                            }
-                            variant="compact"
-                            />
-                            </div>
+                        <form onSubmit={formik.handleSubmit} className="h-full">
+                            <div className="space-y-4 p-1 md:p-2 lg:p-3">
+                                <FormInput
+                                    label="Fullname"
+                                    name="fullname"
+                                    placeholder="Benyamina Sarah"
+                                    value={formik.values.fullname}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.fullname &&
+                                        (formik.errors.fullname as string)
+                                    }
+                                    variant="compact"
+                                />
 
+                                <FormInput
+                                    label="Email Address"
+                                    name="email"
+                                    type="email"
+                                    placeholder="sarah.benyamina@email.com"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.email &&
+                                        (formik.errors.email as string)
+                                    }
+                                    variant="compact"
+                                />
+
+                                <FormInput
+                                    label="Phone number"
+                                    name="phone"
+                                    placeholder="05 0000 00 00"
+                                    value={formik.values.phone}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.phone &&
+                                        (formik.errors.phone as string)
+                                    }
+                                    variant="compact"
+                                />
+
+                                <FormInput
+                                    label="Message"
+                                    name="message"
+                                    as="textarea"
+                                    placeholder="Tell us more about what you're looking for..."
+                                    value={formik.values.message}
+                                    onChange={formik.handleChange}
+                                    error={
+                                        formik.touched.message &&
+                                        (formik.errors.message as string)
+                                    }
+                                    variant="compact"
+                                />
+                            </div>
                             <div className="md:mt-4 mt-0.5">
                                 <SubmitButton
                                     isSubmitting={formik.isSubmitting}

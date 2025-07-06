@@ -7,11 +7,11 @@ import { Badge } from "@/components/ui/Badge";
 const title = "We are LEQTA";
 
 export const HeroSection = () => (
-    <section className="flex md:flex-row flex-col items-center md:px-16 px-8 py-16">
-        <div className="flex-1 ">
+    <section className="flex lg:flex-row flex-col items-center md:px-8 px-4 py-16 space-y-6 md:space-y-8">
+        <div className="flex-1 space-y-4 md:space-y-6">
             <Badge>About Leqta</Badge>
 
-            <h2 className="text-gray-200 md:text-[56px] text-[40px] leading-tight">
+            <h2 className="text-gray-200 leading-tight py-2">
                 {title.split(" ").map((word, index) => (
                     <span
                         key={index}
@@ -29,13 +29,13 @@ export const HeroSection = () => (
                 ))}
             </h2>
 
-            <p className="leading-relaxed text-secondary-gray text-body-md md:text-display-xs mt-4">
+            <p className="leading-relaxed text-secondary-gray text-responsive-lg">
                 A content marketing & film production agency based in Algiers.s
                 We serve brands, businesses, and changemakers with purposeful
                 video content that blends creativity and strategy.
             </p>
 
-            <div className="flex md:flex-row flex-col md:gap-4 gap-2 md:h-16 md:mt-12 mt-4 ">
+            <div className="flex flex-col md:flex-row md:gap-4 gap-2 h-24 md:h-16 ">
                 <Button
                     variant={"primary"}
                     rightIcon={<Rocket />}
@@ -53,7 +53,7 @@ export const HeroSection = () => (
             </div>
         </div>
 
-        <div className="flex-1 mt-12">
+        <div className="flex-1">
             <img
                 src="/images/hero_section_2.png"
                 alt="Logo"

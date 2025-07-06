@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import React from "react";
-import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
     title: "Laqta Design System",
@@ -28,8 +27,8 @@ export default function RootLayout({
                 />
                 <title>dfef</title>
             </head>
-            <body className="min-h-screen font-sans antialiased bg-black  flex flex-col items-center">
-                <main className="flex-1 w-full lg:max-w-[1514px] ">
+            <body className="min-h-screen font-sans antialiased bg-black flex flex-col items-center">
+                <main className="flex-1 w-full xl:max-w-[1514px]">
                     {children}
                 </main>
             </body>

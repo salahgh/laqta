@@ -2,7 +2,7 @@ import React from "react";
 
 export const PaginationDots = ({ total, current, onChange }) => {
     return (
-        <div className="flex justify-center gap-4 mt-16" style={{ gap: 19 }}>
+        <div className="flex justify-center gap-4 mt-4" style={{ gap: 19 }}>
             {[...Array(total)].map((_, i) => (
                 <button
                     key={i}

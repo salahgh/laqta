@@ -80,7 +80,7 @@ const PersonalInfoForm = ({
     return (
         <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Name Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormInput
                     label="First Name"
                     {...useFormInput("firstName", formik)}
@@ -134,7 +134,7 @@ const PersonalInfoForm = ({
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
                     width: "100%",
-                    height: 307,
+                    height: 200,
                 }}
             />
 

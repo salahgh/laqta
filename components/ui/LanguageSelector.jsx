@@ -4,13 +4,21 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 // Algerian Flag Component
-const AlgerianFlag = ({ className = "w-5 h-5" }) => (
-    <img src="/images/algerie%20(1).png" alt="Logo" className="w-8 h-8" />
+const AlgerianFlag = () => (
+    <img
+        src="/images/algerie%20(1).png"
+        alt="Logo"
+        className="aspect-square h-full"
+    />
 );
 
 // UK Flag Component
-const UKFlag = ({ className = "w-5 h-5" }) => (
-    <img src="/images/royaume-uni.png" alt="Logo" className="w-8 h-8" />
+const UKFlag = () => (
+    <img
+        src="/images/royaume-uni.png"
+        alt="Logo"
+        className="aspect-square h-full"
+    />
 );
 
 export const LanguageSelector = ({ className = "" }) => {
@@ -42,18 +50,21 @@ export const LanguageSelector = ({ className = "" }) => {
     };
 
     return (
-        <div className={`relative inline-block text-left h-full ${className}`}>
+        <div className={`text-left relative h-full ${className}`}>
             {/* Selected Language Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1 md:gap-2 px-1  md:px-3 py-1 border border-gray-50 rounded-full transition-colors"
+                className="flex items-center justify-center p-2 gap-2 border border-gray-50
+                rounded-full transition-colors "
                 dir={selectedLang.dir}
                 style={{ borderColor: "rgba(255, 255, 255, 0.2)" }}
             >
-                <selectedLang.flag className="w-5 h-5 rounded-sm" />
+                <div className={"h-full aspect-square"}>
+                    <selectedLang.flag />
+                </div>
 
                 <ChevronDown
-                    className={`w-4 h-4 text-gray-500 transition-transform ${
+                    className={`text-gray-500 transition-transform ${
                         isOpen ? "rotate-180" : ""
                     }`}
                 />
@@ -61,12 +72,12 @@ export const LanguageSelector = ({ className = "" }) => {
 
             {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-50 min-w-max">
+                <div className="absolute top-full left-0 mt-1  bg-white border border-gray-300 rounded-md shadow-lg z-50 min-w-max">
                     {languages.map((language) => (
                         <button
                             key={language.code}
                             onClick={() => handleLanguageSelect(language.code)}
-                            className={`w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition-colors ${
+                            className={`h-12  flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition-colors ${
                                 selectedLanguage === language.code
                                     ? "bg-blue-50 text-blue-700"
                                     : "text-gray-700"
@@ -74,7 +85,7 @@ export const LanguageSelector = ({ className = "" }) => {
                             dir={language.dir}
                         >
                             <language.flag className="w-5 h-5 rounded-sm" />
-                            <span className="text-sm font-medium">
+                            <span className="font-medium ">
                                 {language.name}
                             </span>
                             {selectedLanguage === language.code && (

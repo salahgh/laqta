@@ -6,9 +6,10 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import OurWorks from "@/components/sections/OurWorksSection";
 import YourPerfectPartner from "@/components/sections/YourPerfectPartner";
 import TestimonialsSection from "@/components/sections/successStories/SuccessStories";
-import FAQSection from "@/components/sections/FAQSection";
 import ContactUs from "@/components/sections/ContactUs";
 import Footer from "@/components/sections/Footer";
+import React from "react";
+import FAQSection from "@/components/sections/FAQSection";
 
 export const metadata = {
     title: "Leqta | Where Creativity Meets Strategy",
@@ -18,16 +19,19 @@ export const metadata = {
 
 export default function Home() {
     return (
-        <div className={"w-full"}>
+        <div className="w-full">
+            {/*<LayoutInfo></LayoutInfo>*/}
             <Navigation />
-            <HeroSection />
-            <AboutSection illustration={<CustomIllustration />} />
-            <ServicesSection />
-            <OurWorks />
-            <YourPerfectPartner />
-            <TestimonialsSection />
-            <FAQSection />
-            <ContactUs />
+            <div className="w-full xl:max-w-[1514px] xl:mx-auto">
+                <HeroSection />
+                <AboutSection illustration={<CustomIllustration />} />
+                <ServicesSection />
+                <OurWorks />
+                <YourPerfectPartner />
+                <TestimonialsSection />
+                <FAQSection />
+                <ContactUs />
+            </div>
             <Footer />
         </div>
     );

@@ -11,16 +11,17 @@ import { cn } from "@/lib/utils";
 
 // Navigation constants
 const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact Us", href: "/contact" },
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact Us", href: "/contact" },
 ];
 
 const GET_STARTED_BUTTON_PROPS = {
-  rightIcon: <Rocket className="ml-2 h-4 w-4" />,
-  className: "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+    rightIcon: <Rocket className="ml-2 h-4 w-4" />,
+    className:
+        "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105",
 };
 
 export const Navigation = ({ className = "" }) => {
@@ -85,6 +86,7 @@ export const Navigation = ({ className = "" }) => {
             <nav
                 className={`
                     fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out flex items-center justify-between
+                    text-responsive-md
                     ${
                         scrolled
                             ? "bg-blue-900/50 backdrop-blur-md shadow-lg border-b border-blue-700/30 h-14 md:h-16"
@@ -97,7 +99,7 @@ export const Navigation = ({ className = "" }) => {
             >
                 {/* Desktop Navigation */}
                 <div
-                    className="hidden lg:flex items-center justify-between mx-auto px-6 xl:px-8 h-full py-3"
+                    className="hidden xl:flex items-center justify-between mx-auto px-6 xl:px-8 h-full py-3"
                     style={{ width: 1512 }}
                 >
                     <div className="transition-all duration-300 hidden md:block">
@@ -119,8 +121,8 @@ export const Navigation = ({ className = "" }) => {
                                             href={item.href}
                                             isActive={isActive}
                                             className={`
-                                                relative px-4 py-2 rounded-full transition-all duration-300 ease-in-out
-                                                text-white/90 hover:text-white font-medium text-base md:text-body-xl md:h-32
+                                                relative padding-responsive-sm rounded-full transition-all duration-300 ease-in-out
+                                                text-white/90 hover:text-white md:h-32
                                                 ${
                                                     isActive
                                                         ? "text-white"
@@ -141,14 +143,13 @@ export const Navigation = ({ className = "" }) => {
                             })}
                         </div>
 
-                        <LanguageSelector className="flex" />
+                        <LanguageSelector className={"flex"} />
                     </div>
 
                     <div className="flex items-center  h-full">
                         <Button
-                            size="md"
                             rightIcon={<Rocket className="ml-2 h-4 w-4" />}
-                            className="min-w-[140px] bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                            className=""
                         >
                             Get Started
                         </Button>
@@ -156,7 +157,7 @@ export const Navigation = ({ className = "" }) => {
                 </div>
 
                 {/* Mobile Navigation */}
-                <div className="flex lg:hidden items-center justify-between px-4 w-full h-full">
+                <div className="flex xl:hidden items-center justify-between px-4 w-full h-full">
                     {/* Mobile Menu Button */}
                     <button
                         onClick={toggleDrawer}
@@ -185,9 +186,8 @@ export const Navigation = ({ className = "" }) => {
                     <div className="flex items-center gap-3 h-full py-2">
                         <LanguageSelector className="flex h-full" />
                         <Button
-                            size="sm"
                             rightIcon={<Rocket className="ml-1 h-3 w-3" />}
-                            className="min-w-[100px] text-sm bg-gradient-to-r from-blue-500 to-purple-600 border-0 shadow-md px-1"
+                            className=""
                         >
                             Get Started
                         </Button>
@@ -278,9 +278,8 @@ export const Navigation = ({ className = "" }) => {
                         <div className="flex flex-col gap-4">
                             <LanguageSelector className="flex w-full" />
                             <Button
-                                size="md"
+                                size="lg"
                                 rightIcon={<Rocket className="ml-2 h-4 w-4" />}
-                                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 shadow-lg transition-all duration-300 transform hover:scale-105"
                                 onClick={closeDrawer}
                             >
                                 Get Started
