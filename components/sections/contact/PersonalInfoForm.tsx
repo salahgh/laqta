@@ -86,6 +86,7 @@ const PersonalInfoForm = ({
                     {...useFormInput("firstName", formik)}
                     placeholder="Enter your first name"
                     className=""
+                    variant={"compact"}
                     style={{
                         backgroundColor: "#141733",
                         color: "#D2D2D3",
@@ -93,6 +94,7 @@ const PersonalInfoForm = ({
                 />
                 <FormInput
                     label="Last Name"
+                    variant={"compact"}
                     {...useFormInput("lastName", formik)}
                     placeholder="e.g. Benyamina"
                     style={{
@@ -107,6 +109,7 @@ const PersonalInfoForm = ({
                 label="Email Address"
                 {...useFormInput("email", formik)}
                 placeholder="e.g. sarah.benyamina@email.com"
+                variant={"compact"}
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
@@ -117,6 +120,7 @@ const PersonalInfoForm = ({
             <FormInput
                 label="Phone number"
                 {...useFormInput("phone", formik)}
+                variant={"compact"}
                 placeholder="0 000 000"
                 style={{
                     backgroundColor: "#141733",
@@ -128,6 +132,7 @@ const PersonalInfoForm = ({
             <FormInput
                 label="Message"
                 {...useFormInput("message", formik)}
+                variant={"compact"}
                 as="textarea"
                 placeholder="Tell us more about what you're looking for..."
                 style={{

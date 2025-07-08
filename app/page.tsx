@@ -17,7 +17,7 @@ export const metadata = {
 
 // todo adujust the size of the navigation bar all items should have the same height
 
-export default function Home() {
+export default async function Home() {
     return (
         <div className="w-full">
             {/*<LayoutInfo></LayoutInfo>*/}

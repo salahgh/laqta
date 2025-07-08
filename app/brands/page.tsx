@@ -37,7 +37,9 @@ export default function BrandsPage() {
                     // className="w-full h-full"
                 />
                 <div className={"mt-8 mb-16 flex justify-center h-16"}>
-                    <Button>Become a partner</Button>
+                    <Button leftIcon={undefined} rightIcon={undefined}>
+                        Become a partner
+                    </Button>
                 </div>
             </div>
             <Footer />

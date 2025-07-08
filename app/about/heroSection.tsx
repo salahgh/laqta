@@ -40,6 +40,7 @@ export const HeroSection = () => (
                     variant={"primary"}
                     rightIcon={<Rocket />}
                     // style={{ width: 300 }}
+                    leftIcon={undefined}
                 >
                     Get Started
                 </Button>
@@ -47,6 +48,7 @@ export const HeroSection = () => (
                     variant={"secondary"}
                     // style={{ width: 300 }}
                     rightIcon={<ArrowRight />}
+                    leftIcon={undefined}
                 >
                     Contact Us
                 </Button>

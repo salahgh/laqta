@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-07-06T00:09:45.056Z"
+    "x-generation-date": "2025-07-07T22:19:22.260Z"
   },
   "servers": [
     {
@@ -38,7 +38,7 @@
     }
   ],
   "paths": {
-    "/articles": {
+    "/blogs": {
       "get": {
         "responses": {
           "200": {
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArticleListResponse"
+                  "$ref": "#/components/schemas/BlogListResponse"
                 }
               }
             }
@@ -103,7 +103,7 @@
           }
         },
         "tags": [
-          "Article"
+          "Blog"
         ],
         "parameters": [
           {
@@ -209,7 +209,7 @@
             }
           }
         ],
-        "operationId": "get/articles"
+        "operationId": "get/blogs"
       },
       "post": {
         "responses": {
@@ -218,7 +218,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArticleResponse"
+                  "$ref": "#/components/schemas/BlogResponse"
                 }
               }
             }
@@ -275,23 +275,23 @@
           }
         },
         "tags": [
-          "Article"
+          "Blog"
         ],
         "parameters": [],
-        "operationId": "post/articles",
+        "operationId": "post/blogs",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ArticleRequest"
+                "$ref": "#/components/schemas/BlogRequest"
               }
             }
           }
         }
       }
     },
-    "/articles/{id}": {
+    "/blogs/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -299,7 +299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArticleResponse"
+                  "$ref": "#/components/schemas/BlogResponse"
                 }
               }
             }
@@ -356,7 +356,7 @@
           }
         },
         "tags": [
-          "Article"
+          "Blog"
         ],
         "parameters": [
           {
@@ -370,7 +370,7 @@
             }
           }
         ],
-        "operationId": "get/articles/{id}"
+        "operationId": "get/blogs/{id}"
       },
       "put": {
         "responses": {
@@ -379,7 +379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArticleResponse"
+                  "$ref": "#/components/schemas/BlogResponse"
                 }
               }
             }
@@ -436,7 +436,7 @@
           }
         },
         "tags": [
-          "Article"
+          "Blog"
         ],
         "parameters": [
           {
@@ -450,13 +450,13 @@
             }
           }
         ],
-        "operationId": "put/articles/{id}",
+        "operationId": "put/blogs/{id}",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ArticleRequest"
+                "$ref": "#/components/schemas/BlogRequest"
               }
             }
           }
@@ -527,7 +527,7 @@
           }
         },
         "tags": [
-          "Article"
+          "Blog"
         ],
         "parameters": [
           {
@@ -541,7 +541,7 @@
             }
           }
         ],
-        "operationId": "delete/articles/{id}"
+        "operationId": "delete/blogs/{id}"
       }
     },
     "/faqs": {
@@ -5032,7 +5032,7 @@
           }
         }
       },
-      "ArticleRequest": {
+      "BlogRequest": {
         "type": "object",
         "required": [
           "data"
@@ -5071,6 +5071,12 @@
                 "example": "string or id"
               },
               "read_time": {
+                "type": "integer"
+              },
+              "featured": {
+                "type": "boolean"
+              },
+              "views": {
                 "type": "integer"
               },
               "meta_title": {
@@ -5136,13 +5142,13 @@
           }
         }
       },
-      "ArticleListResponse": {
+      "BlogListResponse": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Article"
+              "$ref": "#/components/schemas/Blog"
             }
           },
           "meta": {
@@ -5171,7 +5177,7 @@
           }
         }
       },
-      "Article": {
+      "Blog": {
         "type": "object",
         "required": [
           "title",
@@ -5799,6 +5805,12 @@
           "read_time": {
             "type": "integer"
           },
+          "featured": {
+            "type": "boolean"
+          },
+          "views": {
+            "type": "integer"
+          },
           "meta_title": {
             "type": "string"
           },
@@ -5826,7 +5838,7 @@
               "color": {
                 "type": "string"
               },
-              "articles": {
+              "blogs": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -5981,6 +5993,12 @@
                     "read_time": {
                       "type": "integer"
                     },
+                    "featured": {
+                      "type": "boolean"
+                    },
+                    "views": {
+                      "type": "integer"
+                    },
                     "meta_title": {
                       "type": "string"
                     },
@@ -6015,7 +6033,7 @@
                           "slug": {
                             "type": "string"
                           },
-                          "articles": {
+                          "blogs": {
                             "type": "array",
                             "items": {
                               "type": "object",
@@ -6232,7 +6250,7 @@
                           }
                         },
                         "social_links": {},
-                        "articles": {
+                        "blogs": {
                           "type": "array",
                           "items": {
                             "type": "object",
@@ -6484,11 +6502,11 @@
           }
         }
       },
-      "ArticleResponse": {
+      "BlogResponse": {
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Article"
+            "$ref": "#/components/schemas/Blog"
           },
           "meta": {
             "type": "object"

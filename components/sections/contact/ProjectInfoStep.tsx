@@ -96,6 +96,7 @@ const ProjectInfoStep = ({
                 <FormInput
                     placeholder={undefined}
                     label="Project Type"
+                    variant={"compact"}
                     {...useFormInput("projectType", formik)}
                     as="select"
                     // options={projectTypeOptions}
@@ -109,6 +110,7 @@ const ProjectInfoStep = ({
                 <FormInput
                     placeholder={undefined}
                     label="Budget"
+                    variant={"compact"}
                     {...useFormInput("budget", formik)}
                     as="select"
                     // options={budgetOptions}
@@ -122,6 +124,7 @@ const ProjectInfoStep = ({
                 <FormInput
                     placeholder={undefined}
                     label="Timeline"
+                    variant={"compact"}
                     {...useFormInput("timeline", formik)}
                     as="select"
                     // options={timelineOptions}
@@ -135,6 +138,7 @@ const ProjectInfoStep = ({
                 <FormInput
                     placeholder={undefined}
                     label="Project Description"
+                    variant={"compact"}
                     {...useFormInput("projectDescription", formik)}
                     as="textarea"
                     style={{
@@ -148,6 +152,7 @@ const ProjectInfoStep = ({
                 {/* Project Goals */}
                 <FormInput
                     placeholder={undefined}
+                    variant={"compact"}
                     label="Project Goals & Success Metrics"
                     {...useFormInput("goals", formik)}
                     as="textarea"

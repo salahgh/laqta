@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-import StepperComponent from "./StepperComponent";
+
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProjectInfoStep from "@/components/sections/contact/ProjectInfoStep";
 import { PaymentInfoForm } from "@/components/sections/contact/paymentInfoForm";
 import SuccessStep from "@/components/sections/contact/SuccessStep";
 import { ActionButtons } from "@/components/sections/contact/ActionButtons";
 import { Navigation } from "@/components/layout/Navigation";
+import { StepperComponent } from "@/components/sections/contact/StepperComponent";
 
 const ContactUs = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -46,7 +47,7 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white space-y-2">
+        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white space-y-2 py-4">
             {/* Header */}
             <div className={""}>
                 <Navigation></Navigation>
@@ -68,7 +69,7 @@ const ContactUs = () => {
             {/* Main Content */}
             <div className="flex lg:flex-row flex-col gap-4 md:px-12 px-4">
                 {/* Left Sidebar - Stepper */}
-                <div className={"pt-4 w-1/2"}>
+                <div className={"pt-4 w-full md:px-6"}>
                     <StepperComponent currentStep={currentStep} />
                 </div>
 

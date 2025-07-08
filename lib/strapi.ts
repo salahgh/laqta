@@ -118,62 +118,6 @@ async function fetchApi<T>(
     return response.json();
 }
 
-// Articles API
-export const articlesApi = {
-    // Get article by slug
-    async getBySlug(slug: string): Promise<ApiResponse<Article>> {
-        return fetchApi<ApiResponse<Article>>(`/articles/slug/${slug}`);
-    },
-
-    // Get articles by category
-    async getByCategory(
-        categorySlug: string,
-        params?: { page?: number; pageSize?: number },
-    ): Promise<ApiResponse<Article[]>> {
-        const searchParams = new URLSearchParams();
-        if (params?.page) searchParams.set("page", params.page.toString());
-        if (params?.pageSize)
-            searchParams.set("pageSize", params.pageSize.toString());
-
-        const query = searchParams.toString();
-        const endpoint = `/articles/category/${categorySlug}${query ? `?${query}` : ""}`;
-
-        return fetchApi<ApiResponse<Article[]>>(endpoint);
-    },
-
-    // Get featured articles
-    async getFeatured(params?: {
-        page?: number;
-        pageSize?: number;
-    }): Promise<ApiResponse<Article[]>> {
-        const searchParams = new URLSearchParams();
-        if (params?.page) searchParams.set("page", params.page.toString());
-        if (params?.pageSize)
-            searchParams.set("pageSize", params.pageSize.toString());
-
-        const query = searchParams.toString();
-        const endpoint = `/articles/featured${query ? `?${query}` : ""}`;
-
-        return fetchApi<ApiResponse<Article[]>>(endpoint);
-    },
-
-    // Get all articles
-    async getAll(params?: {
-        page?: number;
-        pageSize?: number;
-    }): Promise<ApiResponse<Article[]>> {
-        const searchParams = new URLSearchParams();
-        if (params?.page) searchParams.set("page", params.page.toString());
-        if (params?.pageSize)
-            searchParams.set("pageSize", params.pageSize.toString());
-
-        const query = searchParams.toString();
-        const endpoint = `/articles${query ? `?${query}` : ""}`;
-
-        return fetchApi<ApiResponse<Article[]>>(endpoint);
-    },
-};
-
 // Services API
 export const servicesApi = {
     // Get all services
@@ -581,5 +525,251 @@ export const missionsApi = {
     },
 };
 
-// Export default
-export default { articlesApi, servicesApi, worksApi, testimonialsApi, faqsApi, missionsApi, utils };
+// Updated Blog interface based on new API structure
+export interface Blog {
+    id: number;
+    documentId: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    read_time: number;
+    featured: boolean;
+    views: number;
+    meta_title?: string;
+    meta_description?: string;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+    category: {
+        id: number;
+        documentId: string;
+        name: string;
+        slug: string;
+        description?: string;
+        color: string;
+    };
+    author: {
+        id: number;
+        documentId: string;
+        name: string;
+        email: string;
+        bio?: string;
+        avatar?: {
+            id: number;
+            documentId: string;
+            url: string;
+            alternativeText?: string;
+            width?: number;
+            height?: number;
+        };
+    };
+    tags: Array<{
+        id: number;
+        documentId: string;
+        name: string;
+        slug: string;
+    }>;
+    featured_image?: {
+        id: number;
+        documentId: string;
+        url: string;
+        alternativeText?: string;
+        width?: number;
+        height?: number;
+    };
+}
+
+// Category interface
+export interface Category {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    description?: string;
+    color: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+// Tag interface
+export interface Tag {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+// Updated Blogs API
+export const blogsApi = {
+    // Get blog by slug
+    async getBySlug(slug: string): Promise<ApiResponse<Blog>> {
+        return fetchApi<ApiResponse<Blog>>(
+            `/blogs?filters[slug][$eq]=${slug}&populate=*`,
+        );
+    },
+
+    // Get blogs by category
+    async getByCategory(
+        categorySlug: string,
+        params?: { page?: number; pageSize?: number },
+    ): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[category][slug][$eq]", categorySlug);
+        searchParams.set("populate", "*");
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get featured blogs
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[featured][$eq]", "true");
+        searchParams.set("populate", "*");
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get all blogs with search and filters
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        search?: string;
+        category?: string;
+        tag?: string;
+        sort?: string;
+    }): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("populate", "*");
+
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+
+        // Search functionality
+        if (params?.search) {
+            searchParams.set(
+                "filters[$or][0][title][$containsi]",
+                params.search,
+            );
+            searchParams.set(
+                "filters[$or][1][excerpt][$containsi]",
+                params.search,
+            );
+            searchParams.set(
+                "filters[$or][2][content][$containsi]",
+                params.search,
+            );
+        }
+
+        // Category filter
+        if (params?.category) {
+            searchParams.set("filters[category][slug][$eq]", params.category);
+        }
+
+        // Tag filter
+        if (params?.tag) {
+            searchParams.set("filters[tags][slug][$eq]", params.tag);
+        }
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get related blogs
+    async getRelated(
+        blogId: number,
+        limit: number = 3,
+    ): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[id][$ne]", blogId.toString());
+        searchParams.set("populate", "*");
+        searchParams.set("pagination[pageSize]", limit.toString());
+        searchParams.set("sort", "publishedAt:desc");
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+};
+
+// Categories API
+export const categoriesApi = {
+    async getAll(): Promise<ApiResponse<Category[]>> {
+        return fetchApi<ApiResponse<Category[]>>("/categories?sort=name:asc");
+    },
+};
+
+// Tags API
+export const tagsApi = {
+    async getAll(): Promise<ApiResponse<Tag[]>> {
+        return fetchApi<ApiResponse<Tag[]>>("/tags?sort=name:asc");
+    },
+};
+
+// Newsletter API
+export const newsletterApi = {
+    async subscribe(
+        email: string,
+    ): Promise<{ success: boolean; message: string }> {
+        try {
+            await fetchApi("/newsletter-subscriptions", {
+                method: "POST",
+                body: JSON.stringify({ data: { email } }),
+            });
+            return {
+                success: true,
+                message: "Successfully subscribed to newsletter!",
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: "Failed to subscribe. Please try again.",
+            };
+        }
+    },
+};
+
+export default {
+    blogsApi,
+    categoriesApi,
+    tagsApi,
+    newsletterApi,
+    servicesApi,
+    worksApi,
+    testimonialsApi,
+    faqsApi,
+    missionsApi,
+    utils,
+};

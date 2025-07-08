@@ -1,11 +1,10 @@
 import React from "react";
-import { missionsApi } from "@/lib/strapi";
-import { defaultMissions } from "@/app/about/DefaultMissions";
+import { Mission, missionsApi } from "@/lib/strapi";
 import { MissionVisionCardsClient } from "./MissionVisionCardsClient";
 
 const MissionVisionCards = async () => {
     // let missions = defaultMissions;
-    let missions = null;
+    let missions: Mission[] | undefined = undefined;
 
     try {
         const response = await missionsApi.getAll({

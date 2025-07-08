@@ -6,7 +6,7 @@ import { Card } from "@/app/about/card";
 import { Mission } from "@/lib/strapi";
 
 interface MissionVisionCardsClientProps {
-    missions: Mission[];
+    missions: Mission[] | undefined;
 }
 
 // Icon mapping for dynamic icon rendering
@@ -24,7 +24,7 @@ export const MissionVisionCardsClient: React.FC<
             className="p-4 py-8 items-center justify-center grid
         grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:px-8 "
         >
-            {missions.map((mission, index) => {
+            {missions?.map((mission, index) => {
                 // Get the icon component from the mapping
                 const IconComponent = mission.icon
                     ? iconMap[mission.icon]
