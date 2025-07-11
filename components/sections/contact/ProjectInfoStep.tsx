@@ -93,46 +93,46 @@ const ProjectInfoStep = ({
         <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Project Type */}
             <div className="grid grid-cols-1 gap-3 w-full">
-                <FormInput
-                    placeholder={undefined}
-                    label="Project Type"
-                    variant={"compact"}
-                    {...useFormInput("projectType", formik)}
-                    as="select"
-                    // options={projectTypeOptions}
-                    style={{
-                        backgroundColor: "#141733",
-                        color: "#D2D2D3",
-                    }}
-                />
+                {/*<FormInput*/}
+                {/*    placeholder={undefined}*/}
+                {/*    label="Project Type"*/}
+                {/*    variant={"compact"}*/}
+                {/*    {...useFormInput("projectType", formik)}*/}
+                {/*    as="select"*/}
+                {/*    // options={projectTypeOptions}*/}
+                {/*    style={{*/}
+                {/*        backgroundColor: "#141733",*/}
+                {/*        color: "#D2D2D3",*/}
+                {/*    }}*/}
+                {/*/>*/}
 
                 {/* Budget */}
-                <FormInput
-                    placeholder={undefined}
-                    label="Budget"
-                    variant={"compact"}
-                    {...useFormInput("budget", formik)}
-                    as="select"
-                    // options={budgetOptions}
-                    style={{
-                        backgroundColor: "#141733",
-                        color: "#D2D2D3",
-                    }}
-                />
+                {/*<FormInput*/}
+                {/*    placeholder={undefined}*/}
+                {/*    label="Budget"*/}
+                {/*    variant={"compact"}*/}
+                {/*    {...useFormInput("budget", formik)}*/}
+                {/*    as="select"*/}
+                {/*    // options={budgetOptions}*/}
+                {/*    style={{*/}
+                {/*        backgroundColor: "#141733",*/}
+                {/*        color: "#D2D2D3",*/}
+                {/*    }}*/}
+                {/*/>*/}
 
                 {/* Timeline */}
-                <FormInput
-                    placeholder={undefined}
-                    label="Timeline"
-                    variant={"compact"}
-                    {...useFormInput("timeline", formik)}
-                    as="select"
-                    // options={timelineOptions}
-                    style={{
-                        backgroundColor: "#141733",
-                        color: "#D2D2D3",
-                    }}
-                />
+                {/*<FormInput*/}
+                {/*    placeholder={undefined}*/}
+                {/*    label="Timeline"*/}
+                {/*    variant={"compact"}*/}
+                {/*    {...useFormInput("timeline", formik)}*/}
+                {/*    as="select"*/}
+                {/*    // options={timelineOptions}*/}
+                {/*    style={{*/}
+                {/*        backgroundColor: "#141733",*/}
+                {/*        color: "#D2D2D3",*/}
+                {/*    }}*/}
+                {/*/>*/}
 
                 {/* Project Description */}
                 <FormInput

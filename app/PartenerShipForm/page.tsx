@@ -51,6 +51,7 @@ const validationSchema = Yup.object({
 
 // Custom hook for handling form input changes
 function useFormInput(name, formik) {
+    // todo for the form input create a select variant
     return {
         name,
         value: formik.values[name],
@@ -190,17 +191,17 @@ function PartnershipFormPage() {
                     />
 
                     {/* Service Selection */}
-                    <FormInput
-                        label="Service"
-                        {...useFormInput("service", formik)}
-                        as="select"
-                        placeholder="Select one"
-                        style={{
-                            backgroundColor: "#141733",
-                            color: "#D2D2D3",
-                            options: serviceOptions,
-                        }}
-                    />
+                    {/*<FormInput*/}
+                    {/*    label="Service"*/}
+                    {/*    {...useFormInput("service", formik)}*/}
+                    {/*    as="select"*/}
+                    {/*    placeholder="Select one"*/}
+                    {/*    style={{*/}
+                    {/*        backgroundColor: "#141733",*/}
+                    {/*        color: "#D2D2D3",*/}
+                    {/*        options: serviceOptions,*/}
+                    {/*    }}*/}
+                    {/*/>*/}
 
                     {/* Message Field */}
                     <FormInput
@@ -228,6 +229,8 @@ function PartnershipFormPage() {
                             <Button
                                 onClick={formik.handleSubmit}
                                 disabled={formik.isSubmitting}
+                                leftIcon={null}
+                                rightIcon={null}
                             >
                                 {formik.isSubmitting
                                     ? "Submitting..."

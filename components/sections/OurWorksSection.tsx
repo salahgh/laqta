@@ -109,7 +109,12 @@ export const revalidate = 600; // 10 minutes
 
 // Client-side version for compatibility
 export default function OurWorksWrapper(props: OurWorksSectionProps) {
-    return <OurWorksSection {...props} />;
+    return (
+        <>
+            {/* @ts-expect-error Server Component */}
+            <OurWorksSection {...props} />
+        </>
+    );
 }
 
 // Export for server-side usage

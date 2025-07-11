@@ -81,6 +81,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
                             rightIcon={
                                 <Rocket className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-2" />
                             }
+                            leftIcon={null}
                         >
                             {ctaText}
                         </Button>

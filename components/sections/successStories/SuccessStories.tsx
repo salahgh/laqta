@@ -26,7 +26,9 @@ const TestimonialsSection = async ({
         }
     }
 
-    return <TestimonialsClient testimonials={testimonials} />;
+    return (
+        <TestimonialsClient testimonials={testimonials ? testimonials : []} />
+    );
 };
 
 export default TestimonialsSection;

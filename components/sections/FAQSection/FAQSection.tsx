@@ -1,11 +1,9 @@
 import React from "react";
-import { faqsApi } from "@/lib/strapi";
+import { FAQ, faqsApi } from "@/lib/strapi";
 import { FAQSectionClient } from "./FAQSectionClient";
-import { defaultFAQs } from "@/components/sections/FAQSection/DefaultFAQs";
 
 const FAQSection = async () => {
-    // let faqs = defaultFAQs;
-    let faqs = null;
+    let faqs: FAQ[] | null = null;
 
     try {
         const response = await faqsApi.getAll({

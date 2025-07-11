@@ -2,14 +2,14 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { Navigation } from "@/components/layout/Navigation";
 import AboutSection from "@/components/sections/aboutLaqta";
 import { CustomIllustration } from "@/components/ui/CustomIllustration";
-import { ServicesSection } from "@/components/sections/ServicesSection";
+import ServicesSection from "@/components/sections/ServicesSection";
 import OurWorks from "@/components/sections/OurWorksSection";
 import YourPerfectPartner from "@/components/sections/YourPerfectPartner";
-import TestimonialsSection from "@/components/sections/successStories/SuccessStories";
 import ContactUs from "@/components/sections/ContactUs";
 import Footer from "@/components/sections/Footer";
 import React from "react";
-import FAQSection from "@/components/sections/FAQSection";
+import { TestimonialsSectionWrapper } from "@/components/sections/successStories/TestimonialSectionWrapper";
+import FAQSectionWrapper from "@/components/sections/FAQSection/FAQSectionWrapper";
 
 export const metadata = {
     title: "Leqta | Where Creativity Meets Strategy",
@@ -28,8 +28,8 @@ export default async function Home() {
                 <ServicesSection />
                 <OurWorks />
                 <YourPerfectPartner />
-                <TestimonialsSection />
-                <FAQSection />
+                <TestimonialsSectionWrapper />
+                <FAQSectionWrapper />
                 <ContactUs />
             </div>
             <Footer />

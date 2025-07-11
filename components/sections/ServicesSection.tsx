@@ -143,6 +143,7 @@ export default function ExactServicesScreen() {
             //         "linear-gradient(180deg, #F8F9FA 0%, #E9ECEF 30%, #6C757D 70%, #343A40 100%)",
             // }}
         >
+            {/* @ts-expect-error Server Component */}
             <ServicesSection />
         </div>
     );

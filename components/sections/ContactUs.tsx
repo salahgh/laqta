@@ -95,8 +95,9 @@ const ContactForm = () => {
                                     value={formik.values.fullname}
                                     onChange={formik.handleChange}
                                     error={
-                                        formik.touched.fullname &&
-                                        (formik.errors.fullname as string)
+                                        Boolean(formik.touched.fullname)
+                                            ? formik.errors.fullname
+                                            : ""
                                     }
                                     variant="compact"
                                 />
@@ -109,8 +110,9 @@ const ContactForm = () => {
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                     error={
-                                        formik.touched.email &&
-                                        (formik.errors.email as string)
+                                        Boolean(formik.touched.email)
+                                            ? formik.errors.email
+                                            : ""
                                     }
                                     variant="compact"
                                 />
@@ -122,8 +124,9 @@ const ContactForm = () => {
                                     value={formik.values.phone}
                                     onChange={formik.handleChange}
                                     error={
-                                        formik.touched.phone &&
-                                        (formik.errors.phone as string)
+                                        formik.touched.phone
+                                            ? formik.errors.phone
+                                            : ""
                                     }
                                     variant="compact"
                                 />
@@ -136,8 +139,9 @@ const ContactForm = () => {
                                     value={formik.values.message}
                                     onChange={formik.handleChange}
                                     error={
-                                        formik.touched.message &&
-                                        (formik.errors.message as string)
+                                        formik.touched.message
+                                            ? formik.errors.message
+                                            : ""
                                     }
                                     variant="compact"
                                 />

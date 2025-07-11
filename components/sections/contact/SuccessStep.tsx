@@ -94,6 +94,7 @@ const SuccessStep = () => {
                 <Button
                     variant="primary"
                     rightIcon={<ArrowRight className="w-4 h-4" />}
+                    leftIcon={null}
                     onClick={handleGoHome}
                     className="w-full max-w-xs mx-auto"
                     style={{

@@ -15,6 +15,7 @@ export const ActionButtons = ({
                 type="button"
                 variant="secondary"
                 leftIcon={<ArrowLeft className="w-4 h-4" />}
+                rightIcon={null}
                 onClick={handleGoBack}
             >
                 Go Back
@@ -24,6 +25,7 @@ export const ActionButtons = ({
                 type="submit"
                 variant="primary"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
+                leftIcon={null}
                 disabled={isSubmitting}
                 onClick={handeGoNext}
             >

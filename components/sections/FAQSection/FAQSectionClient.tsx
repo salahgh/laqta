@@ -6,7 +6,7 @@ import { FAQItem } from "@/components/sections/FAQSection/FAQItem";
 import { Badge } from "@/components/ui/Badge";
 
 interface FAQSectionClientProps {
-    faqs: FAQ[];
+    faqs: FAQ[] | null;
 }
 
 export const FAQSectionClient: React.FC<FAQSectionClientProps> = ({ faqs }) => {
@@ -30,14 +30,14 @@ export const FAQSectionClient: React.FC<FAQSectionClientProps> = ({ faqs }) => {
                         Find answers to common questions about our
                         subscription-based marketing services.
                     </p>
-                    {faqs.map((faq, index) => (
+                    {faqs?.map((faq, index) => (
                         <FAQItem
                             key={faq.id}
                             question={faq.question}
                             answer={faq.answer}
                             isOpen={openIndex === index}
                             onToggle={() => handleToggle(index)}
-                            isLast={index === faqs.length - 1}
+                            isLast={index === faqs?.length - 1}
                         />
                     ))}
                 </div>

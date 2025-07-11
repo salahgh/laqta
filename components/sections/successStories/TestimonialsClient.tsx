@@ -6,12 +6,11 @@ import { Badge } from "@/components/ui/Badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "@/components/sections/successStories/TestimonialCard";
 import { PaginationDots } from "@/components/sections/successStories/PaginationDots";
-import LetsStartProjectSection from "@/components/sections/LetsStartProjectSection";
 
 export const TestimonialsClient = ({
     testimonials,
 }: {
-    testimonials: Testimonial[] | undefined;
+    testimonials: Testimonial[];
 }) => {
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);

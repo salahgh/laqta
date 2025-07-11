@@ -51,8 +51,17 @@ export default function EmailSubscriptionForm() {
 
                     {/* Button */}
 
-                    <div style={{ width: 'auto' }} className="w-auto md:w-[230px]">
-                        <Button variant={"primary"} size="sm" className="text-xs md:text-sm">
+                    <div
+                        style={{ width: "auto" }}
+                        className="w-auto md:w-[230px]"
+                    >
+                        <Button
+                            variant={"primary"}
+                            size="sm"
+                            className="text-xs md:text-sm"
+                            leftIcon={null}
+                            rightIcon={null}
+                        >
                             {isSubscribed ? "✓ Subscribed!" : "Subscribe Now"}
                         </Button>
                     </div>
