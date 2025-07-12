@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import React from "react";

@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
     "@types/yup": "^0.29.14",
+    "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "lucide-react": "^0.522.0",

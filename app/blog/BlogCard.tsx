@@ -71,9 +71,9 @@ export const BlogCard: React.FC<BlogCardProps> = ({
                     </p>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                            {blog.author.avatar && (
+                            {blog?.author?.avatar && (
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.author.avatar.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${blog?.author?.avatar.url}`}
                                     alt={blog.author.name}
                                     width={32}
                                     height={32}
@@ -81,7 +81,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
                                 />
                             )}
                             <span className="text-sm text-gray-600">
-                                {blog.author.name}
+                                {blog.author?.name}
                             </span>
                         </div>
                         <Link
