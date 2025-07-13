@@ -47,37 +47,33 @@ export const Navigation = () => {
     };
 
     return (
-        <nav
-            className="flex justify-center gap-4 md:mt-8 mt-4 w-full h-[63px] md:h-[45]"
-            style={{ height: 63 }}
-        >
+        <nav className="flex justify-center gap-4 w-full bg-pink-200 px-2 h-12">
             {/* Back Button */}
-            <button
-                className="rounded-full  border border-gray-600 hover:bg-gray-700 transition-colors md:h-[63px] h-[45px] md:w-[63px] w-[45px] flex items-center justify-center flex-shrink-0"
-                aria-label="Go back"
-            >
-                <ArrowLeft className="w-8 h-8 text-white" />
-            </button>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-6 rounded-full border border-gray-500 px-8 h-full items-center">
-                {updatedNavItems.map((item, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handleItemSelect(index)}
-                        className={`text-sm px-3 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${
-                            item.active
-                                ? "text-white bg-white/10 shadow-lg"
-                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
-                        style={{ fontSize: 20 }}
-                    >
-                        {item.name}
-                    </button>
-                ))}
+            <div className={"aspect-square h-full"}>
+                <button
+                    className="rounded-full h-full  border border-gray-600 hover:bg-gray-700 transition-colors
+                flex items-center justify-center aspect-square bg-blue-200"
+                >
+                    <ArrowLeft className="w-8 h-8 text-white" />
+                </button>
             </div>
-
-            {/* Mobile Dropdown */}
+            {/*/!* Desktop Navigation *!/*/}
+            {/*<div className="hidden md:flex gap-6 rounded-full border border-gray-500 px-8 h-full items-center">*/}
+            {/*    {updatedNavItems.map((item, index) => (*/}
+            {/*        <button*/}
+            {/*            key={index}*/}
+            {/*            onClick={() => handleItemSelect(index)}*/}
+            {/*            className={`text-sm px-3 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${*/}
+            {/*                item.active*/}
+            {/*                    ? "text-white bg-white/10 shadow-lg"*/}
+            {/*                    : "text-gray-400 hover:text-white hover:bg-white/5"*/}
+            {/*            }`}*/}
+            {/*            style={{ fontSize: 20 }}*/}
+            {/*        >*/}
+            {/*            {item.name}*/}
+            {/*        </button>*/}
+            {/*    ))}*/}
+            {/*</div>*/}
             <div
                 className="md:hidden relative flex-1 max-w-md mt-1"
                 ref={dropdownRef}

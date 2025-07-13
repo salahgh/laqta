@@ -1,8 +1,7 @@
-// StepperComponent.jsx
 import React from "react";
 import { User, MessageCircle, Send, CheckCircle } from "lucide-react";
 
-const StepperComponent = ({ currentStep = 1 }) => {
+export const StepperComponent = ({ currentStep = 1 }) => {
     const steps = [
         {
             id: 1,
@@ -34,70 +33,125 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
     return (
         <>
-            {/* Desktop Version - Vertical Layout */}
-            <div className="hidden lg:block lg:w-1/3 space-y-6">
-                {steps.map((step) => {
+            {/* Desktop Version - Improved Vertical Layout */}
+            <div className="hidden lg:block relative">
+                {steps.map((step, index) => {
                     const IconComponent = step.icon;
                     const isActive = step.active;
                     const isCompleted = step.completed;
                     const isInactive = !isActive && !isCompleted;
 
                     return (
-                        <div
-                            key={step.id}
-                            className={`flex items-start space-x-4 transition-all duration-300 ${
-                                isInactive ? "opacity-60" : ""
-                            }`}
-                        >
+                        <div key={step.id} className="relative">
+                            {/* Connecting Line */}
+                            {index < steps.length - 1 && (
+                                <div className="absolute left-6 top-12 w-0.5 h-16 transition-all duration-500">
+                                    <div
+                                        className={`w-full h-full rounded-full transition-all duration-500 ${
+                                            step.completed
+                                                ? "bg-gradient-to-b from-green-500 to-blue-500"
+                                                : step.active
+                                                  ? "bg-gradient-to-b from-blue-500 to-slate-600"
+                                                  : "bg-slate-600"
+                                        }`}
+                                    >
+                                        {/* Animated Progress Line */}
+                                        {step.active && (
+                                            <div className="w-full h-full bg-gradient-to-b from-blue-400 to-blue-600 rounded-full animate-pulse"></div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Step Content */}
                             <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                                    isActive
-                                        ? "bg-blue-500 shadow-lg shadow-blue-500/25"
-                                        : isCompleted
-                                          ? "bg-green-500 shadow-lg shadow-green-500/25"
-                                          : "bg-slate-600"
+                                className={`flex items-start space-x-4 pb-8 transition-all duration-300 ${
+                                    isInactive ? "opacity-50" : ""
                                 }`}
                             >
-                                <IconComponent
-                                    className={`w-5 h-5 transition-colors duration-300 ${
-                                        isActive || isCompleted
-                                            ? "text-white"
-                                            : "text-slate-300"
-                                    }`}
-                                />
-                            </div>
-                            <div>
-                                <h3
-                                    className={`font-semibold flex items-center gap-2 transition-all duration-300 ${
+                                {/* Step Circle */}
+                                <div
+                                    className={`relative w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 transform ${
                                         isActive
-                                            ? "text-white"
+                                            ? "bg-blue-500 shadow-lg shadow-blue-500/40 scale-110"
                                             : isCompleted
-                                              ? "text-green-300"
-                                              : "text-slate-300"
+                                              ? "bg-green-500 shadow-lg shadow-green-500/40"
+                                              : "bg-slate-600"
                                     }`}
-                                    style={
-                                        isActive
-                                            ? { fontSize: 23, color: "#dae8f7" }
-                                            : { fontSize: 18 }
-                                    }
                                 >
-                                    {step.title}
-                                    {isCompleted && (
-                                        <CheckCircle className="w-4 h-4 text-green-400" />
+                                    <IconComponent
+                                        className={`w-6 h-6 transition-all duration-300 ${
+                                            isActive || isCompleted
+                                                ? "text-white"
+                                                : "text-slate-300"
+                                        }`}
+                                    />
+
+                                    {/* Active Step Pulse Animation */}
+                                    {isActive && (
+                                        <div className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-30"></div>
                                     )}
-                                </h3>
-                                <p
-                                    className={`text-sm transition-colors duration-300 ${
-                                        isActive
-                                            ? "text-slate-400"
-                                            : isCompleted
-                                              ? "text-green-400"
-                                              : "text-slate-500"
-                                    }`}
-                                    style={isActive ? { color: "#93d5de" } : {}}
-                                >
-                                    {step.description}
-                                </p>
+
+                                    {/* Step Number Badge */}
+                                    <div
+                                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs 
+                                        font-bold transition-all duration-300 ${
+                                            isActive
+                                                ? "bg-white text-blue-500 shadow-md"
+                                                : isCompleted
+                                                  ? "bg-green-600 text-white"
+                                                  : "bg-slate-500 text-slate-200"
+                                        }`}
+                                    >
+                                        {isCompleted ? (
+                                            <CheckCircle className="w-4 h-4" />
+                                        ) : (
+                                            step.id
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Step Info */}
+                                <div className="flex-1 min-w-0">
+                                    <div
+                                        className={`transition-all duration-300 ${
+                                            isActive
+                                                ? "bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 shadow-xl p-4"
+                                                : "p-2"
+                                        }`}
+                                    >
+                                        <h3
+                                            className={`font-semibold flex items-center gap-2 transition-all duration-300 ${
+                                                isActive
+                                                    ? "text-white text-lg"
+                                                    : isCompleted
+                                                      ? "text-green-300 text-base"
+                                                      : "text-slate-300 text-base"
+                                            }`}
+                                        >
+                                            {step.title}
+                                            {isCompleted && !isActive && (
+                                                <CheckCircle className="w-4 h-4 text-green-400" />
+                                            )}
+                                        </h3>
+                                        <p
+                                            className={`text-sm mt-1 transition-colors duration-300 ${
+                                                isActive
+                                                    ? "text-slate-300"
+                                                    : isCompleted
+                                                      ? "text-green-400"
+                                                      : "text-slate-500"
+                                            }`}
+                                            style={
+                                                isActive
+                                                    ? { color: "#93d5de" }
+                                                    : {}
+                                            }
+                                        >
+                                            {step.description}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     );
@@ -105,9 +159,9 @@ const StepperComponent = ({ currentStep = 1 }) => {
             </div>
 
             {/* Mobile Version - Horizontal Layout */}
-            <div className="lg:hidden w-full">
+            <div className="lg:hidden w-full space-y-4">
                 {/* Horizontal Steps */}
-                <div className="flex items-center justify-center space-x-4 mb-6">
+                <div className="flex items-center justify-center space-x-4">
                     {steps.map((step, index) => {
                         const IconComponent = step.icon;
                         const isActive = step.active;
@@ -141,7 +195,8 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
                                     {/* Step Number Badge */}
                                     <div
-                                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs 
+                                        font-bold transition-all duration-300 ${
                                             isActive
                                                 ? "bg-white text-blue-500 shadow-md"
                                                 : isCompleted
@@ -150,7 +205,7 @@ const StepperComponent = ({ currentStep = 1 }) => {
                                         }`}
                                     >
                                         {isCompleted ? (
-                                            <CheckCircle className="w-3 h-3" />
+                                            <CheckCircle className="w-5 h-5" />
                                         ) : (
                                             step.id
                                         )}
@@ -183,42 +238,16 @@ const StepperComponent = ({ currentStep = 1 }) => {
 
                 {/* Active Step Info - Centered */}
                 {activeStep && (
-                    <div className="text-center px-4 animate-fade-in">
-                        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
-                            <h3
-                                className="font-semibold text-white mb-2 transition-all duration-300"
-                                style={{ fontSize: 23, color: "#dae8f7" }}
-                            >
-                                {activeStep.title}
-                            </h3>
-                            <p
-                                className="text-sm transition-colors duration-300"
-                                style={{ color: "#93d5de" }}
-                            >
-                                {activeStep.description}
-                            </p>
-
-                            {/* Progress Indicator */}
-                            <div className="mt-4 flex items-center justify-center space-x-2">
-                                <span className="text-xs text-slate-400">
-                                    Step {currentStep} of {steps.length}
-                                </span>
-                                <div className="flex space-x-1">
-                                    {steps.map((_, index) => (
-                                        <div
-                                            key={index}
-                                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                                index + 1 === currentStep
-                                                    ? "bg-blue-400 scale-125"
-                                                    : index + 1 < currentStep
-                                                      ? "bg-green-400"
-                                                      : "bg-slate-600"
-                                            }`}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <div className="text-center px-2 animate-fade-in bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-xl space-y-2 py-2">
+                        <h3 className="font-semibold text-white transition-all duration-300">
+                            {activeStep.title}
+                        </h3>
+                        <p
+                            className="text-sm transition-colors duration-300"
+                            style={{ color: "#93d5de" }}
+                        >
+                            {activeStep.description}
+                        </p>
                     </div>
                 )}
             </div>
@@ -242,5 +271,3 @@ const StepperComponent = ({ currentStep = 1 }) => {
         </>
     );
 };
-
-export default StepperComponent;

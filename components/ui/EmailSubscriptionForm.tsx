@@ -24,7 +24,7 @@ export default function EmailSubscriptionForm() {
     return (
         <div className="">
             <div>
-                <div className="flex items-center border border-gray-300 rounded-full p-1 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center border border-gray-300 rounded-full p-0.5 md:p-1 shadow-sm hover:shadow-md transition-shadow">
                     {/* Icon container */}
                     {/*<div className="bg-amber-300 rounded-full p-2 ml-1 flex items-center justify-center">*/}
                     {/*    <svg*/}
@@ -38,21 +38,30 @@ export default function EmailSubscriptionForm() {
                     {/*</div>*/}
 
                     {/* Input container */}
-                    <div className="flex-1 px-3">
+                    <div className="flex-1 px-1 md:px-3">
                         <input
                             type="email"
                             placeholder="Enter your email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-transparent w-full h-12 outline-none placeholder-gray-500"
+                            className="bg-transparent w-full h-8 md:h-10 lg:h-12 text-body-xs md:text-body-sm outline-none placeholder-gray-500"
                             required
                         />
                     </div>
 
                     {/* Button */}
 
-                    <div style={{ width: 230 }} className="">
-                        <Button variant={"primary"}>
+                    <div
+                        style={{ width: "auto" }}
+                        className="w-auto md:w-[230px]"
+                    >
+                        <Button
+                            variant={"primary"}
+                            size="sm"
+                            className="text-xs md:text-sm"
+                            leftIcon={null}
+                            rightIcon={null}
+                        >
                             {isSubscribed ? "✓ Subscribed!" : "Subscribe Now"}
                         </Button>
                     </div>

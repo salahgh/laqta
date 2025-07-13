@@ -1,6 +1,23 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 
-export const FormInput = ({
+interface FormInputProps {
+    label: string;
+    name: string;
+    type?: string;
+    placeholder?: string;
+    as?: "input" | "textarea";
+    value: string;
+    onChange: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => void;
+    error?: string;
+    className?: string;
+    style?: React.CSSProperties;
+    variant?: "default" | "compact";
+}
+
+export const FormInput: React.FC<FormInputProps> = ({
     label,
     name,
     type = "text",
@@ -9,39 +26,56 @@ export const FormInput = ({
     value,
     onChange,
     error,
-    className = "text-body-sm md:text-body-xl",
+    className,
     style = {},
-}) => (
-    <div className="mb-6">
-        <label className="block text-white text-body-md mb-2 md:text-display-xs md:mb-4 font-medium">
-            {label}
-        </label>
-        {as === "textarea" ? (
-            <textarea
-                name={name}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                rows={4}
-                className={`w - full text-body-xl bg-transparent border border-gray-600 rounded-lg px-4 
-                 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 
-                 focus:ring-blue-500  focus:border-transparent transition-all 
-                 duration-200 w-full ${className}`}
-                style={style}
-            />
-        ) : (
-            <input
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                className={`w-full px-10 text-body-xl rounded-full bg-transparent border border-gray-600 
-                py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                focus:border-transparent transition-all duration-200 ${className} `}
-                style={{ color: "#D2D2D3", ...style }}
-            />
-        )}
-        {error && <div className="text-red-400 text-sm mt-1">{error}</div>}
-    </div>
-);
+    variant = "default",
+}) => {
+    const containerSpacing =
+        variant === "compact" ? "spacing-form-tight" : "spacing-form-normal";
+    const inputPadding =
+        variant === "compact"
+            ? "padding-responsive-sm"
+            : "padding-responsive-md";
+
+    const baseInputClasses = cn(
+        "form-input-base text-responsive-lg",
+        inputPadding,
+        className,
+    );
+
+    return (
+        <div className={containerSpacing}>
+            <label
+                className={cn(
+                    "form-label-base text-responsive-lg mb-0.5 md:mb-1",
+                )}
+            >
+                {label}
+            </label>
+            {as === "textarea" ? (
+                <textarea
+                    name={name}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    rows={3}
+                    className={cn(baseInputClasses, "rounded-lg")}
+                    style={style}
+                />
+            ) : (
+                <input
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    className={cn(baseInputClasses, "rounded-full ")}
+                    style={{ color: "#D2D2D3", ...style }}
+                />
+            )}
+            {error && (
+                <div className="text-red-400 mt-0.5 md:mt-1">{error}</div>
+            )}
+        </div>
+    );
+};

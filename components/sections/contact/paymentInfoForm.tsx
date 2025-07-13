@@ -51,12 +51,13 @@ export function PaymentInfoForm({
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Payment Details */}
             <FormInput
                 label="Card Number"
                 {...useFormInput("cardNumber", formik)}
                 placeholder="Enter your card number"
+                variant={"compact"}
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
@@ -67,6 +68,7 @@ export function PaymentInfoForm({
                 label="Expiration Date"
                 {...useFormInput("expirationDate", formik)}
                 placeholder="MM/YY"
+                variant={"compact"}
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
@@ -77,6 +79,7 @@ export function PaymentInfoForm({
                 label="CVV"
                 {...useFormInput("cvv", formik)}
                 placeholder="123"
+                variant={"compact"}
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",

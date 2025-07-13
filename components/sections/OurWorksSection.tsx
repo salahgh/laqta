@@ -1,84 +1,121 @@
 import React from "react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Badge } from "@/components/ui/Badge";
+import { worksApi, Work, utils } from "@/lib/strapi";
+import { defaultWorks } from "@/components/sections/DefaultWorks";
 
-const OurWorks = () => {
-    const projects = [
-        {
-            imagePosition: "left",
-            category: "AI & SaaS Industry",
-            title: "Brand Positioning",
-            description:
-                "We helped Neuromind simplify their complex AI product through a clear brand voice, captivating explainer videos, and conversion-driven landing pages—leading to a 35% boost in trial signups within 2 months.",
-            metrics: "Let's shape clarity from complexity.",
-            ctaText: "Get a free audit",
-        },
-        {
-            imagePosition: "right",
-            category: "AI & SaaS Industry",
-            title: "Brand Positioning",
-            description:
-                "We helped Neuromind simplify their complex AI product through a clear brand voice, captivating explainer videos, and conversion-driven landing pages—leading to a 35% boost in trial signups within 2 months.",
-            metrics: "Let's shape clarity from complexity.",
-            ctaText: "Get a free audit",
-        },
-        {
-            imagePosition: "left",
-            category: "AI & SaaS Industry",
-            title: "Brand Positioning",
-            description:
-                "We helped Neuromind simplify their complex AI product through a clear brand voice, captivating explainer videos, and conversion-driven landing pages—leading to a 35% boost in trial signups within 2 months.",
-            metrics: "Let's shape clarity from complexity.",
-            ctaText: "Get a free audit",
-        },
-    ];
+interface OurWorksSectionProps {
+    badge?: string;
+    title?: string;
+    description?: string;
+    works?: Work[];
+    className?: string;
+    fetchFromStrapi?: boolean;
+}
+
+// Server-side component with revalidation
+export async function OurWorksSection({
+    badge = "Our Works",
+    title = "Our Works",
+    description = "From powerful brand firms to bold social campaigns," +
+        " creativity with strategy to connect, perform, and inspire. Here's a look at what we've created with our amazing clients.",
+    works: providedWorks,
+    className = "",
+    fetchFromStrapi = true,
+}: OurWorksSectionProps) {
+    let works: Work[] = [];
+
+    // Determine which works to use
+    if (providedWorks && providedWorks.length > 0) {
+        works = providedWorks;
+    } else if (fetchFromStrapi) {
+        try {
+            const response = await worksApi.getAll({
+                populate: "*",
+                sort: "createdAt:desc",
+                pageSize: 10,
+            });
+
+            works = response.data;
+        } catch (error) {
+            console.error("Failed to fetch works from Strapi:", error);
+            // works = defaultWorks;
+        }
+    } else {
+        // works = defaultWorks;
+    }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-16">
-            <div className=" px-3 md:px-20">
+        <div
+            className={`min-h-screen bg-gray-100 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 ${className}`}
+        >
+            <div className="px-3 sm:px-6 md:px-12 lg:px-12 xl:px-24 2xl:px-32">
                 {/* Header Section */}
-                <div className="text-center mb-16 flex flex-col items-center space-y-4">
-                    <h1
-                        className="px-4 py-2 bg-blue-50 text-blue-600 text-body-md md:text-display-sm
-                        rounded-full border border-blue-100 flex items-center justify-center mb-4
-                        md:h-[56px] h-[42px]
-                        "
-                        style={{
-                            color: "#54B3F1",
-                            borderColor: "#54B3F1",
-                        }}
+                <div
+                    className="text-center flex flex-col
+                items-center gap-2 md:gap-6 lg:gap-5 xl:gap-6 md:pb-8"
+                >
+                    <Badge variant="default" className="">
+                        {badge}
+                    </Badge>
+
+                    <h2 className="text-gray-900">{title}</h2>
+
+                    <p
+                        className="text-secondary-gray text-responsive-lg text-justify px-4 md:px-10 md:text-center
+                    lg:px-24 xl:px-32 2xl:px-40 max-w-4xl"
                     >
-                        Our Works
-                    </h1>
-
-                    <h1 className="px-4 py-2 md:text-display-xl text-display-md flex items-center justify-center mb-4">
-                        Our Works
-                    </h1>
-
-                    <p className="text-secondary-gray md:text-display-xs text-body-md leading-relaxed mx-auto md:px-32">
-                        From powerful brand firms to bold social campaigns,
-                        creativity with strategy to connect, perform, and
-                        inspire. Here's a look at what we've created with our
-                        amazing clients.
+                        {description}
                     </p>
                 </div>
 
                 {/* Projects Section */}
-                <div className="space-y-12 flex flex-col">
-                    {projects.map((project, index) => (
-                        <ProjectCard
-                            key={index}
-                            imagePosition={project.imagePosition}
-                            category={project.category}
-                            title={project.title}
-                            description={project.description}
-                            metrics={project.metrics}
-                            ctaText={project.ctaText}
-                        />
-                    ))}
+                <div className="space-y-2 sm:space-y-4 md:space-y-6 lg:space-y-12 xl:space-y-16 flex flex-col">
+                    {works.map((work, index) => {
+                        const workData = work;
+                        const imageUrl = workData?.image?.data?.attributes?.url
+                            ? utils.getFileUrl(
+                                  workData?.image?.data.attributes.url,
+                              )
+                            : "/images/workImage.jpg";
+                        const imageAlt =
+                            workData?.image?.data?.attributes
+                                ?.alternativeText || workData?.title;
+
+                        return (
+                            <ProjectCard
+                                key={work.id || index}
+                                imagePosition={
+                                    workData?.image_position || "left"
+                                }
+                                category={workData?.category}
+                                title={workData?.title}
+                                description={workData?.description}
+                                metrics={workData?.metrics || ""}
+                                ctaText={workData?.cta_text || "Learn more"}
+                                imageUrl={imageUrl}
+                                imageAlt={imageAlt}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </div>
     );
-};
+}
 
-export default OurWorks;
+// Add revalidation for server-side rendering
+export const revalidate = 600; // 10 minutes
+
+// Client-side version for compatibility
+export default function OurWorksWrapper(props: OurWorksSectionProps) {
+    return (
+        <>
+            {/* @ts-expect-error Server Component */}
+            <OurWorksSection {...props} />
+        </>
+    );
+}
+
+// Export for server-side usage
+export { OurWorksSection as OurWorksSection_SSR };

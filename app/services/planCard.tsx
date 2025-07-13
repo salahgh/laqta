@@ -14,13 +14,11 @@ export const PlanCard = ({
     frameId,
 }) => (
     <div
-        className={`relative rounded-2xl p-8 ${gradient} border border-gray-700 h-full`}
+        className={`relative rounded-2xl p-4 ${gradient} border border-gray-700 h-full`}
     >
-        <div className="mt-6 flex flex-col h-full">
-            <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
-            <p className="text-gray-300 text-sm mb-8 leading-relaxed">
-                {description}
-            </p>
+        <div className="flex flex-col h-full">
+            <h3 className="font-bold text-white ">{title}</h3>
+            <p className="text-gray-300 leading-relaxed">{description}</p>
 
             {features && (
                 <div className="mb-8">

@@ -78,14 +78,15 @@ const PersonalInfoForm = ({
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Name Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormInput
                     label="First Name"
                     {...useFormInput("firstName", formik)}
                     placeholder="Enter your first name"
                     className=""
+                    variant={"compact"}
                     style={{
                         backgroundColor: "#141733",
                         color: "#D2D2D3",
@@ -93,6 +94,7 @@ const PersonalInfoForm = ({
                 />
                 <FormInput
                     label="Last Name"
+                    variant={"compact"}
                     {...useFormInput("lastName", formik)}
                     placeholder="e.g. Benyamina"
                     style={{
@@ -107,6 +109,7 @@ const PersonalInfoForm = ({
                 label="Email Address"
                 {...useFormInput("email", formik)}
                 placeholder="e.g. sarah.benyamina@email.com"
+                variant={"compact"}
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
@@ -117,6 +120,7 @@ const PersonalInfoForm = ({
             <FormInput
                 label="Phone number"
                 {...useFormInput("phone", formik)}
+                variant={"compact"}
                 placeholder="0 000 000"
                 style={{
                     backgroundColor: "#141733",
@@ -128,13 +132,14 @@ const PersonalInfoForm = ({
             <FormInput
                 label="Message"
                 {...useFormInput("message", formik)}
+                variant={"compact"}
                 as="textarea"
                 placeholder="Tell us more about what you're looking for..."
                 style={{
                     backgroundColor: "#141733",
                     color: "#D2D2D3",
                     width: "100%",
-                    height: 307,
+                    height: 200,
                 }}
             />
 

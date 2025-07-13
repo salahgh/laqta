@@ -1,34 +1,23 @@
 import React from "react";
 import { Mail, MapPin, Phone, PhoneCall } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
 
 export const ContactInfo = () => (
-    <div className="flex-1 flex flex-col justify-center px-3 lg:px-12 md:max-w-[50%]">
-        <div className="mb-8 flex justify-center md:justify-start">
-            <span
-                className="inline-block border md:px-6 md:py-4 px-4 py-2 rounded-full shadow-lg"
-                style={{
-                    color: "#54B3F1",
-                    borderColor: "#54B3F1",
-                }}
-            >
-                Let's Connect
-            </span>
-        </div>
+    <div className="flex-1 flex flex-col gap-6 justify-center items-center px-3 lg:px-12 md:min-w-4xl">
+        <Badge variant="default" shadow>
+            Let's Connect
+        </Badge>
 
-        <div
-            className={"leading-tight text-gray-100 md:text-[56px] text-[42px]"}
-        >
-            Get in Touch
-        </div>
+        <h2 className={"leading-tight text-gray-100"}>Get in Touch</h2>
 
-        <div className="space-y-6 text-gray-400">
-            <p className="leading-relaxed text-secondary-gray text-body-md mt-4">
+        <div className="text-gray-400 space-y-4">
+            <p className="leading-relaxed text-secondary-gray text-responsive-lg">
                 Whether you have a project in mind or a question about our
                 services, we’d love to hear from you. Fill out the form and
                 we’ll get back to you within 24 hours.
             </p>
 
-            <div className="space-y-4 text-secondary-gray md:text-display-xs text-body-md">
+            <div className={"space-y-2 text-responsive-lg"}>
                 <div className={"flex gap-2 items-center"}>
                     <PhoneCall className={"w-8 h-8"} />
                     <div>+213 770 123 456</div>

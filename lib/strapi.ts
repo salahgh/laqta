@@ -1,172 +1,778 @@
-import React from "react";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import { Navigation } from "@/components/layout/Navigation";
-import Footer from "@/components/sections/Footer";
-import { articlesApi, Article } from "@/lib/strapi-articles";
-
-interface ArticlePageProps {
-    params: {
+export interface Article {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    read_time: number;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+    category: {
+        id: number;
+        name: string;
         slug: string;
+        color: string;
+    };
+    author: {
+        id: number;
+        name: string;
+        email: string;
+        bio?: string;
+        avatar?: {
+            url: string;
+            alternativeText?: string;
+        };
+    };
+    tags: Array<{
+        id: number;
+        name: string;
+        slug: string;
+    }>;
+    featured_image?: {
+        url: string;
+        alternativeText?: string;
+        width?: number;
+        height?: number;
     };
 }
 
-// Helper function to fetch article by slug
-async function fetchArticleBySlug(slug: string): Promise<Article> {
-    try {
-        const response = await articlesApi.getBySlug(slug);
-        return response.data;
-    } catch (error) {
-        throw new Error(`Failed to fetch article: ${error}`);
-    }
+// Types for Services
+export interface Service {
+    id: number;
+    title: string;
+    description: string;
+    slug?: string;
+    icon?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    tags?: Array<{
+        id: number;
+        name: string;
+        slug: string;
+    }>;
+    featured_image?: {
+        url: string;
+        alternativeText?: string;
+        width?: number;
+        height?: number;
+    };
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-// Generate metadata for SEO
-export async function generateMetadata({ params }: ArticlePageProps) {
-    try {
-        const article = await fetchArticleBySlug(params.slug);
-
-        return {
-            title: `${article.title} - LAQTA`,
-            description: article.excerpt,
-            openGraph: {
-                title: article.title,
-                description: article.excerpt,
-                images: article.featured_image
-                    ? [
-                        `${process.env.NEXT_PUBLIC_STRAPI_URL}${article.featured_image.url}`,
-                    ]
-                    : [],
-            },
-        };
-    } catch (error) {
-        return {
-            title: "Article not found - LAQTA",
-            description: "The requested article could not be found.",
-        };
-    }
+export interface PaginationMeta {
+    pagination: {
+        page: number;
+        pageSize: number;
+        pageCount: number;
+        total: number;
+    };
 }
 
-const ArticlePage: React.FC<ArticlePageProps> = async ({ params }) => {
-    let article: Article;
+export interface ApiResponse<T> {
+    data: T;
+    meta?: PaginationMeta;
+}
 
-    try {
-        article = await fetchArticleBySlug(params.slug);
-    } catch (error) {
-        console.error('Error fetching article:', error);
-        notFound();
+export interface ApiError {
+    data: any;
+    error: {
+        status: number;
+        name: string;
+        message: string;
+        details?: any;
+    };
+}
+
+// Configuration
+const STRAPI_URL =
+    // process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+    process.env.NEXT_PUBLIC_STRAPI_URL_2;
+const API_BASE = `${STRAPI_URL}/api`;
+
+console.log(API_BASE);
+
+// Base fetch wrapper
+async function fetchApi<T>(
+    endpoint: string,
+    options: RequestInit = {},
+): Promise<T> {
+    // const token = await getAuthToken();
+    const token = undefined;
+
+    const config: RequestInit = {
+        headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            ...(options.headers || {}),
+        },
+        ...options,
+    };
+
+    const response = await fetch(`${API_BASE}${endpoint}`, config);
+
+    if (!response.ok) {
+        const error: ApiError = await response.json();
+        throw new Error(error.error.message || "API request failed");
     }
 
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
+    return response.json();
+}
+
+// Services API
+export const servicesApi = {
+    // Get all services
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        sort?: string;
+        populate?: string;
+        filters?: Record<string, any>;
+    }): Promise<ApiResponse<Service[]>> {
+        const searchParams = new URLSearchParams();
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        // Handle filters
+        if (params?.filters) {
+            Object.entries(params.filters).forEach(([key, value]) => {
+                searchParams.set(`filters[${key}]`, value.toString());
+            });
+        }
+
+        const query = searchParams.toString();
+        const endpoint = `/services${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Service[]>>(endpoint);
+    },
+
+    // Get service by ID
+    async getById(
+        id: number,
+        params?: {
+            populate?: string;
+        },
+    ): Promise<ApiResponse<Service>> {
+        const searchParams = new URLSearchParams();
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        const query = searchParams.toString();
+        const endpoint = `/services/${id}${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Service>>(endpoint);
+    },
+
+    // Get featured services
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Service[]>> {
+        return this.getAll({
+            ...params,
+            filters: { featured: true },
+            populate: "*",
         });
-    };
-
-    return (
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 min-h-screen">
-        <Navigation />
-
-        <div className="max-w-4xl mx-auto px-4 py-8 md:py-16">
-            {/* Article Header */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
-        {article.featured_image && (
-                <div className="relative h-64 md:h-96 w-full">
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${article.featured_image.url}`}
-    alt={
-        article.featured_image.alternativeText ||
-            article.title
-    }
-    fill
-    className="object-cover"
-    priority
-    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
-        />
-        </div>
-)}
-
-    <div className="p-6 md:p-8">
-    <div className="flex items-center mb-4">
-    <span
-        className="px-3 py-1 text-sm font-semibold text-white rounded-full"
-    style={{
-        backgroundColor: article.category.color,
-    }}
->
-    {article.category.name}
-    </span>
-    <span className="ml-3 text-gray-600">
-        {article.read_time} min read
-    </span>
-    </div>
-
-    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-        {article.title}
-        </h1>
-
-        <div className="flex items-center mb-6">
-        {article.author.avatar && (
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${article.author.avatar.url}`}
-    alt={article.author.name}
-    width={48}
-    height={48}
-    className="rounded-full mr-4"
-        />
-)}
-    <div>
-        <p className="font-semibold text-slate-900">
-        {article.author.name}
-        </p>
-        <p className="text-gray-600">
-        {formatDate(article.publishedAt)}
-    </p>
-    </div>
-    </div>
-
-    <p className="text-xl text-gray-700 mb-6 leading-relaxed">
-        {article.excerpt}
-        </p>
-        </div>
-        </div>
-
-    {/* Article Content */}
-    <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-    <div className="prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-slate-900 prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
-    <div
-        dangerouslySetInnerHTML={{
-        __html: article.content,
-    }}
-    />
-    </div>
-    </div>
-
-    {/* Tags Section */}
-    {article.tags.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-        <h3 className="text-lg font-semibold mb-3 text-slate-900">
-            Tags
-            </h3>
-            <div className="flex flex-wrap gap-2">
-        {article.tags.map((tag) => (
-                <span
-                    key={tag.id}
-            className="px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-sm hover:bg-blue-500/20 transition-colors cursor-pointer"
-            >
-    #{tag.name}
-        </span>
-    ))}
-        </div>
-        </div>
-    )}
-    </div>
-
-    <Footer />
-    </div>
-);
+    },
 };
 
-export default ArticlePage;
+// Utility functions
+export const utils = {
+    // Get full URL for uploaded files
+    getFileUrl(url: string): string {
+        if (url.startsWith("http")) return url;
+        return `${STRAPI_URL}${url}`;
+    },
+};
+
+// Works/Projects interface
+export interface Work {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    metrics?: string;
+    cta_text?: string;
+    image_position?: "left" | "right";
+    featured?: boolean;
+    image?: {
+        data?: {
+            attributes: {
+                url: string;
+                alternativeText?: string;
+            };
+        };
+    };
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+// Works API
+export const worksApi = {
+    // Get all works
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        sort?: string;
+        populate?: string;
+        filters?: Record<string, any>;
+    }): Promise<ApiResponse<Work[]>> {
+        const searchParams = new URLSearchParams();
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        // Handle filters
+        if (params?.filters) {
+            Object.entries(params.filters).forEach(([key, value]) => {
+                searchParams.set(`filters[${key}]`, value.toString());
+            });
+        }
+
+        const query = searchParams.toString();
+        const endpoint = `/projects${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Work[]>>(endpoint);
+    },
+
+    // Get work by ID
+    async getById(
+        id: number,
+        params?: {
+            populate?: string;
+        },
+    ): Promise<ApiResponse<Work>> {
+        const searchParams = new URLSearchParams();
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        const query = searchParams.toString();
+        const endpoint = `/works/${id}${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Work>>(endpoint);
+    },
+
+    // Get featured works
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Work[]>> {
+        return this.getAll({
+            ...params,
+            filters: { featured: true },
+            populate: "*",
+        });
+    },
+};
+
+// Types for Testimonials
+export interface Testimonial {
+    id: number;
+    documentId: string;
+    testimonial: string;
+    author: string;
+    role: string;
+    avatar?: string;
+    company?: string;
+    rating?: number;
+    featured?: boolean;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+// Testimonials API
+export const testimonialsApi = {
+    // Get all testimonials
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        sort?: string;
+        populate?: string;
+        filters?: Record<string, any>;
+    }): Promise<ApiResponse<Testimonial[]>> {
+        const searchParams = new URLSearchParams();
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        // Handle filters
+        if (params?.filters) {
+            Object.entries(params.filters).forEach(([key, value]) => {
+                searchParams.set(`filters[${key}]`, value.toString());
+            });
+        }
+
+        const query = searchParams.toString();
+        const endpoint = `/testimonials${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Testimonial[]>>(endpoint);
+    },
+
+    // Get testimonial by ID
+    async getById(
+        id: number,
+        params?: {
+            populate?: string;
+        },
+    ): Promise<ApiResponse<Testimonial>> {
+        const searchParams = new URLSearchParams();
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        const query = searchParams.toString();
+        const endpoint = `/testimonials/${id}${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Testimonial>>(endpoint);
+    },
+
+    // Get featured testimonials
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Testimonial[]>> {
+        return this.getAll({
+            ...params,
+            filters: { featured: true },
+            populate: "*",
+        });
+    },
+};
+
+// Types for FAQs
+export interface FAQ {
+    id: number;
+    documentId: string;
+    question: string;
+    answer: string;
+    category?: string;
+    featured?: boolean;
+    order?: number;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+// FAQs API
+export const faqsApi = {
+    // Get all FAQs
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        sort?: string;
+        populate?: string;
+        filters?: Record<string, any>;
+    }): Promise<ApiResponse<FAQ[]>> {
+        const searchParams = new URLSearchParams();
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        // Handle filters
+        if (params?.filters) {
+            Object.entries(params.filters).forEach(([key, value]) => {
+                searchParams.set(`filters[${key}]`, value.toString());
+            });
+        }
+
+        const query = searchParams.toString();
+        const endpoint = `/faqs${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<FAQ[]>>(endpoint);
+    },
+
+    // Get FAQ by ID
+    async getById(
+        id: number,
+        params?: {
+            populate?: string;
+        },
+    ): Promise<ApiResponse<FAQ>> {
+        const searchParams = new URLSearchParams();
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        const query = searchParams.toString();
+        const endpoint = `/faqs/${id}${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<FAQ>>(endpoint);
+    },
+
+    // Get featured FAQs
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<FAQ[]>> {
+        return this.getAll({
+            ...params,
+            filters: { featured: true },
+            sort: "order:asc",
+        });
+    },
+
+    // Get FAQs by category
+    async getByCategory(
+        category: string,
+        params?: {
+            page?: number;
+            pageSize?: number;
+        },
+    ): Promise<ApiResponse<FAQ[]>> {
+        return this.getAll({
+            ...params,
+            filters: { category },
+            sort: "order:asc",
+        });
+    },
+};
+
+// Types for Missions
+export interface Mission {
+    id: number;
+    documentId: string;
+    title: string;
+    description: string;
+    icon?: string;
+    iconSrc?: string;
+    featured?: boolean;
+    order?: number;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+// Missions API
+export const missionsApi = {
+    // Get all missions
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        sort?: string;
+        populate?: string;
+        filters?: Record<string, any>;
+    }): Promise<ApiResponse<Mission[]>> {
+        const searchParams = new URLSearchParams();
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        // Handle filters
+        if (params?.filters) {
+            Object.entries(params.filters).forEach(([key, value]) => {
+                searchParams.set(`filters[${key}]`, value.toString());
+            });
+        }
+
+        const query = searchParams.toString();
+        const endpoint = `/missions${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Mission[]>>(endpoint);
+    },
+
+    // Get mission by ID
+    async getById(
+        id: number,
+        params?: {
+            populate?: string;
+        },
+    ): Promise<ApiResponse<Mission>> {
+        const searchParams = new URLSearchParams();
+        if (params?.populate) searchParams.set("populate", params.populate);
+
+        const query = searchParams.toString();
+        const endpoint = `/missions/${id}${query ? `?${query}` : ""}`;
+
+        return fetchApi<ApiResponse<Mission>>(endpoint);
+    },
+
+    // Get featured missions
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Mission[]>> {
+        return this.getAll({
+            ...params,
+            filters: { featured: true },
+            sort: "order:asc",
+        });
+    },
+};
+
+// Updated Blog interface based on new API structure
+export interface Blog {
+    id: number;
+    documentId: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    read_time: number;
+    featured: boolean;
+    views: number;
+    meta_title?: string;
+    meta_description?: string;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+    category: {
+        id: number;
+        documentId: string;
+        name: string;
+        slug: string;
+        description?: string;
+        color: string;
+    };
+    author: {
+        id: number;
+        documentId: string;
+        name: string;
+        email: string;
+        bio?: string;
+        avatar?: {
+            id: number;
+            documentId: string;
+            url: string;
+            alternativeText?: string;
+            width?: number;
+            height?: number;
+        };
+    };
+    tags: Array<{
+        id: number;
+        documentId: string;
+        name: string;
+        slug: string;
+    }>;
+    featured_image?: {
+        id: number;
+        documentId: string;
+        url: string;
+        alternativeText?: string;
+        width?: number;
+        height?: number;
+    };
+}
+
+// Category interface
+export interface Category {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    description?: string;
+    color: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+// Tag interface
+export interface Tag {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+// Updated Blogs API
+export const blogsApi = {
+    // Get blog by slug
+    async getBySlug(slug: string): Promise<ApiResponse<Blog>> {
+        return fetchApi<ApiResponse<Blog>>(
+            `/blogs?filters[slug][$eq]=${slug}&populate=*`,
+        );
+    },
+
+    // Get blogs by category
+    async getByCategory(
+        categorySlug: string,
+        params?: { page?: number; pageSize?: number },
+    ): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[category][slug][$eq]", categorySlug);
+        searchParams.set("populate", "*");
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get featured blogs
+    async getFeatured(params?: {
+        page?: number;
+        pageSize?: number;
+    }): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[featured][$eq]", "true");
+        searchParams.set("populate", "*");
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get all blogs with search and filters
+    async getAll(params?: {
+        page?: number;
+        pageSize?: number;
+        search?: string;
+        category?: string;
+        tag?: string;
+        sort?: string;
+    }): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("populate", "*");
+
+        if (params?.page)
+            searchParams.set("pagination[page]", params.page.toString());
+        if (params?.pageSize)
+            searchParams.set(
+                "pagination[pageSize]",
+                params.pageSize.toString(),
+            );
+        if (params?.sort) searchParams.set("sort", params.sort);
+
+        // Search functionality
+        if (params?.search) {
+            searchParams.set(
+                "filters[$or][0][title][$containsi]",
+                params.search,
+            );
+            searchParams.set(
+                "filters[$or][1][excerpt][$containsi]",
+                params.search,
+            );
+            searchParams.set(
+                "filters[$or][2][content][$containsi]",
+                params.search,
+            );
+        }
+
+        // Category filter
+        if (params?.category) {
+            searchParams.set("filters[category][slug][$eq]", params.category);
+        }
+
+        // Tag filter
+        if (params?.tag) {
+            searchParams.set("filters[tags][slug][$eq]", params.tag);
+        }
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // Get related blogs
+    async getRelated(
+        blogId: number,
+        limit: number = 3,
+    ): Promise<ApiResponse<Blog[]>> {
+        const searchParams = new URLSearchParams();
+        searchParams.set("filters[id][$ne]", blogId.toString());
+        searchParams.set("populate", "*");
+        searchParams.set("pagination[pageSize]", limit.toString());
+        searchParams.set("sort", "publishedAt:desc");
+
+        return fetchApi<ApiResponse<Blog[]>>(
+            `/blogs?${searchParams.toString()}`,
+        );
+    },
+};
+
+// Categories API
+export const categoriesApi = {
+    async getAll(): Promise<ApiResponse<Category[]>> {
+        return fetchApi<ApiResponse<Category[]>>("/categories?sort=name:asc");
+    },
+};
+
+// Tags API
+export const tagsApi = {
+    async getAll(): Promise<ApiResponse<Tag[]>> {
+        return fetchApi<ApiResponse<Tag[]>>("/tags?sort=name:asc");
+    },
+};
+
+// Newsletter API
+export const newsletterApi = {
+    async subscribe(
+        email: string,
+    ): Promise<{ success: boolean; message: string }> {
+        try {
+            await fetchApi("/newsletter-subscriptions", {
+                method: "POST",
+                body: JSON.stringify({ data: { email } }),
+            });
+            return {
+                success: true,
+                message: "Successfully subscribed to newsletter!",
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: "Failed to subscribe. Please try again.",
+            };
+        }
+    },
+};
+
+export default {
+    blogsApi,
+    categoriesApi,
+    tagsApi,
+    newsletterApi,
+    servicesApi,
+    worksApi,
+    testimonialsApi,
+    faqsApi,
+    missionsApi,
+    utils,
+};

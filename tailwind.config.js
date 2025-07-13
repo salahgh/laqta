@@ -92,6 +92,11 @@ module.exports = {
                     { lineHeight: "72px", letterSpacing: "-2%" },
                 ],
 
+                "display-2xl": [
+                    "72px",
+                    { lineHeight: "80px", letterSpacing: "-2%" },
+                ],
+
                 // Body Text Styles (for content, paragraphs, etc.)
                 "body-xs": [
                     "12px",
@@ -107,11 +112,15 @@ module.exports = {
                 ],
                 "body-lg": [
                     "18px",
-                    { lineHeight: "32px", letterSpacing: "-2%" },
+                    { lineHeight: "30px", letterSpacing: "-2%" },
                 ],
                 "body-xl": [
                     "20px",
-                    { lineHeight: "20px", letterSpacing: "-2%" },
+                    { lineHeight: "32px", letterSpacing: "-2%" },
+                ],
+                "body-2xl": [
+                    "22px",
+                    { lineHeight: "34px", letterSpacing: "-2%" },
                 ],
 
                 // Legacy sizes (keep for backward compatibility)
