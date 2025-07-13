@@ -91,6 +91,7 @@ const STRAPI_URL =
     // process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
     process.env.NEXT_PUBLIC_STRAPI_URL;
 const API_BASE = `${STRAPI_URL}/api`;
+
 console.log(API_BASE);
 
 // Base fetch wrapper
