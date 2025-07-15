@@ -608,6 +608,7 @@ export interface Tag {
 }
 
 // Updated Blogs API
+// Add this method to the blogsApi object
 export const blogsApi = {
     // Get blog by slug
     async getBySlug(slug: string): Promise<ApiResponse<Blog>> {
@@ -723,6 +724,15 @@ export const blogsApi = {
 
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
+        );
+    },
+
+    // 4. Update Strapi API for Better Static Generation
+    
+    // Get all blog slugs for static generation
+    async getAllSlugs(): Promise<ApiResponse<{ slug: string }[]>> {
+        return fetchApi<ApiResponse<{ slug: string }[]>>(
+            `/blogs?fields[0]=slug&pagination[pageSize]=1000`,
         );
     },
 };

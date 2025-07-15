@@ -4,7 +4,9 @@ import Footer from "@/components/sections/Footer";
 import { BlogsClient } from "../BlogsClient";
 import { Blog, blogsApi, categoriesApi, Category } from "@/lib/strapi";
 
-export const revalidate = 1800; // 30 minutes
+// Add these exports at the top
+export const revalidate = 3600; // 1 hour
+export const dynamic = 'force-static';
 
 export const metadata = {
     title: "All Articles - LAQTA",

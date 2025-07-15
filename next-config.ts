@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    // Ensure static generation works properly
+    output: 'standalone', // Optional: for better deployment
+    experimental: {
+        // Enable static generation optimizations
+        optimizePackageImports: ['@/lib/strapi'],
+    },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

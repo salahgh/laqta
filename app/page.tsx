@@ -15,13 +15,10 @@ export const metadata = {
     title: "Leqta | Where Creativity Meets Strategy",
 };
 
-// todo adujust the size of the navigation bar all items should have the same height
-
 export default async function Home() {
     return (
         <div className="w-full">
             {/*<LayoutInfo></LayoutInfo>*/}
-            <Navigation />
             <div className="w-full xl:max-w-[1514px] xl:mx-auto">
                 <HeroSection />
                 <AboutSection illustration={<CustomIllustration />} />
@@ -32,7 +29,7 @@ export default async function Home() {
                 <FAQSectionWrapper />
                 <ContactUs />
             </div>
-            <Footer />
+            {/*<Footer />*/}
         </div>
     );
 }

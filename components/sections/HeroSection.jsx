@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rocket } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
+import { Navigation } from "@/components/layout/Navigation";
+import React from "react";
 
 const ArrowIcon = () => (
     <svg
@@ -22,36 +24,63 @@ const ArrowIcon = () => (
 
 export const HeroSection = () => {
     return (
-        <div className="relative flex flex-col items-center justify-center bg-primary text-center p-4 sm:p-12 md:pb-24 lg:pb-36">
-            <div className={"pt-8 md:pt-0"}>
-                <Logo className={"md:hidden"} />
-            </div>
-
-            <img
-                src="/images/wherecreativitymeetsstrategy.svg"
-                alt="Logo"
-                className={"padding-responsive-lg "}
+        <div className="relative bg-primary flex flex-col items-center justify-center w-full text-center p-4 sm:p-12 md:pb-24 lg:pb-36 overflow-hidden">
+            <div
+                className="absolute inset-0 z-20"
+                style={{
+                    background:
+                        "linear-gradient(to bottom, #FFFFFF00, #000000)",
+                }}
             />
-            <p
-                className="text-responsive-lg font-medium text-secondary-gray padding-responsive-lg
-            text-justify
-             sm:text-center md:px-12 md:text-justify lg:text-center xl:px-40"
-            >
-                Leqta is a full-service content marketing & production company
-                based in Algiers. We combine storytelling, strategy, and visual
-                excellence to empower your brand with impactful video content.
-            </p>
-
-            <div className={"h-8 md:h-[56px]"}></div>
-
-            <div className="flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
-                <div className={"h-12 w-full md:h-16 md:w-auto"}>
-                    <Button rightIcon={<Rocket className="ml-2 h-10 w-4" />}>
-                        Get Started
-                    </Button>
+            {/* Vector Courbe SVG Layer */}
+            <div className="absolute z-30 w-[80%] lg:w-1/2">
+                <img
+                    src="/images/vector_courbe.svg"
+                    alt="Vector Curve Background"
+                    className="h-full aspect-square object-cover"
+                />
+            </div>
+            {/* Union SVG Layer */}
+            <div className="absolute z-10 w-full" style={{ top: 0, left: 0 }}>
+                <img
+                    src="/images/union.svg"
+                    alt="Union Background"
+                    className="object-fill bg"
+                />
+            </div>
+            {/* Content Layer */}
+            <div className="relative z-40 w-full">
+                <Navigation />
+                <div className={"pt-4 flex justify-center"}>
+                    <Logo className={"md:hidden"} />
                 </div>
-                <div className={"h-12 w-full md:h-16 md:w-auto"}>
-                    <Button variant="secondary">Contact Us</Button>
+                <img
+                    src="/images/wherecreativitymeetsstrategy.svg"
+                    alt="Logo"
+                    className={"w-full pt-2 px-2 lg:px-44"}
+                />
+                <p
+                    className="text-responsive-lg font-medium text-secondary-gray padding-responsive-lg
+                text-justify
+                 sm:text-center md:px-12 md:text-justify lg:text-center xl:px-40"
+                >
+                    Leqta is a full-service content marketing & production
+                    company based in Algiers. We combine storytelling, strategy,
+                    and visual excellence to empower your brand with impactful
+                    video content.
+                </p>
+                <div className={"h-8 md:h-[56px]"}></div>
+                <div className="flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
+                    <div className={"h-12 w-full md:h-16 md:w-auto"}>
+                        <Button
+                            rightIcon={<Rocket className="ml-2 h-10 w-4" />}
+                        >
+                            Get Started
+                        </Button>
+                    </div>
+                    <div className={"h-12 w-full md:h-16 md:w-auto"}>
+                        <Button variant="secondary">Contact Us</Button>
+                    </div>
                 </div>
             </div>
         </div>

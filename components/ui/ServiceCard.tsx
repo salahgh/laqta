@@ -14,6 +14,7 @@ export const ServiceCard = (props) => {
     } = props;
 
     // todo display good illustrations
+
     return (
         <div
             className={`relative rounded-lg p-3 h-full overflow-hidden hover:scale-[1.02] transition-all duration-300 ${className}`}

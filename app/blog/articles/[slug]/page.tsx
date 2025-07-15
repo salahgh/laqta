@@ -6,8 +6,27 @@ import { BlogArticleClient } from "./BlogArticleClient";
 
 import { Blog, blogsApi } from "@/lib/strapi";
 
+// Add static generation with revalidation
+export const revalidate = 3600; // 1 hour
+
 interface BlogPageProps {
     params: Promise<{ slug: string }>;
+}
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+    try {
+        // Fetch all blogs to get their slugs
+        const response = await blogsApi.getAll({ pageSize: 1000 }); // Adjust pageSize as needed
+        const blogs = response.data;
+        
+        return blogs.map((blog) => ({
+            slug: blog.slug,
+        }));
+    } catch (error) {
+        console.error('Failed to generate static params for blogs:', error);
+        return [];
+    }
 }
 
 async function fetchBlogBySlug(slug: string): Promise<Blog | null> {

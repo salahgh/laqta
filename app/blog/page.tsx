@@ -8,6 +8,9 @@ import { Blog, blogsApi, categoriesApi, Category } from "@/lib/strapi";
 // Static generation with revalidation every hour
 export const revalidate = 3600;
 
+// Force static generation
+export const dynamic = 'force-static';
+
 export const metadata = {
     title: "Insights & Stories - LAQTA",
     description:

@@ -22,7 +22,6 @@ async function getServices(): Promise<Service[]> {
             populate: "*",
             pageSize: 10,
         });
-
         return response.data;
     } catch (error) {
         console.error("Error fetching services:", error);

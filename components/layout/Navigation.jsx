@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Rocket, Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import "../../app/styles.css";
 import { cn } from "@/lib/utils";
 
 // Navigation constants
@@ -89,8 +90,8 @@ export const Navigation = ({ className = "" }) => {
                     text-responsive-md
                     ${
                         scrolled
-                            ? "bg-blue-900/50 backdrop-blur-md shadow-lg border-b border-blue-700/30 h-14 md:h-16"
-                            : "bg-[#0d1137] md:h-[90px] h-[60px]"
+                            ? "shadow-lg bg-primary opacity-80 backdrop-blur-md  border-blue-700/30 h-14 md:h-16 glassmorphism"
+                            : "md:h-[90px] h-[60px]"
                     }
                     ${className}
                    
