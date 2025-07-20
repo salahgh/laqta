@@ -47,9 +47,26 @@ export async function OurWorksSection({
 
     return (
         <div
-            className={`min-h-screen bg-gray-100 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 ${className}`}
+            className={`min-h-screen relative bg-gray-100 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 ${className}`}
         >
-            <div className="px-3 sm:px-6 md:px-12 lg:px-12 xl:px-24 2xl:px-32">
+            <div
+                className="absolute inset-0 z-0 flex flex-col justify-start items-center "
+                style={{ top: -100 }}
+            >
+                <img
+                    src="/images/laqta_logo_courbe.svg"
+                    alt="LAQTA Logo Curve"
+                    className="w-2/3 aspect-square object-fill z-0 opacity-40"
+                />
+            </div>
+            {/*<div*/}
+            {/*    className={"absolute bg-amber-300 w-full top-0"}*/}
+            {/*    style={{*/}
+            {/*        height: 1000,*/}
+            {/*        top: 0,*/}
+            {/*    }}*/}
+            {/*></div>*/}
+            <div className="px-3 sm:px-6 md:px-12 lg:px-12 xl:px-24 2xl:px-32 z-10">
                 {/* Header Section */}
                 <div
                     className="text-center flex flex-col

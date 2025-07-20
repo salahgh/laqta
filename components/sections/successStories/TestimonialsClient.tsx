@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "@/components/sections/successStories/TestimonialCard";
 import { PaginationDots } from "@/components/sections/successStories/PaginationDots";
+import LetsStartProjectSection from "@/components/sections/LetsStartProjectSection";
 
 export const TestimonialsClient = ({
     testimonials,
@@ -76,8 +77,9 @@ export const TestimonialsClient = ({
     }, [currentTestimonial]);
 
     return (
-        <div className="bg-gray-200 md:pt-20 py-12 flex flex-col gap-8">
+        <div className="relative bg-gray-200 md:pt-20 pt-12 flex flex-col gap-8">
             {/* Header section */}
+
             <div className="text-center px-3 space-y-6 ">
                 <Badge>Testimonials</Badge>
 
@@ -163,10 +165,10 @@ export const TestimonialsClient = ({
                 onChange={setCurrentTestimonial}
             />
             {/* Swipe indicator for mobile */}
-            {/*<div className="md:hidden text-center text-sm text-gray-500 mb-8">*/}
-            {/*    ← Swipe to navigate →*/}
-            {/*</div>*/}
-            {/*<LetsStartProjectSection />*/}
+            <div className="md:hidden text-center text-sm text-gray-500 mb-8">
+                ← Swipe to navigate →
+            </div>
+            <LetsStartProjectSection />
         </div>
     );
 };

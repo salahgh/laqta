@@ -17,13 +17,14 @@ export const ServiceCard = (props) => {
 
     return (
         <div
-            className={`relative rounded-lg p-3 h-full overflow-hidden hover:scale-[1.02] transition-all duration-300 ${className}`}
+            className={`relative text-gray-600 rounded-lg p-2 h-full overflow-hidden hover:scale-[1.02] 
+            transition-all duration-300 ${className}`}
             style={{
                 backgroundColor: "#605e68",
             }}
         >
             <div
-                className={"relative rounded-lg h-full w-full p-2"}
+                className={"relative rounded-lg h-full w-full p-6"}
                 style={{
                     background: `linear-gradient(0deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
                 }}

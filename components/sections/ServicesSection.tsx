@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/Button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { Badge } from "@/components/ui/Badge";
 import { Service, servicesApi } from "@/lib/strapi";
-import { defaultServices } from "@/app/services/DefaultServices";
-import { log } from "next/dist/server/typescript/utils";
 
 // Types
 interface ServicesSectionProps {
@@ -72,8 +70,27 @@ export const ServicesSection = async ({
     })();
 
     return (
-        <section className={className}>
-            <div className="bg-primary flex flex-col">
+        <section className={`relative overflow-hidden bg-primary ${className}`}>
+            {/* Amber Gradient Layer - from bottom to mid */}
+            <div
+                className="absolute top-1/4 left-0 right-0 bottom-0 z-10"
+                style={{
+                    background:
+                        "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(245, 158, 11, 0) 50%, transparent 100%)",
+                }}
+            />
+
+            {/* Vector Curve SVG Layer */}
+            <div className="absolute inset-0 z-10 flex justify-center ">
+                <img
+                    src="/images/vector_courbe.svg"
+                    alt="Vector Curve Background"
+                    className="w-full h-full object-fill "
+                />
+            </div>
+
+            {/* Content Layer */}
+            <div className="relative z-20 flex flex-col">
                 {/* Header - Fully Responsive */}
                 <div className="text-center flex flex-col items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32">
                     <Badge variant="default">{badge}</Badge>

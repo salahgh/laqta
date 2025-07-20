@@ -29,7 +29,7 @@ export default async function Home() {
                 <FAQSectionWrapper />
                 <ContactUs />
             </div>
-            {/*<Footer />*/}
+            <Footer />
         </div>
     );
 }
