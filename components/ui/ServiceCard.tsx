@@ -56,7 +56,7 @@ export const ServiceCard = (props) => {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mt-auto">
-                        {tags.map((tag, index) => (
+                        {tags?.map((tag, index) => (
                             <span
                                 key={index}
                                 className="px-3 py-1.5 bg-white bg-opacity-20 text-white text-sm rounded-full backdrop-blur-sm"

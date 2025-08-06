@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Rocket, Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import "../../app/styles.css";
-import { cn } from "@/lib/utils";
+import "../../src/app/styles.css";
 
 // Navigation constants
 const NAV_ITEMS = [
