@@ -8,28 +8,46 @@ import React from "react";
 import { TestimonialsSectionWrapper } from "@/components/sections/successStories/TestimonialSectionWrapper";
 import FAQSectionWrapper from "@/components/sections/FAQSection/FAQSectionWrapper";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { getTranslations } from "next-intl/server";
+import Footer from "@/components/sections/Footer";
+import { Navigation } from "@/components/layout/Navigation";
 
-export const metadata = {
-    title: "Leqta | Where Creativity Meets Strategy",
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "hero" });
 
-export default async function Home() {
-    console.log("Home page");
+    return {
+        title: t("title") + " | Leqta",
+        description: t("description"),
+    };
+}
+
+export default async function Home({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    console.log("Home page - locale:", locale);
+
     return (
         <div className="w-full">
-            {/*<LayoutInfo></LayoutInfo>*/}
+            {/*<Navigation />*/}
             <div className="w-full xl:max-w-[1514px] xl:mx-auto">
                 <HeroSection />
                 <AboutSection illustration={<CustomIllustration />} />
-                <ServicesSection />
-                <OurWorks />
-                <YourPerfectPartner />
-                <TestimonialsSectionWrapper />
-                <FAQSectionWrapper />
+                <ServicesSection locale={locale} />
+                <OurWorks locale={locale} />
+                <YourPerfectPartner locale={locale} />
+                <TestimonialsSectionWrapper locale={locale} />
+                <FAQSectionWrapper locale={locale} />
                 <ContactUs />
             </div>
-            {/*<Footer />*/}
-            <div>home page</div>
+            <Footer />
         </div>
     );
 }

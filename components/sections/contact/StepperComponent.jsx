@@ -1,29 +1,32 @@
 import React from "react";
 import { User, MessageCircle, Send, CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export const StepperComponent = ({ currentStep = 1 }) => {
+    const t = useTranslations('contactPage.stepper');
+    
     const steps = [
         {
             id: 1,
             icon: User,
-            title: "Personal infos",
-            description: "So we can know you better",
+            title: t('personalInfos'),
+            description: t('personalInfosDescription'),
             completed: currentStep > 1,
             active: currentStep === 1,
         },
         {
             id: 2,
             icon: MessageCircle,
-            title: "Project infos",
-            description: "Let us understand your project",
+            title: t('projectInfos'),
+            description: t('projectInfosDescription'),
             completed: currentStep > 2,
             active: currentStep === 2,
         },
         {
             id: 3,
             icon: Send,
-            title: "Payment infos",
-            description: "Please fill your payment infos to get started",
+            title: t('paymentInfos'),
+            description: t('paymentInfosDescription'),
             completed: currentStep > 3,
             active: currentStep === 3,
         },

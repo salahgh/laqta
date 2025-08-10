@@ -4,10 +4,12 @@ import { TestimonialsClient } from "@/components/sections/successStories/Testimo
 
 interface TestimonialsProps {
     testimonials?: Testimonial[];
+    locale: string;
 }
 
 const TestimonialsSection = async ({
     testimonials: providedTestimonials,
+    locale,
 }: TestimonialsProps = {}) => {
     // Fetch testimonials with fallback logic
     let testimonials = providedTestimonials;
@@ -16,6 +18,7 @@ const TestimonialsSection = async ({
         try {
             const response = await testimonialsApi.getAll({
                 pageSize: 10,
+                locale: locale,
             });
             testimonials = response.data;
         } catch (error) {

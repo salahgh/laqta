@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Telescope, Users, Wand2, LucideIcon } from "lucide-react";
-import { Card } from "@/app/about/card";
 import { Mission } from "@/lib/strapi";
+import { Card } from "@/src/app/[locale]/about/card";
 
 interface MissionVisionCardsClientProps {
     missions: Mission[] | undefined;
@@ -21,7 +21,7 @@ export const MissionVisionCardsClient: React.FC<
 > = ({ missions }) => {
     return (
         <div
-            className="p-4 py-8 items-center justify-center grid
+            className="p-8 py-8 items-center justify-center grid
         grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:px-8 "
         >
             {missions?.map((mission, index) => {

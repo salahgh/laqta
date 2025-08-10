@@ -1,6 +1,6 @@
 import React from "react";
 import { Mission, missionsApi } from "@/lib/strapi";
-import { MissionVisionCardsClient } from "./MissionVisionCardsClient";
+import { MissionVisionCardsClient } from "@/src/app/[locale]/about/MissionVisionCardsClient";
 
 const MissionVisionCards = async () => {
     // let missions = defaultMissions;

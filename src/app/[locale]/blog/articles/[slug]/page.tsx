@@ -2,9 +2,10 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/components/layout/Navigation";
 import Footer from "@/components/sections/Footer";
-import { BlogArticleClient } from "./BlogArticleClient";
+import { BlogArticle } from "./BlogArticle";
 
 import { Blog, blogsApi } from "@/lib/strapi";
+import { getTranslations } from "next-intl/server";
 
 // Add static generation with revalidation
 export const revalidate = 3600; // 1 hour
@@ -13,18 +14,27 @@ interface BlogPageProps {
     params: Promise<{ slug: string }>;
 }
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
+// Add this function to generate static params for all blog articles
+export async function generateStaticParams({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    
     try {
-        // Fetch all blogs to get their slugs
-        const response = await blogsApi.getAll({ pageSize: 1000 }); // Adjust pageSize as needed
-        const blogs = response.data;
+        // Fetch all blog slugs for static generation
+        const response = await blogsApi.getAll({
+            locale,
+            pageSize: 1000, // Get all articles
+            fields: ['slug'],
+        });
         
-        return blogs.map((blog) => ({
+        return response.data.map((blog: any) => ({
             slug: blog.slug,
         }));
     } catch (error) {
-        console.error('Failed to generate static params for blogs:', error);
+        console.error('Error generating static params for blog articles:', error);
         return [];
     }
 }
@@ -39,13 +49,14 @@ async function fetchBlogBySlug(slug: string): Promise<Blog | null> {
 }
 
 export async function generateMetadata({ params }: BlogPageProps) {
-    const { slug } = await params;
+    const { slug, locale } = await params;
     const blog = await fetchBlogBySlug(slug);
+    const t = await getTranslations({ locale, namespace: "blog" });
 
     if (!blog) {
         return {
-            title: "Article not found - LAQTA",
-            description: "The requested article could not be found.",
+            title: t("articleNotFound"),
+            description: t("articleNotFoundDescription"),
         };
     }
 
@@ -85,7 +96,7 @@ const BlogArticlePage = async ({ params }: BlogPageProps) => {
     return (
         <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 min-h-screen">
             <Navigation />
-            <BlogArticleClient blog={blog} relatedBlogs={relatedBlogs} />
+            <BlogArticle blog={blog} relatedBlogs={relatedBlogs} />
             <Footer />
         </div>
     );

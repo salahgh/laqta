@@ -4,6 +4,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { Rocket } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Navigation } from "@/components/layout/Navigation";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const ArrowIcon = () => (
@@ -23,6 +24,8 @@ const ArrowIcon = () => (
 );
 
 export const HeroSection = () => {
+    const t = useTranslations("hero");
+
     return (
         <div className="relative bg-primary flex flex-col items-center justify-center w-full text-center p-4 sm:p-12 md:pb-24 lg:pb-36 overflow-hidden">
             <div
@@ -56,7 +59,7 @@ export const HeroSection = () => {
                 </div>
                 <img
                     src="/images/wherecreativitymeetsstrategy.svg"
-                    alt="Logo"
+                    alt={t("title")}
                     className={"w-full pt-2 px-2 lg:px-44"}
                 />
                 <p
@@ -64,10 +67,7 @@ export const HeroSection = () => {
                 text-justify
                  sm:text-center md:px-12 md:text-justify lg:text-center xl:px-40"
                 >
-                    Leqta is a full-service content marketing & production
-                    company based in Algiers. We combine storytelling, strategy,
-                    and visual excellence to empower your brand with impactful
-                    video content.
+                    {t("description")}
                 </p>
                 <div className={"h-8 md:h-[56px]"}></div>
                 <div className="flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
@@ -75,11 +75,11 @@ export const HeroSection = () => {
                         <Button
                             rightIcon={<Rocket className="ml-2 h-10 w-4" />}
                         >
-                            Get Started
+                            {t("getStarted")}
                         </Button>
                     </div>
                     <div className={"h-12 w-full md:h-16 md:w-auto"}>
-                        <Button variant="secondary">Contact Us</Button>
+                        <Button variant="secondary">{t("contactUs")}</Button>
                     </div>
                 </div>
             </div>

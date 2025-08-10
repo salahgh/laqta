@@ -3,6 +3,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useTranslations } from "next-intl";
 
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import { FormInput } from "@/components/ui/FormInput";
@@ -17,6 +18,9 @@ interface ContactFormValues {
 }
 
 const ContactForm = () => {
+    const t = useTranslations('contact.form');
+    const tCommon = useTranslations('common');
+    
     const formik = useFormik<ContactFormValues>({
         initialValues: {
             fullname: "",
@@ -25,13 +29,13 @@ const ContactForm = () => {
             message: "",
         },
         validationSchema: Yup.object({
-            fullname: Yup.string().trim().required("Full name is required"),
+            fullname: Yup.string().trim().required(t('fullnameRequired')),
             email: Yup.string()
                 .trim()
-                .email("Invalid email address")
-                .required("Email is required"),
-            phone: Yup.string().trim().required("Phone number is required"),
-            message: Yup.string().trim().required("Message is required"),
+                .email(t('invalidEmail'))
+                .required(t('emailRequired')),
+            phone: Yup.string().trim().required(t('phoneRequired')),
+            message: Yup.string().trim().required(t('messageRequired')),
         }),
         onSubmit: async (values, { setSubmitting, resetForm }) => {
             try {
@@ -47,13 +51,13 @@ const ContactForm = () => {
                 );
 
                 if (response.ok) {
-                    alert("Message sent successfully!");
+                    alert(t('successMessage'));
                     resetForm();
                 } else {
                     throw new Error("Failed to send message");
                 }
             } catch (error) {
-                alert("Error sending message. Please try again.");
+                alert(t('errorMessage'));
                 console.error("Error:", error);
             } finally {
                 setSubmitting(false);
@@ -89,7 +93,7 @@ const ContactForm = () => {
                         <form onSubmit={formik.handleSubmit} className="h-full">
                             <div className="space-y-4 p-1 md:p-2 lg:p-3">
                                 <FormInput
-                                    label="Fullname"
+                                    label={t('fullname')}
                                     name="fullname"
                                     placeholder="Benyamina Sarah"
                                     value={formik.values.fullname}
@@ -103,7 +107,7 @@ const ContactForm = () => {
                                 />
 
                                 <FormInput
-                                    label="Email Address"
+                                    label={t('email')}
                                     name="email"
                                     type="email"
                                     placeholder="sarah.benyamina@email.com"
@@ -118,7 +122,7 @@ const ContactForm = () => {
                                 />
 
                                 <FormInput
-                                    label="Phone number"
+                                    label={t('phone')}
                                     name="phone"
                                     placeholder="05 0000 00 00"
                                     value={formik.values.phone}
@@ -132,7 +136,7 @@ const ContactForm = () => {
                                 />
 
                                 <FormInput
-                                    label="Message"
+                                    label={t('message')}
                                     name="message"
                                     as="textarea"
                                     placeholder="Tell us more about what you're looking for..."
@@ -149,6 +153,7 @@ const ContactForm = () => {
                             <div className="md:mt-4 mt-0.5">
                                 <SubmitButton
                                     isSubmitting={formik.isSubmitting}
+                                    text={t('submit')}
                                 />
                             </div>
                         </form>

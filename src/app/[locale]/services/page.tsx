@@ -1,7 +1,7 @@
-import { Navigation } from "@/app/services/navigation";
+import { Navigation } from "@/src/app/[locale]/services/navigation";
 import React from "react";
-import { Header } from "@/app/services/header";
-import { PlanCard } from "@/app/services/planCard";
+import { Header } from "@/src/app/[locale]/services/header";
+import { PlanCard } from "@/src/app/[locale]/services/planCard";
 import { Navigation as Navigation_ } from "@/components/layout/Navigation";
 import Footer from "@/components/sections/Footer";
 

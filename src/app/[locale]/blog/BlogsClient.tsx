@@ -6,18 +6,19 @@ import { SearchAndFilter } from "./SearchAndFilter";
 import { Pagination } from "./Pagination";
 import { NewsletterSubscription } from "./NewsletterSubscription";
 import { Blog, Category, blogsApi } from "@/lib/strapi";
+import { useTranslations, useLocale } from "next-intl";
 
 interface BlogsClientProps {
-    // initialFeaturedBlogs: Blog[];
     initialLatestBlogs: Blog[];
     categories: Category[];
 }
 
 export const BlogsClient: React.FC<BlogsClientProps> = ({
-    // initialFeaturedBlogs,
     initialLatestBlogs,
     categories,
 }) => {
+    const t = useTranslations("blog");
+    const locale = useLocale();
     const [blogs, setBlogs] = useState<Blog[]>(initialLatestBlogs);
     // const [featuredBlogs] = useState<Blog[]>(initialFeaturedBlogs);
     const [loading, setLoading] = useState(false);
@@ -40,6 +41,7 @@ export const BlogsClient: React.FC<BlogsClientProps> = ({
                 category: selectedCategory || undefined,
                 tag: selectedTag || undefined,
                 sort: sortBy,
+                locale: locale,
             });
 
             setBlogs(response.data);
@@ -92,45 +94,14 @@ export const BlogsClient: React.FC<BlogsClientProps> = ({
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center md:text-left mb-12">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                            Insights & Stories
+                            {t("title")}
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl">
-                            Discover how storytelling transforms brands and
-                            connects with audiences on a deeper level
+                            {t("description")}
                         </p>
                     </div>
-
-                    {/* Featured Blogs */}
-                    {/*{featuredBlogs.length > 0 && (*/}
-                    {/*    <div className="mb-16">*/}
-                    {/*        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Featured Stories</h2>*/}
-                    {/*        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">*/}
-                    {/*            {featuredBlogs.map((blog) => (*/}
-                    {/*                <BlogCard key={blog.id} blog={blog} variant="featured" />*/}
-                    {/*            ))}*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
                 </div>
             </section>
-
-            {/* Search and Filter Section */}
-            {/*<section className="px-4 md:px-8 pb-8">*/}
-            {/*    <div className="max-w-7xl mx-auto">*/}
-            {/*        <SearchAndFilter*/}
-            {/*            onSearch={handleSearch}*/}
-            {/*            onCategoryFilter={handleCategoryFilter}*/}
-            {/*            onTagFilter={handleTagFilter}*/}
-            {/*            onSort={handleSort}*/}
-            {/*            onClearFilters={clearFilters}*/}
-            {/*            categories={categories}*/}
-            {/*            searchQuery={searchQuery}*/}
-            {/*            selectedCategory={selectedCategory}*/}
-            {/*            selectedTag={selectedTag}*/}
-            {/*            sortBy={sortBy}*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*</section>*/}
 
             {/* Blog Grid */}
             <section className="px-4 md:px-8 pb-16">
@@ -142,12 +113,14 @@ export const BlogsClient: React.FC<BlogsClientProps> = ({
                     ) : blogs.length > 0 ? (
                         <>
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                                {blogs.map((blog) => (
-                                    <BlogCard key={blog.id} blog={blog} />
-                                ))}
+                                {blogs.map((blog) => {
+                                    console.log("blog", blog);
+                                    return (
+                                        <BlogCard key={blog.id} blog={blog} />
+                                    );
+                                })}
                             </div>
 
-                            {/* Pagination */}
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={totalPages}
@@ -157,15 +130,13 @@ export const BlogsClient: React.FC<BlogsClientProps> = ({
                     ) : (
                         <div className="text-center py-12">
                             <p className="text-gray-300 text-lg">
-                                No blogs found. Try adjusting your search or
-                                filters.
+                                {t("noArticles")}
                             </p>
                         </div>
                     )}
                 </div>
             </section>
 
-            {/* Newsletter Subscription */}
             <NewsletterSubscription />
         </>
     );

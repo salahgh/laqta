@@ -7,12 +7,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "@/components/sections/successStories/TestimonialCard";
 import { PaginationDots } from "@/components/sections/successStories/PaginationDots";
 import LetsStartProjectSection from "@/components/sections/LetsStartProjectSection";
+import { useTranslations } from "next-intl";
 
 export const TestimonialsClient = ({
     testimonials,
 }: {
     testimonials: Testimonial[];
 }) => {
+    const t = useTranslations('testimonials');
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -79,14 +81,11 @@ export const TestimonialsClient = ({
     return (
         <div className="relative bg-gray-200 md:pt-20 pt-12 flex flex-col gap-8">
             {/* Header section */}
-
             <div className="text-center px-3 space-y-6 ">
-                <Badge>Testimonials</Badge>
+                <Badge>{t('badge')}</Badge>
 
                 <h1 className="leading-tight text-gray-800">
-                    Success Stories From Our
-                    <br />
-                    Happy Clients
+                    {t('successStoriesTitle')}
                 </h1>
             </div>
             {/* Testimonial carousel container */}
@@ -95,7 +94,7 @@ export const TestimonialsClient = ({
                     onClick={goToPrevious}
                     className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full
                      shadow-lg items-center justify-center hover:bg-gray-50 transition-colors"
-                    aria-label="Previous testimonial"
+                    aria-label={t('previousTestimonial')}
                 >
                     <ChevronLeft className="w-6 h-6 text-gray-600" />
                 </button>
@@ -103,7 +102,7 @@ export const TestimonialsClient = ({
                     onClick={goToNext}
                     className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg items-center
                      justify-center hover:bg-gray-50 transition-colors"
-                    aria-label="Next testimonial"
+                    aria-label={t('nextTestimonial')}
                 >
                     <ChevronRight className="w-6 h-6 text-gray-600" />
                 </button>
@@ -140,23 +139,6 @@ export const TestimonialsClient = ({
                         ))}
                     </div>
                 </div>
-                {/* Mobile navigation buttons */}
-                {/*<div className="md:hidden flex justify-center gap-4 mt-6">*/}
-                {/*    <button*/}
-                {/*        onClick={goToPrevious}*/}
-                {/*        className="flex w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-50 transition-colors"*/}
-                {/*        aria-label="Previous testimonial"*/}
-                {/*    >*/}
-                {/*        <ChevronLeft className="w-5 h-5 text-gray-600" />*/}
-                {/*    </button>*/}
-                {/*    <button*/}
-                {/*        onClick={goToNext}*/}
-                {/*        className="flex w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-50 transition-colors"*/}
-                {/*        aria-label="Next testimonial"*/}
-                {/*    >*/}
-                {/*        <ChevronRight className="w-5 h-5 text-gray-600" />*/}
-                {/*    </button>*/}
-                {/*</div>*/}
             </div>
 
             <PaginationDots
@@ -166,7 +148,7 @@ export const TestimonialsClient = ({
             />
             {/* Swipe indicator for mobile */}
             <div className="md:hidden text-center text-sm text-gray-500 mb-8">
-                ← Swipe to navigate →
+                {t('swipeIndicator')}
             </div>
             <LetsStartProjectSection />
         </div>

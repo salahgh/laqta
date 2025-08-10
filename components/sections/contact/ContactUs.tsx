@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/sections/Footer";
+import { useTranslations } from "next-intl";
 
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProjectInfoStep from "@/components/sections/contact/ProjectInfoStep";
@@ -14,6 +15,7 @@ import { StepperComponent } from "@/components/sections/contact/StepperComponent
 
 const ContactUs = () => {
     const [currentStep, setCurrentStep] = useState(1);
+    const t = useTranslations('contactPage');
 
     const handleGoBack = () => {
         if (currentStep > 1) {
@@ -49,7 +51,7 @@ const ContactUs = () => {
     return (
         <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white space-y-2 py-4">
             {/* Header */}
-            <div className={""}>
+            <div className="">
                 <Navigation></Navigation>
             </div>
 
@@ -62,7 +64,7 @@ const ContactUs = () => {
                     style={{}}
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    <span>Go Back</span>
+                    <span>{t('goBack')}</span>
                 </button>
             </div>
 

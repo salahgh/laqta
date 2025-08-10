@@ -1,21 +1,16 @@
 import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { useTranslations } from "next-intl";
 import "./styles.css";
 
 // Main About Section Component
 const AboutSection = ({
-    badge = "About Leqta",
-    title = "We are LEQTA",
-    description = "A content marketing & film production agency based in Algiers. We serve brands, businesses, and changemakers with purposeful video content that blends creativity and strategy.",
-    primaryButtonText = "Get Started",
-    primaryButtonIcon = <Rocket className="w-4 h-4 ml-2" />,
-    secondaryButtonText = "Learn more",
     illustration,
     className = "",
 }) => {
-    // @ts-ignore
-    // @ts-ignore
+    const t = useTranslations('about');
+    
     return (
         <div className={`relative overflow-hidden ${className} rounded-3xl`}>
             {/* Linear Gradient Background */}
@@ -35,11 +30,11 @@ const AboutSection = ({
                 {/* Content Section */}
                 <div className="space-y-6 flex-1">
                     {/* Badge */}
-                    <div className="items-center justify-center ">
-                        <Badge>{badge}</Badge>
+                    <div className="items-center justify-center">
+                        <Badge>{t('badge')}</Badge>
                     </div>
                     <h2 className="text-black md:text-[46px] text-[40px] leading-tight">
-                        {title.split(" ").map((word, index) => (
+                        {t('title').split(" ").map((word, index) => (
                             <span
                                 key={index}
                                 style={{
@@ -58,7 +53,7 @@ const AboutSection = ({
                     </h2>
                     {/* Description */}
                     <p className="text-secondary-gray leading-relaxed text-responsive-lg">
-                        {description}
+                        {t('description')}
                     </p>
                     {/*Buttons*/}
                     <div className="flex gap-4" style={{ height: 61 }}>
@@ -69,7 +64,7 @@ const AboutSection = ({
                                 rightIcon={<Rocket className="w-4 h-4 ml-2" />}
                                 leftIcon={null}
                             >
-                                {primaryButtonText}
+                                {t('getStarted')}
                             </Button>
                         </div>
                         <div className={"h-12 md:h-16"}>
@@ -79,13 +74,12 @@ const AboutSection = ({
                                 leftIcon={null}
                                 rightIcon={null}
                             >
-                                {secondaryButtonText}
+                                {t('learnMore')}
                             </Button>
                         </div>
                     </div>
                 </div>
                 {/* Illustration Section */}
-
                 <div className="flex justify-center items-center md:max-w-80 lg:max-w-xl">
                     {illustration || (
                         // Fallback illustration if none provided

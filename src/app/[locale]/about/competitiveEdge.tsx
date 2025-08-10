@@ -2,24 +2,27 @@
 import { Clock, Edit, Eye, RefreshCw } from "lucide-react";
 import React from "react";
 import { Badge } from "@/components/ui/Badge";
+import { getTranslations } from "next-intl/server";
 
-export const CompetitiveEdge = () => {
+export const CompetitiveEdge = async () => {
+    const t = await getTranslations('competitiveEdge');
+    
     const advantages = [
         {
             icon: <Edit className="w-6 h-6" />,
-            title: "Creativity with Professionalism",
+            title: t('advantages.creativity'),
         },
         {
             icon: <RefreshCw className="w-6 h-6" />,
-            title: "Resilience & Perseverance",
+            title: t('advantages.resilience'),
         },
         {
             icon: <Eye className="w-6 h-6" />,
-            title: "Attention to Detail",
+            title: t('advantages.attention'),
         },
         {
             icon: <Clock className="w-6 h-6" />,
-            title: "Commitment & Time Management",
+            title: t('advantages.commitment'),
         },
     ];
 
@@ -29,15 +32,13 @@ export const CompetitiveEdge = () => {
         to-blue-100/10 backdrop-blur-sm rounded-3xl border border-gray-200/20 p-4 md:p-8"
         >
             <div className="text-center space-y-4 py-8 flex flex-col items-center md:text-center">
-                <Badge>The Leqta Difference</Badge>
+                <Badge>{t('badge')}</Badge>
 
                 <div className={"w-full flex justify-center"}>
-                    <h2 className="text-white w-1/2">Our Competitive Edge</h2>
+                    <h2 className="text-white w-1/2">{t('title')}</h2>
                 </div>
                 <p className="text-responsive-lg text-secondary-gray max-w-xl">
-                    At Leqta, we blend bold creativity with strategic marketing
-                    know-how. This balance ensures high-performing content with
-                    visual impact.
+                    {t('description')}
                 </p>
             </div>
 

@@ -1,9 +1,11 @@
 import React from "react";
 import { Logo } from "@/components/ui/Logo";
 import EmailSubscriptionForm from "@/components/ui/EmailSubscriptionForm";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
-    // todo button shadows
+    const t = useTranslations('footer');
+    
     return (
         <div className="bg-gray-100">
             {/* Main content area - light gray background */}
@@ -19,14 +21,13 @@ const Footer = () => {
 
                             <div className={"mt-12"}>
                                 <h3 className="font-semibold mb-2 text-body-xl">
-                                    Newsletter
+                                    {t('newsletter')}
                                 </h3>
                                 <p
                                     className=" mb-6"
                                     style={{ fontSize: 16, color: "#D9D9D9" }}
                                 >
-                                    Keep up out latest update, subscribe to our
-                                    newsletter
+                                    {t('newsletterDescription')}
                                 </p>
 
                                 <EmailSubscriptionForm />
@@ -37,7 +38,7 @@ const Footer = () => {
                         <div className={"flex md:flex-col flex-row gap-16"}>
                             <div className="lg:col-span-1">
                                 <h3 className="text-lg font-semibold mb-6">
-                                    Company
+                                    {t('company')}
                                 </h3>
                                 <ul className="space-y-4">
                                     <li>
@@ -45,7 +46,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            About us
+                                            {t('aboutUs')}
                                         </a>
                                     </li>
                                     <li>
@@ -53,7 +54,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Our services
+                                            {t('ourServices')}
                                         </a>
                                     </li>
                                     <li>
@@ -61,7 +62,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Our works
+                                            {t('ourWorks')}
                                         </a>
                                     </li>
                                     <li>
@@ -69,7 +70,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Testimonials
+                                            {t('testimonials')}
                                         </a>
                                     </li>
                                     <li>
@@ -77,7 +78,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Contact us
+                                            {t('contactUs')}
                                         </a>
                                     </li>
                                     <li>
@@ -85,7 +86,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            FAQ
+                                            {t('faq')}
                                         </a>
                                     </li>
                                     <li>
@@ -93,7 +94,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Blog
+                                            {t('blog')}
                                         </a>
                                     </li>
                                 </ul>
@@ -102,7 +103,7 @@ const Footer = () => {
                             {/* Right - Utility Pages */}
                             <div className="lg:col-span-1">
                                 <h3 className="text-lg font-semibold mb-6">
-                                    Utility Pages
+                                    {t('utilityPages')}
                                 </h3>
                                 <ul className="space-y-4">
                                     <li>
@@ -110,7 +111,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Terms & Condition
+                                            {t('termsCondition')}
                                         </a>
                                     </li>
                                     <li>
@@ -118,7 +119,7 @@ const Footer = () => {
                                             href="#"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
-                                            Privacy Policy
+                                            {t('privacyPolicy')}
                                         </a>
                                     </li>
                                 </ul>
@@ -137,7 +138,7 @@ const Footer = () => {
                         style={{ marginTop: -100 }}
                     >
                         <p className="text-gray-400 text-body-md mb-4 md:mb-0">
-                            Copyright © 2025 LEQTA. All Rights Reserved
+                            {t('copyright')}
                         </p>
 
                         {/* Social Media Icons */}

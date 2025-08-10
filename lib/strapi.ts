@@ -98,6 +98,7 @@ console.log(API_BASE);
 async function fetchApi<T>(
     endpoint: string,
     options: RequestInit = {},
+    locale?: string,  // Add optional locale parameter
 ): Promise<T> {
     // const token = await getAuthToken();
     const token = undefined;
@@ -111,7 +112,12 @@ async function fetchApi<T>(
         ...options,
     };
 
-    const response = await fetch(`${API_BASE}${endpoint}`, config);
+    const url = new URL(`${API_BASE}${endpoint}`);
+    if (locale) {
+        url.searchParams.append('locale', locale);
+    }
+
+    const response = await fetch(url.toString(), config);
 
     if (!response.ok) {
         const error: ApiError = await response.json();
@@ -121,15 +127,15 @@ async function fetchApi<T>(
     return response.json();
 }
 
-// Services API
+// Services API - Update getAll method
 export const servicesApi = {
-    // Get all services
     async getAll(params?: {
         page?: number;
         pageSize?: number;
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Service[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -152,14 +158,15 @@ export const servicesApi = {
         const query = searchParams.toString();
         const endpoint = `/services${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Service[]>>(endpoint);
+        return fetchApi<ApiResponse<Service[]>>(endpoint, {}, params?.locale);
     },
 
-    // Get service by ID
+    // Update getById method
     async getById(
         id: number,
         params?: {
             populate?: string;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<Service>> {
         const searchParams = new URLSearchParams();
@@ -168,13 +175,14 @@ export const servicesApi = {
         const query = searchParams.toString();
         const endpoint = `/services/${id}${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Service>>(endpoint);
+        return fetchApi<ApiResponse<Service>>(endpoint, {}, params?.locale);
     },
 
-    // Get featured services
+    // Update getFeatured method
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Service[]>> {
         return this.getAll({
             ...params,
@@ -218,13 +226,13 @@ export interface Work {
 
 // Works API
 export const worksApi = {
-    // Get all works
     async getAll(params?: {
         page?: number;
         pageSize?: number;
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Work[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -247,14 +255,14 @@ export const worksApi = {
         const query = searchParams.toString();
         const endpoint = `/projects${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Work[]>>(endpoint);
+        return fetchApi<ApiResponse<Work[]>>(endpoint, {}, params?.locale);
     },
 
-    // Get work by ID
     async getById(
         id: number,
         params?: {
             populate?: string;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<Work>> {
         const searchParams = new URLSearchParams();
@@ -263,13 +271,13 @@ export const worksApi = {
         const query = searchParams.toString();
         const endpoint = `/works/${id}${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Work>>(endpoint);
+        return fetchApi<ApiResponse<Work>>(endpoint, {}, params?.locale);
     },
 
-    // Get featured works
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Work[]>> {
         return this.getAll({
             ...params,
@@ -297,13 +305,13 @@ export interface Testimonial {
 
 // Testimonials API
 export const testimonialsApi = {
-    // Get all testimonials
     async getAll(params?: {
         page?: number;
         pageSize?: number;
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Testimonial[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -326,14 +334,14 @@ export const testimonialsApi = {
         const query = searchParams.toString();
         const endpoint = `/testimonials${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Testimonial[]>>(endpoint);
+        return fetchApi<ApiResponse<Testimonial[]>>(endpoint, {}, params?.locale);
     },
 
-    // Get testimonial by ID
     async getById(
         id: number,
         params?: {
             populate?: string;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<Testimonial>> {
         const searchParams = new URLSearchParams();
@@ -342,13 +350,13 @@ export const testimonialsApi = {
         const query = searchParams.toString();
         const endpoint = `/testimonials/${id}${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Testimonial>>(endpoint);
+        return fetchApi<ApiResponse<Testimonial>>(endpoint, {}, params?.locale);
     },
 
-    // Get featured testimonials
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Testimonial[]>> {
         return this.getAll({
             ...params,
@@ -374,13 +382,13 @@ export interface FAQ {
 
 // FAQs API
 export const faqsApi = {
-    // Get all FAQs
     async getAll(params?: {
         page?: number;
         pageSize?: number;
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<FAQ[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -403,14 +411,14 @@ export const faqsApi = {
         const query = searchParams.toString();
         const endpoint = `/faqs${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<FAQ[]>>(endpoint);
+        return fetchApi<ApiResponse<FAQ[]>>(endpoint, {}, params?.locale);
     },
 
-    // Get FAQ by ID
     async getById(
         id: number,
         params?: {
             populate?: string;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<FAQ>> {
         const searchParams = new URLSearchParams();
@@ -419,13 +427,13 @@ export const faqsApi = {
         const query = searchParams.toString();
         const endpoint = `/faqs/${id}${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<FAQ>>(endpoint);
+        return fetchApi<ApiResponse<FAQ>>(endpoint, {}, params?.locale);
     },
 
-    // Get featured FAQs
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<FAQ[]>> {
         return this.getAll({
             ...params,
@@ -434,12 +442,12 @@ export const faqsApi = {
         });
     },
 
-    // Get FAQs by category
     async getByCategory(
         category: string,
         params?: {
             page?: number;
             pageSize?: number;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<FAQ[]>> {
         return this.getAll({
@@ -467,13 +475,13 @@ export interface Mission {
 
 // Missions API
 export const missionsApi = {
-    // Get all missions
     async getAll(params?: {
         page?: number;
         pageSize?: number;
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Mission[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -496,14 +504,14 @@ export const missionsApi = {
         const query = searchParams.toString();
         const endpoint = `/missions${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Mission[]>>(endpoint);
+        return fetchApi<ApiResponse<Mission[]>>(endpoint, {}, params?.locale);
     },
 
-    // Get mission by ID
     async getById(
         id: number,
         params?: {
             populate?: string;
+            locale?: string;  // Add locale
         },
     ): Promise<ApiResponse<Mission>> {
         const searchParams = new URLSearchParams();
@@ -512,13 +520,13 @@ export const missionsApi = {
         const query = searchParams.toString();
         const endpoint = `/missions/${id}${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Mission>>(endpoint);
+        return fetchApi<ApiResponse<Mission>>(endpoint, {}, params?.locale);
     },
 
-    // Get featured missions
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;  // Add locale
     }): Promise<ApiResponse<Mission[]>> {
         return this.getAll({
             ...params,
@@ -608,19 +616,18 @@ export interface Tag {
 }
 
 // Updated Blogs API
-// Add this method to the blogsApi object
 export const blogsApi = {
-    // Get blog by slug
-    async getBySlug(slug: string): Promise<ApiResponse<Blog>> {
+    async getBySlug(slug: string, locale?: string): Promise<ApiResponse<Blog>> {
         return fetchApi<ApiResponse<Blog>>(
             `/blogs?filters[slug][$eq]=${slug}&populate=*`,
+            {},
+            locale
         );
     },
 
-    // Get blogs by category
     async getByCategory(
         categorySlug: string,
-        params?: { page?: number; pageSize?: number },
+        params?: { page?: number; pageSize?: number; locale?: string },
     ): Promise<ApiResponse<Blog[]>> {
         const searchParams = new URLSearchParams();
         searchParams.set("filters[category][slug][$eq]", categorySlug);
@@ -635,13 +642,15 @@ export const blogsApi = {
 
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
+            {},
+            params?.locale
         );
     },
 
-    // Get featured blogs
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
+        locale?: string;
     }): Promise<ApiResponse<Blog[]>> {
         const searchParams = new URLSearchParams();
         searchParams.set("filters[featured][$eq]", "true");
@@ -656,10 +665,11 @@ export const blogsApi = {
 
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
+            {},
+            params?.locale
         );
     },
 
-    // Get all blogs with search and filters
     async getAll(params?: {
         page?: number;
         pageSize?: number;
@@ -667,6 +677,7 @@ export const blogsApi = {
         category?: string;
         tag?: string;
         sort?: string;
+        locale?: string;
     }): Promise<ApiResponse<Blog[]>> {
         const searchParams = new URLSearchParams();
         searchParams.set("populate", "*");
@@ -708,13 +719,15 @@ export const blogsApi = {
 
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
+            {},
+            params?.locale
         );
     },
 
-    // Get related blogs
     async getRelated(
         blogId: number,
         limit: number = 3,
+        locale?: string,
     ): Promise<ApiResponse<Blog[]>> {
         const searchParams = new URLSearchParams();
         searchParams.set("filters[id][$ne]", blogId.toString());
@@ -724,30 +737,30 @@ export const blogsApi = {
 
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
+            {},
+            locale
         );
     },
 
-    // 4. Update Strapi API for Better Static Generation
-    
-    // Get all blog slugs for static generation
-    async getAllSlugs(): Promise<ApiResponse<{ slug: string }[]>> {
+    async getAllSlugs(locale?: string): Promise<ApiResponse<{ slug: string }[]>> {
         return fetchApi<ApiResponse<{ slug: string }[]>>(
             `/blogs?fields[0]=slug&pagination[pageSize]=1000`,
+            {},
+            locale
         );
     },
 };
 
 // Categories API
 export const categoriesApi = {
-    async getAll(): Promise<ApiResponse<Category[]>> {
-        return fetchApi<ApiResponse<Category[]>>("/categories?sort=name:asc");
+    async getAll(locale?: string): Promise<ApiResponse<Category[]>> {
+        return fetchApi<ApiResponse<Category[]>>("/categories?sort=name:asc", {}, locale);
     },
 };
 
-// Tags API
 export const tagsApi = {
-    async getAll(): Promise<ApiResponse<Tag[]>> {
-        return fetchApi<ApiResponse<Tag[]>>("/tags?sort=name:asc");
+    async getAll(locale?: string): Promise<ApiResponse<Tag[]>> {
+        return fetchApi<ApiResponse<Tag[]>>("/tags?sort=name:asc", {}, locale);
     },
 };
 
@@ -755,12 +768,13 @@ export const tagsApi = {
 export const newsletterApi = {
     async subscribe(
         email: string,
+        locale?: string,
     ): Promise<{ success: boolean; message: string }> {
         try {
             await fetchApi("/newsletter-subscriptions", {
                 method: "POST",
                 body: JSON.stringify({ data: { email } }),
-            });
+            }, locale);
             return {
                 success: true,
                 message: "Successfully subscribed to newsletter!",

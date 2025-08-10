@@ -3,6 +3,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Badge } from "@/components/ui/Badge";
 import { worksApi, Work, utils } from "@/lib/strapi";
 import { defaultWorks } from "@/components/sections/DefaultWorks";
+import { getTranslations } from "next-intl/server";
 
 interface OurWorksSectionProps {
     badge?: string;
@@ -11,18 +12,22 @@ interface OurWorksSectionProps {
     works?: Work[];
     className?: string;
     fetchFromStrapi?: boolean;
+    locale: string;
 }
 
 // Server-side component with revalidation
 export async function OurWorksSection({
-    badge = "Our Works",
-    title = "Our Works",
-    description = "From powerful brand firms to bold social campaigns," +
-        " creativity with strategy to connect, perform, and inspire. Here's a look at what we've created with our amazing clients.",
+    badge,
+    title,
+    description,
     works: providedWorks,
     className = "",
     fetchFromStrapi = true,
+    locale,
 }: OurWorksSectionProps) {
+    const t = await getTranslations('works');
+    const tNav = await getTranslations('navigation');
+    
     let works: Work[] = [];
 
     // Determine which works to use
@@ -34,6 +39,7 @@ export async function OurWorksSection({
                 populate: "*",
                 sort: "createdAt:desc",
                 pageSize: 10,
+                locale: locale,
             });
 
             works = response.data;
@@ -73,16 +79,16 @@ export async function OurWorksSection({
                 items-center gap-2 md:gap-6 lg:gap-5 xl:gap-6 md:pb-8"
                 >
                     <Badge variant="default" className="">
-                        {badge}
+                        {badge || t('badge')}
                     </Badge>
 
-                    <h2 className="text-gray-900">{title}</h2>
+                    <h2 className="text-gray-900">{title || t('title')}</h2>
 
                     <p
                         className="text-secondary-gray text-responsive-lg text-justify px-4 md:px-10 md:text-center
                     lg:px-24 xl:px-32 2xl:px-40 max-w-4xl"
                     >
-                        {description}
+                        {description || t('description')}
                     </p>
                 </div>
 
@@ -109,7 +115,7 @@ export async function OurWorksSection({
                                 title={workData?.title}
                                 description={workData?.description}
                                 metrics={workData?.metrics || ""}
-                                ctaText={workData?.cta_text || "Learn more"}
+                                ctaText={workData?.cta_text || tNav('learnMore')}
                                 imageUrl={imageUrl}
                                 imageAlt={imageAlt}
                             />

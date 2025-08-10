@@ -1,0 +1,157 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contactez-nous",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  },
+  "hero": {
+    "title": "Où la Créativité Rencontre la Stratégie",
+    "description": "Leqta est une entreprise de marketing de contenu et de production complète basée à Alger. Nous combinons narration, stratégie et excellence visuelle pour autonomiser votre marque avec du contenu vidéo percutant.",
+    "getStarted": "Commencer",
+    "contactUs": "Contactez-nous"
+  },
+  "about": {
+    "badge": "À propos de Leqta",
+    "title": "Nous sommes LEQTA",
+    "description": "Une agence de marketing de contenu et de production cinématographique basée à Alger. Nous servons les marques, les entreprises et les acteurs du changement avec du contenu vidéo significatif qui mélange créativité et stratégie.",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  },
+  "aboutHero": {
+    "badge": "À propos de Leqta",
+    "title": "Nous sommes LEQTA",
+    "description": "Une agence de marketing de contenu et de production cinématographique basée à Alger. Nous servons les marques, les entreprises et les acteurs du changement avec du contenu vidéo significatif qui mélange créativité et stratégie.",
+    "getStarted": "Commencer",
+    "contactUs": "Nous contacter"
+  },
+  "services": {
+    "badge": "Nos Services",
+    "title": "Ce Que Nous Faisons",
+    "description": "Nous offrons des solutions numériques complètes pour aider votre entreprise à croître"
+  },
+  "works": {
+    "badge": "Nos Travaux",
+    "title": "Nos Travaux",
+    "description": "Des entreprises de marque puissantes aux campagnes sociales audacieuses, la créativité avec la stratégie pour connecter, performer et inspirer. Voici un aperçu de ce que nous avons créé avec nos clients extraordinaires."
+  },
+  "perfectPartner": {
+    "badge": "Votre Partenaire Parfait",
+    "title": "Croissance Constante en Seulement 3 Étapes Simples",
+    "description": "Nous suivons un processus structuré et basé sur les données pour garantir que votre stratégie marketing offre une croissance constante et des résultats mesurables."
+  },
+  "competitiveEdge": {
+    "badge": "La Différence Leqta",
+    "title": "Notre Avantage Concurrentiel",
+    "description": "Chez Leqta, nous mélangeons la créativité audacieuse avec le savoir-faire marketing stratégique. Cet équilibre garantit un contenu performant avec un impact visuel.",
+    "advantages": {
+      "creativity": "Créativité avec Professionnalisme",
+      "resilience": "Résilience et Persévérance",
+      "attention": "Attention aux Détails",
+      "commitment": "Engagement et Gestion du Temps"
+    }
+  },
+  "testimonials": {
+    "badge": "Témoignages",
+    "title": "Ce Que Disent Nos Clients",
+    "description": "Ne nous croyez pas sur parole",
+    "successStoriesTitle": "Histoires de Succès de Nos Clients Satisfaits",
+    "swipeIndicator": "← Glissez pour naviguer →",
+    "loadingText": "Chargement des témoignages...",
+    "previousTestimonial": "Témoignage précédent",
+    "nextTestimonial": "Témoignage suivant"
+  },
+  "faq": {
+    "badge": "Questions?",
+    "title": "Questions Fréquemment Posées",
+    "description": "Trouvez des réponses aux questions courantes sur nos services de marketing par abonnement."
+  },
+  "contact": {
+    "badge": "Contactez-nous",
+    "title": "Commençons Votre Projet",
+    "description": "Prêt à donner vie à votre vision ?",
+    "getInTouch": "Entrer en Contact",
+    "connectBadge": "Connectons-nous",
+    "contactTitle": "Entrer en Contact",
+    "contactDescription": "Que vous ayez un projet en tête ou une question sur nos services, nous aimerions avoir de vos nouvelles. Remplissez le formulaire et nous vous répondrons dans les 24 heures.",
+    "form": {
+      "fullname": "Nom complet",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Message",
+      "submit": "Envoyer le Message",
+      "required": "requis",
+      "invalidEmail": "Adresse email invalide",
+      "fullnameRequired": "Le nom complet est requis",
+      "emailRequired": "L'email est requis",
+      "phoneRequired": "Le numéro de téléphone est requis",
+      "messageRequired": "Le message est requis",
+      "successMessage": "Message envoyé avec succès !",
+      "errorMessage": "Erreur lors de l'envoi du message. Veuillez réessayer."
+    },
+    "contactPage": {
+      "goBack": "Retour",
+      "stepper": {
+        "personalInfos": "Infos personnelles",
+        "personalInfosDescription": "Pour mieux vous connaître",
+        "projectInfos": "Infos du projet",
+        "projectInfosDescription": "Laissez-nous comprendre votre projet",
+        "paymentInfos": "Infos de paiement",
+        "paymentInfosDescription": "Veuillez remplir vos infos de paiement pour commencer"
+      }
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Quelque chose s'est mal passé",
+    "success": "Succès!",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "retry": "Réessayer",
+    "readMore": "Lire la suite",
+    "viewAll": "Voir tout"
+  },
+  "blog": {
+    "title": "Insights & Histoires",
+    "description": "Découvrez comment la narration transforme les marques et se connecte avec les audiences à un niveau plus profond",
+    "featuredStories": "Histoires en vedette",
+    "latestArticles": "Derniers articles",
+    "allArticles": "Tous les articles",
+    "allArticlesDescription": "Explorez notre collection complète d'insights et d'histoires",
+    "viewAllArticles": "Voir tous les articles",
+    "noArticles": "Aucun blog disponible pour le moment.",
+    "relatedArticles": "Articles connexes",
+    "tags": "Tags:",
+    "minRead": "min de lecture",
+    "views": "vues",
+    "articleNotFound": "Article non trouvé - LAQTA",
+    "articleNotFoundDescription": "L'article demandé n'a pas pu être trouvé.",
+    "allArticlesTitle": "Tous les articles - LAQTA",
+    "allArticlesMetaDescription": "Parcourez tous nos articles avec des options de recherche et de filtrage",
+    "blogTitle": "Insights & Histoires - LAQTA",
+    "blogMetaDescription": "Découvrez comment la narration transforme les marques et se connecte avec les audiences à un niveau plus profond"
+  },
+  "footer": {
+    "newsletter": "Newsletter",
+    "newsletterDescription": "Restez au courant de nos dernières mises à jour, abonnez-vous à notre newsletter",
+    "company": "Entreprise",
+    "aboutUs": "À propos de nous",
+    "ourServices": "Nos services",
+    "ourWorks": "Nos travaux",
+    "testimonials": "Témoignages",
+    "contactUs": "Contactez-nous",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "utilityPages": "Pages Utilitaires",
+    "termsCondition": "Termes et Conditions",
+    "privacyPolicy": "Politique de Confidentialité",
+    "copyright": "Copyright © 2025 LEQTA. Tous Droits Réservés"
+  }
+}

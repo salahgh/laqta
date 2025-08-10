@@ -3,11 +3,13 @@ import FAQSection from "./FAQSection"; // Your async FAQ component
 
 interface FAQSectionWrapperProps {
     loadingComponent?: React.ReactNode;
+    locale: string;
 }
 
 // Sync wrapper for FAQSection
 export const FAQSectionWrapper: React.FC<FAQSectionWrapperProps> = ({
     loadingComponent,
+    locale,
 }) => {
     const defaultLoadingComponent = (
         <div className="py-16 flex justify-center items-center">
@@ -19,7 +21,7 @@ export const FAQSectionWrapper: React.FC<FAQSectionWrapperProps> = ({
     return (
         <Suspense fallback={loadingComponent || defaultLoadingComponent}>
             {/* @ts-expect-error Server Component */}
-            <FAQSection />
+            <FAQSection locale={locale} />
         </Suspense>
     );
 };
