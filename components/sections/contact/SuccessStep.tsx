@@ -2,10 +2,13 @@
 
 import React from "react";
 import { CheckCircle, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
 
 const SuccessStep = () => {
+    const t = useTranslations();
+    
     const handleGoHome = () => {
         // Navigate to main page in real implementation
         console.log("Navigating to main page...");
@@ -36,7 +39,7 @@ const SuccessStep = () => {
                         fontWeight: "700",
                     }}
                 >
-                    Submitted!
+                    {t('contactPage.success.title')}
                 </h1>
 
                 <p
@@ -47,7 +50,7 @@ const SuccessStep = () => {
                         lineHeight: "1.6",
                     }}
                 >
-                    Form has been Submitted successfully
+                    {t('contactPage.success.description')}
                 </p>
             </div>
 
@@ -57,19 +60,19 @@ const SuccessStep = () => {
                     <div className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                         <span className="text-slate-300">
-                            Personal information received
+                            {t('contactPage.success.personalInfoSubmitted')}
                         </span>
                     </div>
                     <div className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                         <span className="text-slate-300">
-                            Project details recorded
+                            {t('contactPage.success.companyInfoSubmitted')}
                         </span>
                     </div>
                     <div className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                         <span className="text-slate-300">
-                            Payment information secured
+                            {t('contactPage.success.socialMediaSubmitted')}
                         </span>
                     </div>
                 </div>
@@ -78,14 +81,14 @@ const SuccessStep = () => {
             {/* Next Steps */}
             <div className="bg-blue-900/30 backdrop-blur-sm rounded-xl p-6 border border-blue-700/50">
                 <h3 className="text-lg font-semibold text-blue-200 mb-3">
-                    What happens next?
+                    {t('contactPage.success.nextStepsTitle')}
                 </h3>
                 <div className="space-y-2 text-left text-sm text-blue-100">
                     <p>
-                        • Our team will review your submission within 24 hours
+                        • {t('contactPage.success.reviewSubmission')}
                     </p>
-                    <p>• You'll receive a confirmation email shortly</p>
-                    <p>• We'll contact you to schedule a discovery call</p>
+                    <p>• {t('contactPage.success.confirmationEmail')}</p>
+                    <p>• {t('contactPage.success.scheduleCall')}</p>
                 </div>
             </div>
 
@@ -107,13 +110,13 @@ const SuccessStep = () => {
                         fontWeight: "600",
                     }}
                 >
-                    Go Back to Main Page
+                    {t('contactPage.buttons.goBackToMainPage')}
                 </Button>
             </div>
 
             {/* Reference ID */}
             <div className="text-xs text-slate-500">
-                Reference ID: #LEQTA-
+                {t('contactPage.success.referenceId')} #LEQTA-
                 {Math.random().toString(36).substr(2, 9).toUpperCase()}
             </div>
         </div>

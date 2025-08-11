@@ -19,22 +19,22 @@ export async function generateStaticParams() {
     try {
         const response = await blogsApi.getAll({ pageSize: 100 });
         const blogs = response.data || [];
-        
-        const locales = ['en', 'ar', 'fr'];
+
+        const locales = ["en", "ar", "fr"];
         const params = [];
-        
+
         for (const locale of locales) {
             for (const blog of blogs) {
                 params.push({
                     locale,
-                    slug: blog.slug
+                    slug: blog.slug,
                 });
             }
         }
-        
+
         return params;
     } catch (error) {
-        console.error('Error generating static params:', error);
+        console.error("Error generating static params:", error);
         return [];
     }
 }
@@ -71,11 +71,6 @@ export async function generateMetadata({ params }: BlogPageProps) {
         openGraph: {
             title: blog.title,
             description: blog.excerpt,
-            images: blog.featured_image
-                ? [
-                      `${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.featured_image.url}`,
-                  ]
-                : [],
         },
     };
 }

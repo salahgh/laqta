@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export const ActionButtons = ({
     handleGoBack,
-    handeGoNext,
     currentStep,
     totalSteps,
     isSubmitting,
+    formId
 }) => {
+    const t = useTranslations('contactPage.buttons');
+    
     return (
         <div className={"flex w-full justify-end items-center gap-4 h-12"}>
             <Button
@@ -18,18 +21,18 @@ export const ActionButtons = ({
                 rightIcon={null}
                 onClick={handleGoBack}
             >
-                Go Back
+                {t('goBack')}
             </Button>
 
             <Button
                 type="submit"
+                form={formId}
                 variant="primary"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
                 leftIcon={null}
                 disabled={isSubmitting}
-                onClick={handeGoNext}
             >
-                Next {currentStep}/{totalSteps}
+                {currentStep === totalSteps ? t('submit') : t('next')} {currentStep}/{totalSteps}
             </Button>
         </div>
     );

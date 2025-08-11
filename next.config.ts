@@ -10,6 +10,16 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     output: "standalone",
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'nmgsempbczwwefyzsofb.supabase.co',
+                port: '',
+                pathname: '/storage/v1/object/public/**',
+            },
+        ],
+    },
 };
 
 export default withNextIntl(nextConfig);
