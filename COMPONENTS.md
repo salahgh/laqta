@@ -49,7 +49,7 @@ This document provides detailed information about the components used in the Laq
 
 ### Navbar
 
-**File Path**: `components/layout/Navbar.tsx`
+
 
 **Description**: A simpler navigation bar with links to different sections of the website.
 
@@ -380,7 +380,7 @@ This document provides detailed information about the components used in the Laq
 
 1. **Standardize Component File Extensions**: Convert all components to TypeScript (TSX) for better type safety.
 
-2. **Consolidate Navigation Components**: Merge `Navbar.tsx` and `Navigation.jsx` into a single component.
+2. **Consolidate Navigation Components**:  and `Navigation.jsx` into a single component.
 
 3. **Implement Design System**: Fully implement the design token system across all components.
 

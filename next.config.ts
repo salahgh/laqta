@@ -1,5 +1,7 @@
 import createNextIntlPlugin from "next-intl/plugin";
 
+const withNextIntl = createNextIntlPlugin();
+
 const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
@@ -10,5 +12,4 @@ const nextConfig = {
     output: "standalone",
 };
 
-const withNextIntl = createNextIntlPlugin();
 export default withNextIntl(nextConfig);

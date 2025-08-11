@@ -29,7 +29,7 @@ This document outlines the recommended enhancements for the Laqta project, organ
 
 #### 1.2 Consolidate Navigation Components
 
-**Description**: Merge `Navbar.tsx` and `Navigation.jsx` into a single component to reduce duplication and improve maintainability.
+**Description**:  and `Navigation.jsx` into a single component to reduce duplication and improve maintainability.
 
 **Tasks**:
 - Analyze both components to identify common functionality

@@ -10,47 +10,52 @@ import { getTranslations } from "next-intl/server";
 // Add static generation with revalidation
 export const revalidate = 3600; // 1 hour
 
+// Fix interface to include both slug and locale
 interface BlogPageProps {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ locale: string; slug: string }>;
 }
 
-// Add this function to generate static params for all blog articles
-export async function generateStaticParams({
-    params,
-}: {
-    params: Promise<{ locale: string }>;
-}) {
-    const { locale } = await params;
-    
+export async function generateStaticParams() {
     try {
-        // Fetch all blog slugs for static generation
-        const response = await blogsApi.getAll({
-            locale,
-            pageSize: 1000, // Get all articles
-            fields: ['slug'],
-        });
+        const response = await blogsApi.getAll({ pageSize: 100 });
+        const blogs = response.data || [];
         
-        return response.data.map((blog: any) => ({
-            slug: blog.slug,
-        }));
+        const locales = ['en', 'ar', 'fr'];
+        const params = [];
+        
+        for (const locale of locales) {
+            for (const blog of blogs) {
+                params.push({
+                    locale,
+                    slug: blog.slug
+                });
+            }
+        }
+        
+        return params;
     } catch (error) {
-        console.error('Error generating static params for blog articles:', error);
+        console.error('Error generating static params:', error);
         return [];
     }
 }
 
-async function fetchBlogBySlug(slug: string): Promise<Blog | null> {
+// Fix fetchBlogBySlug to include locale
+async function fetchBlogBySlug(
+    slug: string,
+    locale: string,
+): Promise<Blog | null> {
     try {
-        const response = await blogsApi.getBySlug(slug);
+        const response = await blogsApi.getBySlug(slug, locale);
         return response.data[0] || null;
     } catch (error) {
         return null;
     }
 }
 
+// Fix generateMetadata to use both slug and locale
 export async function generateMetadata({ params }: BlogPageProps) {
     const { slug, locale } = await params;
-    const blog = await fetchBlogBySlug(slug);
+    const blog = await fetchBlogBySlug(slug, locale);
     const t = await getTranslations({ locale, namespace: "blog" });
 
     if (!blog) {
@@ -75,19 +80,22 @@ export async function generateMetadata({ params }: BlogPageProps) {
     };
 }
 
+// Fix BlogArticlePage component to use both slug and locale
 const BlogArticlePage = async ({ params }: BlogPageProps) => {
-    const { slug } = await params;
+    const { slug, locale } = await params;
 
-    const blog = await fetchBlogBySlug(slug);
+    const blog = await fetchBlogBySlug(slug, locale);
 
     if (!blog) {
         notFound();
     }
 
-    // Fetch related blogs
+    // Fetch related blogs with locale
     let relatedBlogs: Blog[] = [];
     try {
-        const relatedResponse = await blogsApi.getRelated(blog.id, 3);
+        const relatedResponse = await blogsApi.getRelated(blog.id, 3, {
+            locale,
+        });
         relatedBlogs = relatedResponse.data;
     } catch (error) {
         console.error("Failed to fetch related blogs:", error);

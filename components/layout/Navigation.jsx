@@ -14,14 +14,14 @@ export const Navigation = ({ className = "" }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
-    const t = useTranslations('navigation');
+    const t = useTranslations("navigation");
 
     const navItems = [
-        { label: t('home'), href: "/" },
-        { label: t('about'), href: "/about" },
-        { label: t('services'), href: "/services" },
-        { label: t('blog'), href: "/blog" },
-        { label: t('contact'), href: "/contact" },
+        { label: t("home"), href: "/" },
+        { label: t("about"), href: "/about" },
+        { label: t("services"), href: "/services" },
+        { label: t("blog"), href: "/blog" },
+        { label: t("contact"), href: "/contact" },
     ];
 
     // Function to check if a nav item is active
@@ -117,12 +117,12 @@ export const Navigation = ({ className = "" }) => {
                                             `}
                                         >
                                             {item.label}
-                                            {isActive && (
-                                                <div className="hidden absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse" />
-                                            )}
+                                            {/*{isActive && (*/}
+                                            {/*    <div className="hidden absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse" />*/}
+                                            {/*)}*/}
                                         </NavLink>
                                         {isActive && (
-                                            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full animate-bounce" />
+                                            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full animate-bounce" />
                                         )}
                                     </div>
                                 );
@@ -137,7 +137,7 @@ export const Navigation = ({ className = "" }) => {
                             rightIcon={<Rocket className="ml-2 h-4 w-4" />}
                             className=""
                         >
-                            {t('getStarted')}
+                            {t("getStarted")}
                         </Button>
                     </div>
                 </div>
@@ -175,7 +175,7 @@ export const Navigation = ({ className = "" }) => {
                             rightIcon={<Rocket className="ml-1 h-3 w-3" />}
                             className=""
                         >
-                            {t('getStarted')}
+                            {t("getStarted")}
                         </Button>
                     </div>
                 </div>
@@ -268,7 +268,7 @@ export const Navigation = ({ className = "" }) => {
                                 rightIcon={<Rocket className="ml-2 h-4 w-4" />}
                                 onClick={closeDrawer}
                             >
-                                {t('getStarted')}
+                                {t("getStarted")}
                             </Button>
                         </div>
                     </div>

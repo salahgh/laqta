@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Blog } from "@/lib/strapi";
@@ -8,6 +8,107 @@ import { BlogCard } from "../../BlogCard";
 import { SocialShare } from "../../SocialShare";
 import { ReadingProgress } from "./ReadingProgress";
 import { useTranslations } from "next-intl";
+
+// New Gallery Component
+const BlogGallery: React.FC<{ gallery: Blog['gallery'] }> = ({ gallery }) => {
+    const [selectedImage, setSelectedImage] = useState<number | null>(null);
+    
+    if (!gallery || gallery.length === 0) return null;
+    
+    return (
+        <div className="my-12">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                </svg>
+                Gallery ({gallery.length} images)
+            </h3>
+            
+            {/* Gallery Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {gallery.map((image, index) => (
+                    <div 
+                        key={image.id} 
+                        className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                        onClick={() => setSelectedImage(index)}
+                    >
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${image.url}`}
+                            alt={image.alternativeText || `Gallery image ${index + 1}`}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            {/* Lightbox Modal */}
+            {selectedImage !== null && (
+                <div 
+                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <div className="relative max-w-4xl max-h-full">
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${gallery[selectedImage].url}`}
+                            alt={gallery[selectedImage].alternativeText || `Gallery image ${selectedImage + 1}`}
+                            width={gallery[selectedImage].width}
+                            height={gallery[selectedImage].height}
+                            className="max-w-full max-h-full object-contain"
+                        />
+                        <button 
+                            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        
+                        {/* Navigation */}
+                        {gallery.length > 1 && (
+                            <>
+                                <button 
+                                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(selectedImage > 0 ? selectedImage - 1 : gallery.length - 1);
+                                    }}
+                                >
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button 
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(selectedImage < gallery.length - 1 ? selectedImage + 1 : 0);
+                                    }}
+                                >
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
+                        
+                        {/* Image counter */}
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                            {selectedImage + 1} / {gallery.length}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
 
 interface BlogArticleClientProps {
     blog: Blog;
@@ -31,7 +132,6 @@ export const BlogArticle: React.FC<BlogArticleClientProps> = ({
     return (
         <div className={"px-40 rounded-2xl space-y-8"}>
             <ReadingProgress />
-            {/*/!* Reduced top padding and optimized container *!/*/}
             <div className="text-gray-800 bg-gray-100 rounded-2xl">
                 {/* Article Header with enhanced styling */}
                 <div className="">
@@ -174,6 +274,10 @@ export const BlogArticle: React.FC<BlogArticleClientProps> = ({
                                 }}
                             />
                         </div>
+                        
+                        {/* Gallery Section */}
+                        <BlogGallery gallery={blog.gallery} />
+                        
                         {blog.tags && blog.tags.length > 0 && (
                             <div className="mt-8 pt-6 border-t border-gray-200">
                                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">

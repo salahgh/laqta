@@ -19,7 +19,7 @@ interface ServicesSectionProps {
 async function getServices(locale: string): Promise<Service[]> {
     try {
         const response = await servicesApi.getAll({
-            populate: "*",
+            populate: "featured_image", // Make sure to populate the featured_image
             pageSize: 10,
             locale: locale,
         });
@@ -52,6 +52,13 @@ const transformStrapiService = (service: Service) => ({
     gradientFrom: service.gradientFrom,
     gradientTo: service.gradientTo,
     icon: getIconComponent(service.icon),
+    // Add featured_image with full URL
+    featured_image: service.featured_image ? {
+        ...service.featured_image,
+        url: service.featured_image.url.startsWith('http') 
+            ? service.featured_image.url 
+            : `${process.env.NEXT_PUBLIC_STRAPI_URL_2}${service.featured_image.url}`
+    } : null,
 });
 
 // Main Services Section Component - Server-side with revalidation
@@ -127,6 +134,7 @@ export default async function ServicesSection({
                                 gradientFrom={service.gradientFrom}
                                 gradientTo={service.gradientTo}
                                 icon={service.icon}
+                                featured_image={service.featured_image}
                                 className="h-full"
                             />
                         </div>

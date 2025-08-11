@@ -204,21 +204,41 @@ export const utils = {
 // Works/Projects interface
 export interface Work {
     id: number;
+    documentId?: string;
     title: string;
+    slug?: string;
     description: string;
     category: string;
     metrics?: string;
     cta_text?: string;
-    image_position?: "left" | "right";
+    ctaText?: string;
+    imagePosition?: "left" | "right";
     featured?: boolean;
-    image?: {
-        data?: {
-            attributes: {
-                url: string;
-                alternativeText?: string;
-            };
-        };
+    // Updated featured_image structure to match API documentation
+    featured_image?: {
+        id?: number;
+        documentId?: string;
+        name?: string;
+        alternativeText?: string;
+        caption?: string;
+        width?: number;
+        height?: number;
+        formats?: any;
+        hash?: string;
+        ext?: string;
+        mime?: string;
+        size?: number;
+        url: string;
+        previewUrl?: string;
+        provider?: string;
+        provider_metadata?: any;
+        related?: Array<{
+            id: number;
+            documentId: string;
+        }>;
+        folder?: any;
     };
+
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
@@ -589,6 +609,26 @@ export interface Blog {
         width?: number;
         height?: number;
     };
+    // New fields from updated API
+    featured_image_overlay?: {
+        id: number;
+        documentId: string;
+        url: string;
+        alternativeText?: string;
+        width?: number;
+        height?: number;
+    };
+    gallery?: Array<{
+        id: number;
+        documentId: string;
+        name: string;
+        alternativeText?: string;
+        caption?: string;
+        width: number;
+        height: number;
+        url: string;
+        previewUrl?: string;
+    }>;
 }
 
 // Category interface
@@ -616,10 +656,11 @@ export interface Tag {
 }
 
 // Updated Blogs API
+// Ensure these methods support locale parameter
 export const blogsApi = {
     async getBySlug(slug: string, locale?: string): Promise<ApiResponse<Blog>> {
         return fetchApi<ApiResponse<Blog>>(
-            `/blogs?filters[slug][$eq]=${slug}&populate=*`,
+            `/blogs?filters[slug][$eq]=${slug}&populate[0]=featured_image&populate[1]=featured_image_overlay&populate[2]=gallery&populate[3]=category&populate[4]=author.avatar&populate[5]=tags`,
             {},
             locale
         );

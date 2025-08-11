@@ -37,19 +37,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
             <div
                 className={`flex gap-3 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 ${
                     isLeftImage ? "lg:flex-row" : "lg:flex-row-reverse"
-                } flex-col`}
+                } flex-col lg:items-center`}
             >
-                {/* Project Image */}
-                <div className="flex w-full lg:w-auto justify-center items-center">
+                {/* Project Image - Updated to be square and 30% width */}
+                <div className="flex w-full lg:w-[30%] justify-center items-center flex-shrink-0">
                     <img
                         src={imageUrl}
                         alt={imageAlt}
-                        className="w-full rounded-lg sm:rounded-xl object-cover md:w-2/3 lg:w-full aspect-square"
+                        className="w-full max-w-sm lg:max-w-none rounded-lg sm:rounded-xl object-cover aspect-square"
                     />
                 </div>
 
-                {/* Project Content */}
-                <div className="flex-1 lg:w-3/5 xl:w-1/2 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+                {/* Project Content - Updated to take remaining 70% width */}
+                <div className="flex-1 lg:w-[70%] space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
                     <Badge variant="compact" className="">
                         {category}
                     </Badge>

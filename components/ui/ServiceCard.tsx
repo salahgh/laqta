@@ -1,4 +1,4 @@
-// Service Card Component - Exact replica
+// Service Card Component - Updated to support featured_image background with gradient overlay
 import { ChartColumnBig } from "lucide-react";
 
 export const ServiceCard = (props) => {
@@ -11,9 +11,34 @@ export const ServiceCard = (props) => {
         iconBg = "rgba(255,255,255,0.2)",
         className = "",
         icon = <ChartColumnBig />,
+        featured_image = null, // New prop for featured image
     } = props;
 
-    // todo display good illustrations
+    // Determine background style - always include image if available
+    const getBackgroundStyle = () => {
+        if (featured_image?.url) {
+            return {
+                backgroundImage: `url(${featured_image.url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            };
+        }
+        return {
+            background: `linear-gradient(0deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
+        };
+    };
+
+    // Generate gradient overlay style - transparent black at bottom, gradientTo at top
+    const getGradientOverlay = () => {
+        if (featured_image?.url && gradientTo) {
+            return {
+                background: `linear-gradient(0deg, rgba(0,0,0,1) 0%, ${gradientTo} 100%)`,
+                opacity: 0.8, // Adjust opacity to blend with image
+            };
+        }
+        return {};
+    };
 
     return (
         <div
@@ -25,12 +50,18 @@ export const ServiceCard = (props) => {
         >
             <div
                 className={"relative rounded-lg h-full w-full p-6"}
-                style={{
-                    background: `linear-gradient(0deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
-                }}
+                style={getBackgroundStyle()}
             >
+                {/* Gradient overlay - applied on top of image when both are present */}
+                {featured_image?.url && gradientTo && (
+                    <div 
+                        className="absolute inset-0 rounded-lg" 
+                        style={getGradientOverlay()}
+                    ></div>
+                )}
+
                 {/* Dark overlay for better text readability */}
-                <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+                <div className={`absolute inset-0 ${featured_image?.url ? 'bg-black bg-opacity-30' : 'bg-black bg-opacity-20'}`}></div>
 
                 {/* Content */}
                 <div className="relative z-10 h-full flex flex-col">

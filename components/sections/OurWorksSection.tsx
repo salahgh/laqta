@@ -36,7 +36,7 @@ export async function OurWorksSection({
     } else if (fetchFromStrapi) {
         try {
             const response = await worksApi.getAll({
-                populate: "*",
+                populate: "featured_image", // Make sure to populate the featured_image
                 sort: "createdAt:desc",
                 pageSize: 10,
                 locale: locale,
@@ -96,26 +96,32 @@ export async function OurWorksSection({
                 <div className="space-y-2 sm:space-y-4 md:space-y-6 lg:space-y-12 xl:space-y-16 flex flex-col">
                     {works.map((work, index) => {
                         const workData = work;
-                        const imageUrl = workData?.image?.data?.attributes?.url
-                            ? utils.getFileUrl(
-                                  workData?.image?.data.attributes.url,
-                              )
-                            : "/images/workImage.jpg";
-                        const imageAlt =
-                            workData?.image?.data?.attributes
-                                ?.alternativeText || workData?.title;
+                        
+                        // Updated image handling to prioritize featured_image
+                        let imageUrl = "/images/workImage.jpg"; // default fallback
+                        let imageAlt = workData?.title || "Project image";
+                        
+                        if (workData?.featured_image?.url) {
+                            // Use the new featured_image structure
+                            imageUrl = utils.getFileUrl(workData.featured_image.url);
+                            imageAlt = workData.featured_image.alternativeText || workData.title;
+                        } else if (workData?.image?.data?.attributes?.url) {
+                            // Fallback to old image structure for backward compatibility
+                            imageUrl = utils.getFileUrl(workData.image.data.attributes.url);
+                            imageAlt = workData.image.data.attributes.alternativeText || workData.title;
+                        }
 
                         return (
                             <ProjectCard
                                 key={work.id || index}
                                 imagePosition={
-                                    workData?.image_position || "left"
+                                    workData?.imagePosition || workData?.image_position || "left"
                                 }
                                 category={workData?.category}
                                 title={workData?.title}
                                 description={workData?.description}
                                 metrics={workData?.metrics || ""}
-                                ctaText={workData?.cta_text || tNav('learnMore')}
+                                ctaText={workData?.ctaText || workData?.cta_text || tNav('learnMore')}
                                 imageUrl={imageUrl}
                                 imageAlt={imageAlt}
                             />

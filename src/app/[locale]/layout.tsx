@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Starter with modern App Router",
 };
 
+
 // Add this function for static generation
 export async function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
