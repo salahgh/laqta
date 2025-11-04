@@ -88,9 +88,7 @@ const BlogArticlePage = async ({ params }: BlogPageProps) => {
     // Fetch related blogs with locale
     let relatedBlogs: Blog[] = [];
     try {
-        const relatedResponse = await blogsApi.getRelated(blog.id, 3, {
-            locale,
-        });
+        const relatedResponse = await blogsApi.getRelated(blog.id, 3, locale);
         relatedBlogs = relatedResponse.data;
     } catch (error) {
         console.error("Failed to fetch related blogs:", error);
