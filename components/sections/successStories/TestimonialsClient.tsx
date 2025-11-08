@@ -14,7 +14,7 @@ export const TestimonialsClient = ({
 }: {
     testimonials: Testimonial[];
 }) => {
-    const t = useTranslations('testimonials');
+    const t = useTranslations("testimonials");
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -82,10 +82,10 @@ export const TestimonialsClient = ({
         <div className="relative bg-gray-200 md:pt-20 pt-12 flex flex-col gap-8">
             {/* Header section */}
             <div className="text-center px-3 space-y-6 ">
-                <Badge>{t('badge')}</Badge>
+                <Badge>{t("badge")}</Badge>
 
                 <h1 className="leading-tight text-gray-800">
-                    {t('successStoriesTitle')}
+                    {t("successStoriesTitle")}
                 </h1>
             </div>
             {/* Testimonial carousel container */}
@@ -94,7 +94,7 @@ export const TestimonialsClient = ({
                     onClick={goToPrevious}
                     className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full
                      shadow-lg items-center justify-center hover:bg-gray-50 transition-colors"
-                    aria-label={t('previousTestimonial')}
+                    aria-label={t("previousTestimonial")}
                 >
                     <ChevronLeft className="w-6 h-6 text-gray-600" />
                 </button>
@@ -102,7 +102,7 @@ export const TestimonialsClient = ({
                     onClick={goToNext}
                     className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg items-center
                      justify-center hover:bg-gray-50 transition-colors"
-                    aria-label={t('nextTestimonial')}
+                    aria-label={t("nextTestimonial")}
                 >
                     <ChevronRight className="w-6 h-6 text-gray-600" />
                 </button>
@@ -148,7 +148,7 @@ export const TestimonialsClient = ({
             />
             {/* Swipe indicator for mobile */}
             <div className="md:hidden text-center text-sm text-gray-500 mb-8">
-                {t('swipeIndicator')}
+                {t("swipeIndicator")}
             </div>
             <LetsStartProjectSection />
         </div>

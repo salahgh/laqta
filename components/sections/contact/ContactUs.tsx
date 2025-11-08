@@ -85,10 +85,8 @@ const ContactUs = () => {
     };
 
     const handleStepSubmit = (stepData: Partial<ContactFormData>) => {
-        console.log('Step data received:', stepData); // Debug log
         setFormData((prev) => {
             const updated = { ...prev, ...stepData };
-            console.log('Updated form data:', updated); // Debug log
             return updated;
         });
         handleGoNext();

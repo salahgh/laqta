@@ -1,4 +1,10 @@
-export const ArrowRightIcon = ({ className = "w-4 h-4" }) => (
+import React from "react";
+
+interface IconProps {
+    className?: string;
+}
+
+export const ArrowRightIcon = ({ className = "w-4 h-4" }: IconProps): JSX.Element => (
     <svg
         className={className}
         fill="none"
@@ -14,7 +20,7 @@ export const ArrowRightIcon = ({ className = "w-4 h-4" }) => (
     </svg>
 );
 
-export const ChevronDownIcon = ({ className = "w-4 h-4" }) => (
+export const ChevronDownIcon = ({ className = "w-4 h-4" }: IconProps): JSX.Element => (
     <svg
         className={className}
         fill="currentColor"
@@ -28,7 +34,7 @@ export const ChevronDownIcon = ({ className = "w-4 h-4" }) => (
     </svg>
 );
 
-export const UKFlagIcon = ({ className = "w-[40px] h-[28px]" }) => (
+export const UKFlagIcon = ({ className = "w-[40px] h-[28px]" }: IconProps): JSX.Element => (
     <div className={`relative ${className}`}>
         <svg viewBox="0 0 40 28" className="w-full h-full">
             {/* Blue background */}

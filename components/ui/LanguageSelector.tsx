@@ -4,9 +4,25 @@ import { useState, useTransition } from "react";
 import { ChevronDown } from "lucide-react";
 import { useRouter, usePathname } from "@/src/i18n/navigation"; // Use next-intl navigation
 import { useLocale } from "next-intl";
+import React from "react";
+
+// Define locale type
+type Locale = "en" | "ar" | "fr";
+
+// Define language structure
+interface Language {
+    code: Locale;
+    name: string;
+    flag: React.FC;
+    dir: "ltr" | "rtl";
+}
+
+interface LanguageSelectorProps {
+    className?: string;
+}
 
 // Algerian Flag Component
-const AlgerianFlag = () => (
+const AlgerianFlag: React.FC = () => (
     <img
         src="/images/algerie%20(1).png"
         alt="Arabic"
@@ -15,7 +31,7 @@ const AlgerianFlag = () => (
 );
 
 // UK Flag Component
-const UKFlag = () => (
+const UKFlag: React.FC = () => (
     <img
         src="/images/royaume-uni.png"
         alt="English"
@@ -24,7 +40,7 @@ const UKFlag = () => (
 );
 
 // French Flag Component
-const FrenchFlag = () => (
+const FrenchFlag: React.FC = () => (
     <div className="aspect-square h-full flex">
         <div className="w-1/3 bg-blue-600"></div>
         <div className="w-1/3 bg-white"></div>
@@ -32,14 +48,14 @@ const FrenchFlag = () => (
     </div>
 );
 
-export const LanguageSelector = ({ className = "" }) => {
-    const [isOpen, setIsOpen] = useState(false);
+export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = "" }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
     const pathname = usePathname();
-    const locale = useLocale();
+    const locale = useLocale() as Locale;
 
-    const languages = [
+    const languages: Language[] = [
         {
             code: "en",
             name: "English",
@@ -62,7 +78,7 @@ export const LanguageSelector = ({ className = "" }) => {
 
     const selectedLang = languages.find((lang) => lang.code === locale);
 
-    const handleLanguageSelect = (langCode) => {
+    const handleLanguageSelect = (langCode: Locale): void => {
         if (langCode === locale) {
             setIsOpen(false);
             return;

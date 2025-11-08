@@ -11,7 +11,6 @@ export default function EmailSubscriptionForm() {
         if (email) {
             setIsSubscribed(true);
             // Here you would typically send the email to your backend
-            console.log("Subscribing email:", email);
 
             // Reset after 3 seconds for demo
             setTimeout(() => {

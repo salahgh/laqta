@@ -2,6 +2,7 @@ import React from "react";
 import { Logo } from "@/components/ui/Logo";
 import EmailSubscriptionForm from "@/components/ui/EmailSubscriptionForm";
 import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 
 const Footer = () => {
     const t = useTranslations('footer');
@@ -42,60 +43,60 @@ const Footer = () => {
                                 </h3>
                                 <ul className="space-y-4">
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/about"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('aboutUs')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/services"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('ourServices')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/#works"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('ourWorks')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/#testimonials"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('testimonials')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/contact"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('contactUs')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/#faq"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('faq')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/blog"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('blog')}
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -107,20 +108,20 @@ const Footer = () => {
                                 </h3>
                                 <ul className="space-y-4">
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/PrivacyPolicy"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('termsCondition')}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/PrivacyPolicy"
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             {t('privacyPolicy')}
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

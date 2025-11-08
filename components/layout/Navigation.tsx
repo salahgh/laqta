@@ -7,16 +7,27 @@ import { Button } from "@/components/ui/Button";
 import { Rocket, Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 import "../../src/app/styles.css";
 
-export const Navigation = ({ className = "" }) => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+interface NavigationProps {
+    className?: string;
+}
+
+interface NavItem {
+    label: string;
+    href: string;
+}
+
+export const Navigation = ({ className = "" }: NavigationProps) => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+    const [scrolled, setScrolled] = useState<boolean>(false);
     const pathname = usePathname();
+    const locale = useLocale();
     const t = useTranslations("navigation");
 
-    const navItems = [
+    const navItems: NavItem[] = [
         { label: t("home"), href: "/" },
         { label: t("about"), href: "/about" },
         { label: t("services"), href: "/services" },
@@ -25,33 +36,34 @@ export const Navigation = ({ className = "" }) => {
     ];
 
     // Function to check if a nav item is active
-    const isActiveRoute = (href) => {
+    const isActiveRoute = (href: string): boolean => {
         if (href === "/") {
-            return pathname === "/";
+            return pathname === "/" || pathname === `/${locale}`;
         }
-        return pathname.startsWith(href);
+        const pathWithoutLocale = pathname.replace(/^\/(en|ar|fr)/, '');
+        return pathWithoutLocale === href;
     };
 
     // Handle scroll effect
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = (): void => {
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const toggleDrawer = () => {
+    const toggleDrawer = (): void => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
-    const closeDrawer = () => {
+    const closeDrawer = (): void => {
         setIsDrawerOpen(false);
     };
 
     // Close drawer on escape key
     useEffect(() => {
-        const handleEscape = (e) => {
+        const handleEscape = (e: KeyboardEvent): void => {
             if (e.key === "Escape") {
                 closeDrawer();
             }
@@ -80,7 +92,7 @@ export const Navigation = ({ className = "" }) => {
                             : "md:h-[90px] h-[60px]"
                     }
                     ${className}
-                   
+
                 `}
             >
                 {/* Desktop Navigation */}
@@ -133,12 +145,15 @@ export const Navigation = ({ className = "" }) => {
                     </div>
 
                     <div className="flex items-center  h-full">
-                        <Button
-                            rightIcon={<Rocket className="ml-2 h-4 w-4" />}
-                            className=""
-                        >
-                            {t("getStarted")}
-                        </Button>
+                        <Link href="/contact">
+                            <Button
+                                leftIcon={null}
+                                rightIcon={<Rocket className="ml-2 h-4 w-4" />}
+                                className=""
+                            >
+                                {t("getStarted")}
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 
@@ -171,12 +186,15 @@ export const Navigation = ({ className = "" }) => {
                     {/* Mobile Right Section */}
                     <div className="flex items-center gap-3 h-full py-2">
                         <LanguageSelector className="flex h-full" />
-                        <Button
-                            rightIcon={<Rocket className="ml-1 h-3 w-3" />}
-                            className=""
-                        >
-                            {t("getStarted")}
-                        </Button>
+                        <Link href="/contact">
+                            <Button
+                                leftIcon={null}
+                                rightIcon={<Rocket className="ml-1 h-3 w-3" />}
+                                className=""
+                            >
+                                {t("getStarted")}
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </nav>
@@ -224,35 +242,36 @@ export const Navigation = ({ className = "" }) => {
                                             animationDelay: `${index * 100}ms`,
                                         }}
                                     >
-                                        <NavLink
-                                            href={item.href}
-                                            isActive={isActive}
-                                            onClick={closeDrawer}
-                                            className={`
-                                                group relative flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300
-                                                ${
-                                                    isActive
-                                                        ? "bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-white border border-blue-500/30 shadow-lg"
-                                                        : "text-gray-300 hover:text-white hover:bg-gray-700/50"
-                                                }
-                                            `}
-                                        >
-                                            <div className="flex items-center">
-                                                <span className="text-lg font-medium">
-                                                    {item.label}
-                                                </span>
-                                                {isActive && (
-                                                    <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                                                )}
-                                            </div>
-                                            <ChevronRight
-                                                className={`h-5 w-5 transition-all duration-300 ${
-                                                    isActive
-                                                        ? "text-blue-400"
-                                                        : "text-gray-500 group-hover:text-white group-hover:translate-x-1"
-                                                }`}
-                                            />
-                                        </NavLink>
+                                        <div onClick={closeDrawer}>
+                                            <NavLink
+                                                href={item.href}
+                                                isActive={isActive}
+                                                className={`
+                                                    group relative flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300
+                                                    ${
+                                                        isActive
+                                                            ? "bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-white border border-blue-500/30 shadow-lg"
+                                                            : "text-gray-300 hover:text-white hover:bg-gray-700/50"
+                                                    }
+                                                `}
+                                            >
+                                                <div className="flex items-center">
+                                                    <span className="text-lg font-medium">
+                                                        {item.label}
+                                                    </span>
+                                                    {isActive && (
+                                                        <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                                                    )}
+                                                </div>
+                                                <ChevronRight
+                                                    className={`h-5 w-5 transition-all duration-300 ${
+                                                        isActive
+                                                            ? "text-blue-400"
+                                                            : "text-gray-500 group-hover:text-white group-hover:translate-x-1"
+                                                    }`}
+                                                />
+                                            </NavLink>
+                                        </div>
                                     </div>
                                 );
                             })}
@@ -263,13 +282,17 @@ export const Navigation = ({ className = "" }) => {
                     <div className="border-t border-gray-700/50 p-6 bg-gray-800/30">
                         <div className="flex flex-col gap-4">
                             <LanguageSelector className="flex w-full" />
-                            <Button
-                                size="lg"
-                                rightIcon={<Rocket className="ml-2 h-4 w-4" />}
-                                onClick={closeDrawer}
-                            >
-                                {t("getStarted")}
-                            </Button>
+                            <div onClick={closeDrawer}>
+                                <Link href="/contact">
+                                    <Button
+                                        size="lg"
+                                        leftIcon={null}
+                                        rightIcon={<Rocket className="ml-2 h-4 w-4" />}
+                                    >
+                                        {t("getStarted")}
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

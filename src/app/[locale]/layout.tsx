@@ -4,6 +4,8 @@ import { routing } from "@/src/i18n/routing";
 import { getMessages } from "next-intl/server";
 import type { Metadata } from "next";
 import React from "react";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { BackToTop } from "@/components/ui/BackToTop";
 import "../../../styles/globals.css";
 
 export const metadata: Metadata = {
@@ -55,11 +57,22 @@ export default async function LocaleLayout({
                     locale === "ar" ? "font-arabic" : ""
                 }`}
             >
-                <main className="flex-1 w-full" style={{ maxWidth: 1540 }}>
-                    <NextIntlClientProvider messages={messages}>
-                        {children}
-                    </NextIntlClientProvider>
-                </main>
+                {/* Skip Navigation Link for Accessibility */}
+                <a
+                    href="#main-content"
+                    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
+                >
+                    Skip to main content
+                </a>
+
+                <ErrorBoundary>
+                    <main className="flex-1 w-full" style={{ maxWidth: 1540 }} id="main-content">
+                        <NextIntlClientProvider messages={messages}>
+                            {children}
+                        </NextIntlClientProvider>
+                    </main>
+                    <BackToTop />
+                </ErrorBoundary>
             </body>
         </html>
     );

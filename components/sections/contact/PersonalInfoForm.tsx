@@ -106,7 +106,6 @@ const PersonalInfoForm = ({
 
     const onSubmit = (values, formikBag) => {
         // Handle form submission logic here
-        console.log("Form submitted with values:", values);
         formikBag.setSubmitting(false);
     };
 

@@ -5,9 +5,10 @@ import { Rocket } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Navigation } from "@/components/layout/Navigation";
 import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 import React from "react";
 
-const ArrowIcon = () => (
+const ArrowIcon: React.FC = () => (
     <svg
         className="h-4 w-4"
         fill="none"
@@ -23,7 +24,7 @@ const ArrowIcon = () => (
     </svg>
 );
 
-export const HeroSection = () => {
+export const HeroSection: React.FC = () => {
     const t = useTranslations("hero");
 
     return (
@@ -72,14 +73,18 @@ export const HeroSection = () => {
                 <div className={"h-8 md:h-[56px]"}></div>
                 <div className="flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
                     <div className={"h-12 w-full md:h-16 md:w-auto"}>
-                        <Button
-                            rightIcon={<Rocket className="ml-2 h-10 w-4" />}
-                        >
-                            {t("getStarted")}
-                        </Button>
+                        <Link href="/services">
+                            <Button
+                                rightIcon={<Rocket className="ml-2 h-10 w-4" />}
+                            >
+                                {t("getStarted")}
+                            </Button>
+                        </Link>
                     </div>
                     <div className={"h-12 w-full md:h-16 md:w-auto"}>
-                        <Button variant="secondary">{t("contactUs")}</Button>
+                        <Link href="/contact">
+                            <Button variant="secondary">{t("contactUs")}</Button>
+                        </Link>
                     </div>
                 </div>
             </div>

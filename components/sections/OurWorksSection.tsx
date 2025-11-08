@@ -25,9 +25,9 @@ export async function OurWorksSection({
     fetchFromStrapi = true,
     locale,
 }: OurWorksSectionProps) {
-    const t = await getTranslations('works');
-    const tNav = await getTranslations('navigation');
-    
+    const t = await getTranslations("works");
+    const tNav = await getTranslations("navigation");
+
     let works: Work[] = [];
 
     // Determine which works to use
@@ -44,7 +44,6 @@ export async function OurWorksSection({
 
             works = response.data;
         } catch (error) {
-            console.error("Failed to fetch works from Strapi:", error);
             // works = defaultWorks;
         }
     } else {
@@ -79,16 +78,16 @@ export async function OurWorksSection({
                 items-center gap-2 md:gap-6 lg:gap-5 xl:gap-6 md:pb-8"
                 >
                     <Badge variant="default" className="">
-                        {badge || t('badge')}
+                        {badge || t("badge")}
                     </Badge>
 
-                    <h2 className="text-gray-900">{title || t('title')}</h2>
+                    <h2 className="text-gray-900">{title || t("title")}</h2>
 
                     <p
                         className="text-secondary-gray text-responsive-lg text-justify px-4 md:px-10 md:text-center
                     lg:px-24 xl:px-32 2xl:px-40 max-w-4xl"
                     >
-                        {description || t('description')}
+                        {description || t("description")}
                     </p>
                 </div>
 
@@ -96,32 +95,46 @@ export async function OurWorksSection({
                 <div className="space-y-2 sm:space-y-4 md:space-y-6 lg:space-y-12 xl:space-y-16 flex flex-col">
                     {works.map((work, index) => {
                         const workData = work;
-                        
+
                         // Updated image handling to prioritize featured_image
                         let imageUrl = "/images/workImage.jpg"; // default fallback
                         let imageAlt = workData?.title || "Project image";
-                        
+
                         if (workData?.featured_image?.url) {
                             // Use the new featured_image structure
-                            imageUrl = utils.getFileUrl(workData.featured_image.url);
-                            imageAlt = workData.featured_image.alternativeText || workData.title;
+                            imageUrl = utils.getFileUrl(
+                                workData.featured_image.url,
+                            );
+                            imageAlt =
+                                workData.featured_image.alternativeText ||
+                                workData.title;
                         } else if (workData?.image?.data?.attributes?.url) {
                             // Fallback to old image structure for backward compatibility
-                            imageUrl = utils.getFileUrl(workData.image.data.attributes.url);
-                            imageAlt = workData.image.data.attributes.alternativeText || workData.title;
+                            imageUrl = utils.getFileUrl(
+                                workData.image.data.attributes.url,
+                            );
+                            imageAlt =
+                                workData.image.data.attributes
+                                    .alternativeText || workData.title;
                         }
 
                         return (
                             <ProjectCard
                                 key={work.id || index}
                                 imagePosition={
-                                    workData?.imagePosition || workData?.image_position || "left"
+                                    workData?.imagePosition ||
+                                    workData?.image_position ||
+                                    "left"
                                 }
                                 category={workData?.category}
                                 title={workData?.title}
                                 description={workData?.description}
                                 metrics={workData?.metrics || ""}
-                                ctaText={workData?.ctaText || workData?.cta_text || tNav('learnMore')}
+                                ctaText={
+                                    workData?.ctaText ||
+                                    workData?.cta_text ||
+                                    tNav("learnMore")
+                                }
                                 imageUrl={imageUrl}
                                 imageAlt={imageAlt}
                             />

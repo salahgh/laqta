@@ -11,7 +11,6 @@ const SuccessStep = () => {
     
     const handleGoHome = () => {
         // Navigate to main page in real implementation
-        console.log("Navigating to main page...");
     };
 
     return (

@@ -1,6 +1,14 @@
 import { Link } from "@/src/i18n/navigation";
+import React from "react";
 
-export const NavLink = ({
+interface NavLinkProps {
+    href?: string;
+    children: React.ReactNode;
+    className?: string;
+    isActive?: boolean;
+}
+
+export const NavLink: React.FC<NavLinkProps> = ({
     href = "#",
     children,
     className = "",

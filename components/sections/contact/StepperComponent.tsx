@@ -6,13 +6,27 @@ import {
     FileText,
     CheckCircle,
     Share,
+    LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export const StepperComponent = ({ currentStep = 1 }) => {
+interface StepperComponentProps {
+    currentStep?: number;
+}
+
+interface Step {
+    id: number;
+    icon: LucideIcon;
+    title: string;
+    description: string;
+    completed: boolean;
+    active: boolean;
+}
+
+export const StepperComponent: React.FC<StepperComponentProps> = ({ currentStep = 1 }) => {
     const t = useTranslations("contactPage.stepper");
 
-    const steps = [
+    const steps: Step[] = [
         {
             id: 1,
             icon: User,
@@ -125,7 +139,7 @@ export const StepperComponent = ({ currentStep = 1 }) => {
                                         >
                                             {step.description}
                                         </p>
-                                        
+
                                         {/* Progress indicator for active step */}
                                         {step.active && (
                                             <div className="mt-2 w-8 h-1 bg-gradient-to-r from-blue-500 to-blue-400 rounded-full animate-pulse" />

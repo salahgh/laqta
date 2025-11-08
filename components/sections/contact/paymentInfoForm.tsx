@@ -39,7 +39,6 @@ export function PaymentInfoForm({
 }) {
     const handleSubmit = (values, formikBag) => {
         // Handle form submission logic here
-        console.log("Payment info submitted with values:", values);
         formikBag.setSubmitting(false);
     };
 

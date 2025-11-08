@@ -1,4 +1,6 @@
-export const WaveBackground = () => {
+import React from "react";
+
+export const WaveBackground: React.FC = () => {
     return (
         <div className="absolute bottom-0 left-0 right-0">
             <svg viewBox="0 0 1440 120" fill="none" className="w-full h-auto">

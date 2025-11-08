@@ -87,18 +87,14 @@ export interface ApiError {
 }
 
 // Configuration
-const STRAPI_URL =
-    // process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-    process.env.NEXT_PUBLIC_STRAPI_URL_2;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL_2 || "http://localhost:1337";
 const API_BASE = `${STRAPI_URL}/api`;
-
-console.log(API_BASE);
 
 // Base fetch wrapper
 async function fetchApi<T>(
     endpoint: string,
     options: RequestInit = {},
-    locale?: string,  // Add optional locale parameter
+    locale?: string, // Add optional locale parameter
 ): Promise<T> {
     // const token = await getAuthToken();
     const token = undefined;
@@ -114,7 +110,7 @@ async function fetchApi<T>(
 
     const url = new URL(`${API_BASE}${endpoint}`);
     if (locale) {
-        url.searchParams.append('locale', locale);
+        url.searchParams.set("locale", locale);
     }
 
     const response = await fetch(url.toString(), config);
@@ -135,7 +131,7 @@ export const servicesApi = {
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Service[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -166,7 +162,7 @@ export const servicesApi = {
         id: number,
         params?: {
             populate?: string;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<Service>> {
         const searchParams = new URLSearchParams();
@@ -182,7 +178,7 @@ export const servicesApi = {
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Service[]>> {
         return this.getAll({
             ...params,
@@ -252,7 +248,7 @@ export const worksApi = {
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Work[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -282,7 +278,7 @@ export const worksApi = {
         id: number,
         params?: {
             populate?: string;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<Work>> {
         const searchParams = new URLSearchParams();
@@ -297,7 +293,7 @@ export const worksApi = {
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Work[]>> {
         return this.getAll({
             ...params,
@@ -331,7 +327,7 @@ export const testimonialsApi = {
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Testimonial[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -354,14 +350,18 @@ export const testimonialsApi = {
         const query = searchParams.toString();
         const endpoint = `/testimonials${query ? `?${query}` : ""}`;
 
-        return fetchApi<ApiResponse<Testimonial[]>>(endpoint, {}, params?.locale);
+        return fetchApi<ApiResponse<Testimonial[]>>(
+            endpoint,
+            {},
+            params?.locale,
+        );
     },
 
     async getById(
         id: number,
         params?: {
             populate?: string;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<Testimonial>> {
         const searchParams = new URLSearchParams();
@@ -376,7 +376,7 @@ export const testimonialsApi = {
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Testimonial[]>> {
         return this.getAll({
             ...params,
@@ -408,7 +408,7 @@ export const faqsApi = {
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<FAQ[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -438,7 +438,7 @@ export const faqsApi = {
         id: number,
         params?: {
             populate?: string;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<FAQ>> {
         const searchParams = new URLSearchParams();
@@ -453,7 +453,7 @@ export const faqsApi = {
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<FAQ[]>> {
         return this.getAll({
             ...params,
@@ -467,7 +467,7 @@ export const faqsApi = {
         params?: {
             page?: number;
             pageSize?: number;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<FAQ[]>> {
         return this.getAll({
@@ -501,7 +501,7 @@ export const missionsApi = {
         sort?: string;
         populate?: string;
         filters?: Record<string, any>;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Mission[]>> {
         const searchParams = new URLSearchParams();
         if (params?.page)
@@ -531,7 +531,7 @@ export const missionsApi = {
         id: number,
         params?: {
             populate?: string;
-            locale?: string;  // Add locale
+            locale?: string; // Add locale
         },
     ): Promise<ApiResponse<Mission>> {
         const searchParams = new URLSearchParams();
@@ -546,7 +546,7 @@ export const missionsApi = {
     async getFeatured(params?: {
         page?: number;
         pageSize?: number;
-        locale?: string;  // Add locale
+        locale?: string; // Add locale
     }): Promise<ApiResponse<Mission[]>> {
         return this.getAll({
             ...params,
@@ -662,7 +662,7 @@ export const blogsApi = {
         return fetchApi<ApiResponse<Blog>>(
             `/blogs?filters[slug][$eq]=${slug}&populate[0]=featured_image&populate[1]=featured_image_overlay&populate[2]=gallery&populate[3]=category&populate[4]=author.avatar&populate[5]=tags`,
             {},
-            locale
+            locale,
         );
     },
 
@@ -684,7 +684,7 @@ export const blogsApi = {
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
             {},
-            params?.locale
+            params?.locale,
         );
     },
 
@@ -707,7 +707,7 @@ export const blogsApi = {
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
             {},
-            params?.locale
+            params?.locale,
         );
     },
 
@@ -761,7 +761,7 @@ export const blogsApi = {
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
             {},
-            params?.locale
+            params?.locale,
         );
     },
 
@@ -779,15 +779,17 @@ export const blogsApi = {
         return fetchApi<ApiResponse<Blog[]>>(
             `/blogs?${searchParams.toString()}`,
             {},
-            locale
+            locale,
         );
     },
 
-    async getAllSlugs(locale?: string): Promise<ApiResponse<{ slug: string }[]>> {
+    async getAllSlugs(
+        locale?: string,
+    ): Promise<ApiResponse<{ slug: string }[]>> {
         return fetchApi<ApiResponse<{ slug: string }[]>>(
             `/blogs?fields[0]=slug&pagination[pageSize]=1000`,
             {},
-            locale
+            locale,
         );
     },
 };
@@ -795,7 +797,11 @@ export const blogsApi = {
 // Categories API
 export const categoriesApi = {
     async getAll(locale?: string): Promise<ApiResponse<Category[]>> {
-        return fetchApi<ApiResponse<Category[]>>("/categories?sort=name:asc", {}, locale);
+        return fetchApi<ApiResponse<Category[]>>(
+            "/categories?sort=name:asc",
+            {},
+            locale,
+        );
     },
 };
 
@@ -812,10 +818,14 @@ export const newsletterApi = {
         locale?: string,
     ): Promise<{ success: boolean; message: string }> {
         try {
-            await fetchApi("/newsletter-subscriptions", {
-                method: "POST",
-                body: JSON.stringify({ data: { email } }),
-            }, locale);
+            await fetchApi(
+                "/newsletter-subscriptions",
+                {
+                    method: "POST",
+                    body: JSON.stringify({ data: { email } }),
+                },
+                locale,
+            );
             return {
                 success: true,
                 message: "Successfully subscribed to newsletter!",

@@ -75,7 +75,6 @@ const ProjectInfoStep = ({
 
     const handleSubmit = (values, formikBag) => {
         // Handle form submission logic here
-        console.log("Project info submitted with values:", values);
         formikBag.setSubmitting(false);
     };
 
