@@ -1,12 +1,15 @@
 import React from "react";
+import Image from "next/image";
 
 const LetsStartProjectSection = () => {
     return (
         <div className={"mt-12 md:mt-24"}>
-            <img
+            <Image
                 src="/images/letsStartProject.png"
-                alt="Logo"
-                // className="w-full h-full"
+                alt="Let's Start Your Project"
+                width={1920}
+                height={600}
+                className="w-full h-auto"
             />
         </div>
     );

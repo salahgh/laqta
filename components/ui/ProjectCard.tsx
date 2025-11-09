@@ -2,6 +2,7 @@ import React from "react";
 import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import Image from "next/image";
 
 interface ProjectCardProps {
     imagePosition?: "left" | "right";
@@ -41,9 +42,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
             >
                 {/* Project Image - Updated to be square and 30% width */}
                 <div className="flex w-full lg:w-[30%] justify-center items-center flex-shrink-0">
-                    <img
+                    <Image
                         src={imageUrl}
                         alt={imageAlt}
+                        width={500}
+                        height={500}
                         className="w-full max-w-sm lg:max-w-none rounded-lg sm:rounded-xl object-cover aspect-square"
                     />
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { colors, shadows, spacing, borderRadius } from "@/design/tokens";
 
 interface BadgeProps {
     children: React.ReactNode;
@@ -13,8 +14,8 @@ interface BadgeProps {
 export const Badge: React.FC<BadgeProps> = ({
     children,
     variant = "default",
-    color = "#54B3F1",
-    borderColor = "#54B3F1",
+    color = colors.brand.aqua,
+    borderColor = colors.brand.aqua,
     className,
     shadow = false,
     ...props
@@ -39,6 +40,8 @@ export const Badge: React.FC<BadgeProps> = ({
             style={{
                 color,
                 borderColor,
+                borderRadius: borderRadius.full,
+                boxShadow: shadow ? shadows.lg : "none",
             }}
             {...props}
         >

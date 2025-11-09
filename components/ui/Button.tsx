@@ -1,15 +1,16 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { colors, shadows, transitions, borderRadius } from "@/design/tokens";
 
 const buttonVariants = {
     primary: cn(
-        "bg-gradient-to-r from-[#1370AD] to-[#62C1FF] text-white font-medium",
-        "hover:shadow-xl hover:shadow-blue-500/25 focus:outline-none",
-        "transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95",
+        "text-white font-medium",
+        "hover:shadow-xl focus:outline-none",
+        "transition-all ease-in-out transform hover:scale-105 active:scale-95",
     ),
     secondary: cn(
-        "bg-transparent text-gray-400 focus:ring-brand-aqua",
-        "transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95",
+        "bg-transparent focus:ring-brand-aqua",
+        "transition-all ease-in-out transform hover:scale-105 active:scale-95",
     ),
 };
 
@@ -50,8 +51,14 @@ export const Button = ({
                 className,
             )}
             style={{
-                borderColor: variant === "secondary" ? "#54B3F1" : "unset",
+                background: variant === "primary"
+                    ? `linear-gradient(to right, ${colors.primary.light}, #62C1FF)`
+                    : "transparent",
+                borderColor: variant === "secondary" ? colors.brand.aqua : "unset",
                 borderWidth: variant === "secondary" ? "1px" : "0px",
+                borderRadius: borderRadius.full,
+                transitionDuration: transitions.slow,
+                boxShadow: variant === "primary" ? shadows.md : "none",
                 ...style,
             }}
             {...props}

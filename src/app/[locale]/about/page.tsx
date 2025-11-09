@@ -4,6 +4,7 @@ import { HeroSection } from "@/src/app/[locale]/about/heroSection";
 import MissionVisionCards from "@/src/app/[locale]/about/MissionVisionCards";
 import Footer from "@/components/sections/Footer";
 import { CompetitiveEdge } from "@/src/app/[locale]/about/competitiveEdge";
+import Image from "next/image";
 
 // Main About Page Component - Make it async to handle async components
 export default async function AboutPage() {
@@ -20,19 +21,25 @@ export default async function AboutPage() {
             
             {/* Vector Courbe SVG Layer */}
             <div className="absolute z-30 w-[80%] lg:w-1/2 top-0 left-1/2 transform -translate-x-1/2">
-                <img
+                <Image
                     src="/images/vector_courbe.svg"
                     alt="Vector Curve Background"
+                    width={800}
+                    height={800}
                     className="h-full aspect-square object-cover"
+                    priority
                 />
             </div>
-            
+
             {/* Union SVG Layer */}
             <div className="absolute z-10 w-full" style={{ top: 0, left: 0 }}>
-                <img
+                <Image
                     src="/images/union.svg"
                     alt="Union Background"
-                    className="object-fill bg w-full"
+                    width={1920}
+                    height={1080}
+                    className="object-fill bg w-full h-auto"
+                    priority
                 />
             </div>
             

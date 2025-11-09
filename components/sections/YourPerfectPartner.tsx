@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export const YourPerfectPartner = () => {
     const t = useTranslations('perfectPartner');
@@ -29,10 +30,12 @@ export const YourPerfectPartner = () => {
                 </p>
             </div>
             <div className="flex w-full justify-center md:hidden">
-                <img
+                <Image
                     src="/images/steps_vertical.svg"
-                    alt="Logo"
-                    className={""}
+                    alt="Steps Diagram"
+                    width={400}
+                    height={800}
+                    className="w-auto h-auto"
                 />
             </div>
         </div>

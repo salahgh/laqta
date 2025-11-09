@@ -2,6 +2,7 @@ import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import "./styles.css";
 
 // Main About Section Component
@@ -18,10 +19,11 @@ const AboutSection = ({
 
             {/* LAQTA Logo SVG in the middle */}
             <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <img
+                <Image
                     src="/images/laqta_logo_courbe.svg"
                     alt="LAQTA Logo Curve"
-                    className="w-full h-full object-contain opacity-20"
+                    fill
+                    className="object-contain opacity-20"
                 />
             </div>
 
